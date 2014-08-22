@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">schalarm_android_app</string>
+    <string name="app_name">schalarm</string>
+    <string name="schedule_create_save_button">save</string>
+    <string name="schedule_create_clear_button">clear</string>
 </resources>
