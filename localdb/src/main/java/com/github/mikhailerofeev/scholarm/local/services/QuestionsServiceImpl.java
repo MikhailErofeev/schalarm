@@ -4,10 +4,11 @@ import com.github.mikhailerofeev.scholarm.api.entities.Question;
 import com.github.mikhailerofeev.scholarm.api.entities.QuestionTheme;
 import com.github.mikhailerofeev.scholarm.api.services.QuestionsService;
 import com.github.mikhailerofeev.scholarm.local.entities.QuestionThemeImpl;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -26,7 +27,7 @@ public class QuestionsServiceImpl implements QuestionsService {
 
   @Override
   public List<Question> getQuestions(Set<String> themesNames) {
-    Set<String> themesAndSubthemes = Sets.newHashSet();
+    Set<String> themesAndSubthemes = new HashSet<>();
     List<QuestionTheme> themes = getTopLevelThemes();
     addSubThemesReqursive(themesAndSubthemes, themesNames, themes);
     return questionsManager.getQuestions(themesAndSubthemes);
@@ -43,9 +44,9 @@ public class QuestionsServiceImpl implements QuestionsService {
 
   @Override
   public List<QuestionTheme> getTopLevelThemes() {
-    List<QuestionTheme> top = Lists.newArrayList();
+    List<QuestionTheme> top = new ArrayList<>();
     QuestionTheme java = new QuestionThemeImpl("java", null);
-    top.add(new QuestionThemeImpl("programming", Lists.newArrayList(java)));
+    top.add(new QuestionThemeImpl("programming", Arrays.asList(java)));
     return top;
   }
 }
