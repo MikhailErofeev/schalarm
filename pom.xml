@@ -11,6 +11,7 @@
     <modules>
         <module>api</module>
         <module>localdb</module>
+        <module>schalarm_android_app</module>
     </modules>
 
 
