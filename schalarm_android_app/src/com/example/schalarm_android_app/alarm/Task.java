@@ -9,16 +9,15 @@ import java.util.Set;
 /**
  * Created by FFX20413 on 23.08.2014.
  */
-public class Task extends Thread {
+public class Task implements Runnable {
 
     private MediaPlayer mediaPlayer;
     private MusicTrack musicTrack;
     private Set<String> tags;
     private final long taskStartTime;
 
-    public Task(Set<String> tags, String threadName, MusicTrack musicTrack, long taskStartTime) {
-        super(threadName);
-        mediaPlayer = new MediaPlayer();
+    public Task(Set<String> tags, MusicTrack musicTrack, long taskStartTime) {
+        this.mediaPlayer = new MediaPlayer();
         this.tags = tags;
         this.musicTrack = musicTrack;
         this.taskStartTime = taskStartTime;
@@ -27,7 +26,7 @@ public class Task extends Thread {
     @Override
     public void run() {
         try {
-            sleep(taskStartTime);
+            Thread.sleep(taskStartTime);
             startPlayMusic();
             runQueryActivity();
         } catch (InterruptedException ignored) {
@@ -50,12 +49,11 @@ public class Task extends Thread {
         }
     }
 
-    @Override
     public void interrupt() {
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.stop();
         }
-        super.interrupt();
+        Thread.currentThread().interrupt();
     }
 
     @Override

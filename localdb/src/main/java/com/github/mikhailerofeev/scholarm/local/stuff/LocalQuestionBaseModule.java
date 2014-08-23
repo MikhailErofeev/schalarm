@@ -8,7 +8,7 @@ import com.google.inject.AbstractModule;
  * @author m-erofeev
  * @since 22.08.14
  */
-public class GuiceModule extends AbstractModule {
+public class LocalQuestionBaseModule extends AbstractModule {
   @Override
   protected void configure() {
     bind(QuestionsService.class).to(QuestionsServiceImpl.class);

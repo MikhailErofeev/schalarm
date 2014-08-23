@@ -1,22 +1,30 @@
 package com.example.schalarm_android_app.activities;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import com.example.schalarm_android_app.R;
 import com.example.schalarm_android_app.alarm.AlarmManager;
 import com.example.schalarm_android_app.alarm.Task;
+import com.example.schalarm_android_app.main_settings.widgets.OnOffWidget;
+import com.example.schalarm_android_app.main_settings.widgets.TagsSelectElement;
 import com.example.schalarm_android_app.utils.entitys.MusicTrack;
-import com.example.schalarm_android_app.main_settings.widgets.*;
+import com.github.mikhailerofeev.scholarm.api.entities.QuestionTheme;
+import com.github.mikhailerofeev.scholarm.api.services.QuestionsService;
+import com.github.mikhailerofeev.scholarm.local.stuff.LocalQuestionBaseModule;
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -24,20 +32,6 @@ import java.util.Set;
  */
 public class ScheduleCreateActivity extends Activity {
 
-    private static final Set<String> programmersTags = new HashSet<String>() {{
-        add("Java");
-        add("MySQL");
-    }};
-
-    private static final Set<String> physicsSubTag = new HashSet<String>() {{
-        add("Thermodynamics");
-        add("Optics");
-    }};
-
-    private final static HashMap<String, Set<String>> tags = new HashMap<String, Set<String>>() {{
-        put("Programmers", programmersTags);
-        put("Physics", physicsSubTag);
-    }};
     public static final int SELECT_TRACK_REQUEST_CODE = 10;
     public static final String TRACK_INFO_TAG = "track_info_tag";
 
@@ -58,9 +52,14 @@ public class ScheduleCreateActivity extends Activity {
     private Button clearButton;
 
     private Activity parentContext;
+    private QuestionsService questionsService;
+    private AlarmManager alarmManager;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
+        Injector injector = Guice.createInjector(new ApplicationModule(), new LocalQuestionBaseModule());
+        questionsService = injector.getBinding(QuestionsService.class).getProvider().get();
+        alarmManager = injector.getBinding(AlarmManager.class).getProvider().get();
         super.onCreate(savedInstanceState);
         parentContext = this;
         setContentView(R.layout.main_settings);
@@ -72,6 +71,13 @@ public class ScheduleCreateActivity extends Activity {
 
     private void setElementsOnContainers() {
         timerPluONOFFSwitchContainer.addView(onOffWidget);
+    }
+
+    private class ApplicationModule extends AbstractModule {
+        @Override
+        protected void configure() {
+            bind(Application.class).toInstance(ScheduleCreateActivity.this.getApplication());
+        }
     }
 
     private void findAllElements() {
@@ -130,14 +136,14 @@ public class ScheduleCreateActivity extends Activity {
     }
 
     private void setOnOffWidgetListener() {
-        final Task task = new Task(selectedTags, "name", selectedTrack, timeToStartTask);
+        final Task task = new Task(selectedTags, selectedTrack, timeToStartTask);
         onOffWidget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (onOffWidget.isActivated()) {
-                    AlarmManager.startTask(task);
+                if (((OnOffWidget) v).isChecked()) {
+                    alarmManager.startTask(task);
                 } else {
-                    AlarmManager.shutdownTask(task);
+                    alarmManager.shutdownTask(task);
                 }
             }
         });
@@ -163,10 +169,10 @@ public class ScheduleCreateActivity extends Activity {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
 
-                for (Map.Entry<String, Set<String>> entry : tags.entrySet()) {
-                    SubMenu subMenu = menu.addSubMenu(entry.getKey());
-                    for (String subTag : entry.getValue()) {
-                        subMenu.add(subTag);
+                for (QuestionTheme theme : questionsService.getTopLevelThemes()) {
+                    SubMenu subMenu = menu.addSubMenu(theme.getName());
+                    for (QuestionTheme subTag : theme.getChildren()) {
+                        subMenu.add(subTag.getName());
                     }
                 }
             }
