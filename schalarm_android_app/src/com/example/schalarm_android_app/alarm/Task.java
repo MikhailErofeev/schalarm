@@ -1,6 +1,9 @@
 package com.example.schalarm_android_app.alarm;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.media.MediaPlayer;
+import com.example.schalarm_android_app.activities.QueryShowerActivity;
 import com.example.schalarm_android_app.utils.entitys.MusicTrack;
 
 import java.io.IOException;
@@ -15,8 +18,9 @@ public class Task implements Runnable {
     private MusicTrack musicTrack;
     private Set<String> tags;
     private final long taskStartTime;
+    private Activity parent;
 
-    public Task(Set<String> tags, MusicTrack musicTrack, long taskStartTime) {
+    public Task(Activity parent, Set<String> tags, MusicTrack musicTrack, long taskStartTime) {
         this.mediaPlayer = new MediaPlayer();
         this.tags = tags;
         this.musicTrack = musicTrack;
@@ -35,7 +39,9 @@ public class Task implements Runnable {
     }
 
     private void runQueryActivity() {
-        // TODO serialize name and push to Activity
+        Intent intent = new Intent();
+        intent.setClass(parent, QueryShowerActivity.class);
+        parent.startActivity(intent);
     }
 
     private void startPlayMusic() {

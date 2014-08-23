@@ -26,7 +26,6 @@ public class MusicSelectorListView extends ListView {
 
     private OnItemClickListener onTrackClickListener = new OnItemClickListener() {
         public void onItemClick(AdapterView parent, View v, int index, long id) {
-
             try {
                 if (!mediaPlayer.isPlaying()) {
                     mediaPlayer.setDataSource(musicTracks.get(index).getFilePath());

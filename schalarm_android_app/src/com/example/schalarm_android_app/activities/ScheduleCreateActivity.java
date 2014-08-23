@@ -2,6 +2,7 @@ package com.example.schalarm_android_app.activities;
 
 import android.app.Activity;
 import android.app.Application;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.schalarm_android_app.R;
+import com.example.schalarm_android_app.activities.elements.TimerEditFragment;
 import com.example.schalarm_android_app.alarm.AlarmManager;
 import com.example.schalarm_android_app.alarm.Task;
 import com.example.schalarm_android_app.main_settings.widgets.OnOffWidget;
@@ -47,6 +49,8 @@ public class ScheduleCreateActivity extends Activity {
     private LinearLayout tagContainer;
     private LinearLayout trackInfoLayout;
     private TagsSelectElement tagsSelectElement;
+    private TextView scheduleTimer;
+    private TimerEditFragment timerEditFragment;
 
     private Button saveButton;
     private Button clearButton;
@@ -69,6 +73,12 @@ public class ScheduleCreateActivity extends Activity {
         setListeners();
     }
 
+
+    private void convertToIntTimerValues() {
+        String time = scheduleTimer.getText().toString();
+        // TODO ну от сюда куда угодно ы
+    }
+
     private void setElementsOnContainers() {
         timerPluONOFFSwitchContainer.addView(onOffWidget);
     }
@@ -86,11 +96,13 @@ public class ScheduleCreateActivity extends Activity {
         clearButton = (Button) findViewById(R.id.clearButton);
         tagContainer = (LinearLayout) findViewById(R.id.create_schedule_tag_container);
         trackInfoLayout = (LinearLayout) findViewById(R.id.createScheduleTrackInfoLayout);
+        scheduleTimer = (TextView) findViewById(R.id.create_schedule_timer);
     }
 
     private void initInstanceElements() {
         onOffWidget = new OnOffWidget(this);
         tagsSelectElement = new TagsSelectElement(this);
+        timerEditFragment = new TimerEditFragment();
         saveButton.setVisibility(View.INVISIBLE);
         clearButton.setVisibility(View.INVISIBLE);
 
@@ -105,6 +117,16 @@ public class ScheduleCreateActivity extends Activity {
         setSaveButtonClickListener();
         setOnOffWidgetListener();
         setOnTrackLayoutClickListener();
+        setOnScheduleTimerClickListener();
+    }
+
+    private void setOnScheduleTimerClickListener() {
+        scheduleTimer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().add(new TimerEditFragment(), "key").commit();
+            }
+        });
     }
 
     @Override
@@ -136,7 +158,7 @@ public class ScheduleCreateActivity extends Activity {
     }
 
     private void setOnOffWidgetListener() {
-        final Task task = new Task(selectedTags, selectedTrack, timeToStartTask);
+        final Task task = new Task(this, selectedTags, selectedTrack, timeToStartTask);
         onOffWidget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
