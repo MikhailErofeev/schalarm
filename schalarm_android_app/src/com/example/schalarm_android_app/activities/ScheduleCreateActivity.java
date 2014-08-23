@@ -1,7 +1,6 @@
 package com.example.schalarm_android_app.activities;
 
 import android.app.Activity;
-import android.app.Application;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.SubMenu;
@@ -15,14 +14,11 @@ import com.example.schalarm_android_app.alarm.AlarmTask;
 import com.example.schalarm_android_app.alarm.AlarmTaskService;
 import com.example.schalarm_android_app.main_settings.widgets.OnOffWidget;
 import com.example.schalarm_android_app.main_settings.widgets.TagsSelectElement;
+import com.example.schalarm_android_app.utils.InjectorApplication;
 import com.example.schalarm_android_app.utils.MusicFinder;
 import com.example.schalarm_android_app.utils.entitys.MusicTrack;
 import com.github.mikhailerofeev.scholarm.api.entities.QuestionTheme;
 import com.github.mikhailerofeev.scholarm.api.services.QuestionsService;
-import com.github.mikhailerofeev.scholarm.local.stuff.LocalQuestionBaseModule;
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import org.joda.time.DateTime;
 
 import java.util.HashSet;
@@ -64,9 +60,8 @@ public class ScheduleCreateActivity extends Activity {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        Injector injector = Guice.createInjector(new ApplicationModule(), new LocalQuestionBaseModule());
-        questionsService = injector.getBinding(QuestionsService.class).getProvider().get();
-        alarmTaskService = injector.getBinding(AlarmTaskService.class).getProvider().get();
+        questionsService = InjectorApplication.get(QuestionsService.class);
+        alarmTaskService = InjectorApplication.get(AlarmTaskService.class);
         super.onCreate(savedInstanceState);
         parentContext = this;
         setContentView(R.layout.main_settings);
@@ -105,13 +100,6 @@ public class ScheduleCreateActivity extends Activity {
 
     private void setElementsOnContainers() {
         timerPluONOFFSwitchContainer.addView(onOffWidget);
-    }
-
-    private class ApplicationModule extends AbstractModule {
-        @Override
-        protected void configure() {
-            bind(Application.class).toInstance(ScheduleCreateActivity.this.getApplication());
-        }
     }
 
     private void findAllElements() {

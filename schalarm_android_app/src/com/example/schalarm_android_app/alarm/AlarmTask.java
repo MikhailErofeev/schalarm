@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import com.example.schalarm_android_app.activities.QueryShowerActivity;
 import com.example.schalarm_android_app.utils.entitys.MusicTrack;
 import org.joda.time.DateTime;
 
@@ -51,8 +52,8 @@ public class AlarmTask implements Runnable {
 
     private void runQueryActivity() {
         Intent intent = new Intent();
-//        intent.setClass(parent, QueryShowerActivity.class);
-//        parent.startActivity(intent);
+        intent.setClass(parent, QueryShowerActivity.class);
+        parent.startActivity(intent);
     }
 
     private void startPlayMusic() {
