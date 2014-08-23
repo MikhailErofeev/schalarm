@@ -104,7 +104,6 @@ public class ScheduleCreateActivity extends Activity {
         timerPluONOFFSwitchContainer = (LinearLayout) findViewById(R.id.onOffSwitchContainer);
         saveButton = (Button) findViewById(R.id.saveButton);
         clearButton = (Button) findViewById(R.id.clearButton);
-        tagContainer = (LinearLayout) findViewById(R.id.create_schedule_tag_container);
         trackInfoLayout = (LinearLayout) findViewById(R.id.createScheduleTrackInfoLayout);
         scheduleTimer = (TextView) findViewById(R.id.create_schedule_timer);
         songGeneratorTextView = (TextView) findViewById(R.id.createScheduleTrackInfoTrackName);

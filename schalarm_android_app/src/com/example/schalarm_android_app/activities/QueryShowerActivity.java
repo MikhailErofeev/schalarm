@@ -1,8 +1,12 @@
 package com.example.schalarm_android_app.activities;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -11,10 +15,7 @@ import com.example.schalarm_android_app.utils.InjectorApplication;
 import com.github.mikhailerofeev.scholarm.api.entities.Question;
 import com.github.mikhailerofeev.scholarm.api.services.QuestionsService;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by FFX20413 on 23.08.2014.
@@ -29,7 +30,7 @@ public class QueryShowerActivity extends Activity {
 
 
     private TextView questionText;
-    private LinearLayout answers;
+    private LinearLayout answersLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,25 +38,69 @@ public class QueryShowerActivity extends Activity {
         setContentView(R.layout.qa);
         Question question = null;
         questionText = (TextView) findViewById(R.id.question_text);
-        answers = (LinearLayout) findViewById(R.id.answers_list);
+        answersLayout = (LinearLayout) findViewById(R.id.answers_list);
         questionsService = InjectorApplication.get(QuestionsService.class);
-        List<Question> questions;
-        questions = questionsService.getQuestions(tags);
+        Question question1 = getNextQuestion();
         boolean canQuit = false;
-        setNewQuestion(questions.get(0), canQuit);
+        setNewQuestion(question1, canQuit);
     }
 
-    private void setNewQuestion(Question question, boolean canQuit) {
-        questionText.setText(question.getQuestionText());
+    private Random random = new Random();
 
-        ArrayList<View> buttons = new ArrayList<>();
-        Button exampleBtn = new Button(this.getApplicationContext());
-        buttons.add(exampleBtn);
-        if (canQuit) {
-            Button closeBtn = new Button(this.getApplicationContext());            
-            buttons.add(closeBtn);
+    private Question getNextQuestion() {
+        List<Question> questions = questionsService.getQuestions(tags);
+        int index = random.nextInt(questions.size());
+        return questions.get(index);
+    }
+
+    private void setNewQuestion(final Question question, boolean canQuit) {
+        questionText.setText(question.getQuestionText());
+        answersLayout.removeAllViews();
+
+        if (question.getRightAnswers().size() == 1) {
+            setOneAnswerButtons(question);
         }
-        answers.addTouchables(buttons);
+        if (canQuit) {
+            Button closeBtn = new Button(this.getApplicationContext());
+            answersLayout.addView(closeBtn);
+        }
+    }
+
+    private void setOneAnswerButtons(Question question) {
+        ActionBar.LayoutParams fillParams = new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        final Character rightAnswer = question.getRightAnswers().iterator().next();
+        final Map<Character, Button> answersBtns = new HashMap<>();
+        for (Map.Entry<Character, String> key2answer : question.getVariants().entrySet()) {
+            final Button answerBtn = new Button(this.getApplicationContext());
+            answersBtns.put(key2answer.getKey(), answerBtn);
+            answerBtn.setText(key2answer.getValue());
+            answerBtn.setTextSize(14);
+            answerBtn.setLayoutParams(fillParams);
+            answerBtn.setTag(key2answer.getKey());
+            answerBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Button btn = (Button) v;
+                    Character answer = (Character) btn.getTag();
+                    boolean correct = rightAnswer.equals(answer);
+                    if (correct) {
+                        btn.setBackgroundColor(Color.GREEN);
+                    } else {
+                        btn.setBackgroundColor(Color.RED);
+                        answersBtns.get(rightAnswer).setBackgroundColor(Color.GREEN);
+                    }
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            setNewQuestion(getNextQuestion(), false);
+                        }
+                    }, 2000);
+
+                }
+            });
+            answersLayout.addView(answerBtn);
+        }
     }
 
     @Override

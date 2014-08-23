@@ -17,15 +17,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.ScheduleCreateActivity"
-                  android:screenOrientation="landscape"
+                  android:screenOrientation="portrait"
                   android:theme="@android:style/Theme.NoTitleBar">
         </activity>
         <activity android:name=".activities.SelectTrackActivity"
-                  android:screenOrientation="landscape"
+                  android:screenOrientation="portrait"
                   android:theme="@android:style/Theme.NoTitleBar">
         </activity>
         <activity android:name=".activities.QueryShowerActivity"
-                  android:screenOrientation="landscape"
+                  android:screenOrientation="portrait"
                   android:theme="@android:style/Theme.NoTitleBar">
         </activity>
         <activity android:name=".activities.tagsSelectorActivity"
