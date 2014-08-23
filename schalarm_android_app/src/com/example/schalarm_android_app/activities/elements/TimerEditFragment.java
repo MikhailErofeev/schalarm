@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import com.example.schalarm_android_app.R;
+import com.example.schalarm_android_app.activities.ScheduleCreateActivity;
 
 /**
  * Created by FFX20413 on 23.08.2014.
@@ -21,7 +22,6 @@ public class TimerEditFragment extends DialogFragment {
     private TimePicker timePicker;
 
     public TimerEditFragment() {
-        //..
     }
 
     @Override
@@ -49,6 +49,7 @@ public class TimerEditFragment extends DialogFragment {
     private void saveSelectedTime() {
         TextView timer = (TextView) getActivity().findViewById(R.id.create_schedule_timer);
         timer.setText(timePicker.getCurrentHour() + ":" + timePicker.getCurrentMinute());
+        ((ScheduleCreateActivity) getActivity()).convertToIntTimerValues();
     }
 
     private void removeTime() {

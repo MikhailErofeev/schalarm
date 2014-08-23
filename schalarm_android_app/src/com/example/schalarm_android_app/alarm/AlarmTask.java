@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import com.example.schalarm_android_app.activities.QueryShowerActivity;
 import com.example.schalarm_android_app.utils.entitys.MusicTrack;
+import org.joda.time.DateTime;
 
 import java.io.IOException;
 import java.util.Set;
@@ -12,27 +13,34 @@ import java.util.Set;
 /**
  * Created by FFX20413 on 23.08.2014.
  */
-public class Task implements Runnable {
+public class AlarmTask implements Runnable {
 
-    private MediaPlayer mediaPlayer;
-    private MusicTrack musicTrack;
-    private Set<String> tags;
-    private final long taskStartTime;
-    private Activity parent;
+    private final MediaPlayer mediaPlayer;
+    private final MusicTrack musicTrack;
+    private final Set<String> tags;
+    private final long taskStartTimeInMillis;
+    private final Activity parent;
 
-    public Task(Activity parent, Set<String> tags, MusicTrack musicTrack, long taskStartTime) {
+
+    public AlarmTask(Activity parent, Set<String> tags, MusicTrack musicTrack, long taskStartTimeInMillis) {
         this.mediaPlayer = new MediaPlayer();
         this.tags = tags;
         this.musicTrack = musicTrack;
-        this.taskStartTime = taskStartTime;
+        
+        this.taskStartTimeInMillis = taskStartTimeInMillis;
+        this.parent = parent;
     }
 
     @Override
     public void run() {
         try {
-            Thread.sleep(taskStartTime);
+            while (DateTime.now().getMillis() < taskStartTimeInMillis) {
+                long diff = taskStartTimeInMillis - DateTime.now().getMillis();
+                Thread.sleep(diff);
+            }
             startPlayMusic();
-         //   runQueryActivity();
+            runQueryActivity();
+            //@todo add new task!
         } catch (InterruptedException ignored) {
             // look down
         }
@@ -60,25 +68,5 @@ public class Task implements Runnable {
             mediaPlayer.stop();
         }
         Thread.currentThread().interrupt();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null) return false;
-
-        Task task = (Task) o;
-
-        if (taskStartTime != task.taskStartTime) return false;
-        if (tags != null ? !tags.equals(task.tags) : task.tags != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = tags != null ? tags.hashCode() : 0;
-        result = 31 * result + (int) (taskStartTime ^ (taskStartTime >>> 32));
-        return result;
     }
 }

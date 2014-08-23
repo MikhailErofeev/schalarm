@@ -2,21 +2,17 @@ package com.example.schalarm_android_app.activities;
 
 import android.app.Activity;
 import android.app.Application;
-import android.app.FragmentManager;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
-import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.schalarm_android_app.R;
 import com.example.schalarm_android_app.activities.elements.TimerEditFragment;
-import com.example.schalarm_android_app.alarm.AlarmManager;
-import com.example.schalarm_android_app.alarm.Task;
+import com.example.schalarm_android_app.alarm.AlarmTask;
+import com.example.schalarm_android_app.alarm.AlarmTasksManager;
 import com.example.schalarm_android_app.main_settings.widgets.OnOffWidget;
 import com.example.schalarm_android_app.main_settings.widgets.TagsSelectElement;
 import com.example.schalarm_android_app.utils.MusicFinder;
@@ -27,6 +23,7 @@ import com.github.mikhailerofeev.scholarm.local.stuff.LocalQuestionBaseModule;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import org.joda.time.DateTime;
 
 import java.util.HashSet;
 import java.util.List;
@@ -56,20 +53,20 @@ public class ScheduleCreateActivity extends Activity {
     private TagsSelectElement tagsSelectElement;
     private LinearLayout tagsContainer;
     private TextView scheduleTimer;
-    private TimerEditFragment timerEditFragment;
+
     private TextView songGeneratorTextView;
     private Button saveButton;
     private Button clearButton;
 
     private Activity parentContext;
     private QuestionsService questionsService;
-    private AlarmManager alarmManager;
+    private AlarmTasksManager alarmTasksManager;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         Injector injector = Guice.createInjector(new ApplicationModule(), new LocalQuestionBaseModule());
         questionsService = injector.getBinding(QuestionsService.class).getProvider().get();
-        alarmManager = injector.getBinding(AlarmManager.class).getProvider().get();
+        alarmTasksManager = injector.getBinding(AlarmTasksManager.class).getProvider().get();
         super.onCreate(savedInstanceState);
         parentContext = this;
         setContentView(R.layout.main_settings);
@@ -86,9 +83,17 @@ public class ScheduleCreateActivity extends Activity {
         songGeneratorTextView.setText(selectedTrack.getTrackName() + " " + selectedTrack.getArtistName());
     }
 
-    private void convertToIntTimerValues() {
+    public void convertToIntTimerValues() {
         String time = scheduleTimer.getText().toString();
-        // TODO ну от сюда куда угодно ы
+        String[] hh2MM = time.split(":");
+        int hours = Integer.parseInt(hh2MM[0]);
+        int minutes = Integer.parseInt(hh2MM[1]);
+        DateTime alarmTime = DateTime.now().withHourOfDay(hours).withMinuteOfHour(minutes).withSecondOfMinute(0);
+        if (DateTime.now().isAfter(alarmTime)) {
+            alarmTime = alarmTime.plusDays(1);
+        }
+        timeToStartTask = alarmTime.getMillis();
+        startUpdatedTaskIfOn();
     }
 
     private void setElementsOnContainers() {
@@ -116,7 +121,6 @@ public class ScheduleCreateActivity extends Activity {
     private void initInstanceElements() {
         onOffWidget = new OnOffWidget(this);
         tagsSelectElement = new TagsSelectElement(this);
-        timerEditFragment = new TimerEditFragment();
         saveButton.setVisibility(View.INVISIBLE);
         clearButton.setVisibility(View.INVISIBLE);
 
@@ -152,17 +156,23 @@ public class ScheduleCreateActivity extends Activity {
     }
 
     private void setOnOffWidgetListener() {
-        final Task task = new Task(this, selectedTags, selectedTrack, timeToStartTask);
         onOffWidget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (((OnOffWidget) v).isChecked()) {
-                    alarmManager.startTask(task);
+                    startUpdatedTaskIfOn();
                 } else {
-                    alarmManager.shutdownTask(task);
+                    alarmTasksManager.shutdownTask();
                 }
             }
         });
+    }
+
+    private void startUpdatedTaskIfOn() {
+        if (onOffWidget.isChecked()) {
+            AlarmTask task = new AlarmTask(this, selectedTags, selectedTrack, timeToStartTask);
+            alarmTasksManager.startTask(task);
+        }
     }
 
     private void setTagContainerListener() {
