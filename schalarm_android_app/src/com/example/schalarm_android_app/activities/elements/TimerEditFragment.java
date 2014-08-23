@@ -28,6 +28,9 @@ public class TimerEditFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         timePicker = new TimePicker(getActivity());
         timePicker.setIs24HourView(true);
+        timePicker.setCurrentHour(0);
+        timePicker.setCurrentMinute(0);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(TITLE).setPositiveButton(YES, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
