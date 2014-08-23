@@ -5,6 +5,7 @@ import android.database.Cursor;
 import com.example.schalarm_android_app.utils.entitys.MusicTrack;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static android.provider.MediaStore.Audio.Media.*;
 
@@ -13,11 +14,11 @@ public class MusicFinder {
     private final static String[] INTERESTED_COLUMN_TAGS = {_ID, DATA, DISPLAY_NAME, DURATION, ARTIST};
     private final static String SORT_ORDER = ARTIST + " " + "ASC";
 
-    public static ArrayList<MusicTrack> getAllAvailableMusicTracks(Activity context) {
+    public static List<MusicTrack> getAllAvailableMusicTracks(Activity context) {
+        List<MusicTrack> musicTracks = new ArrayList<>();
         Cursor media = getTracksCursor(context);
-        int mediaCount = media.getCount();
-        ArrayList<MusicTrack> musicTracks = new ArrayList<>(mediaCount);
         try {
+            int mediaCount = media.getCount();
             for (int i = 0; i < mediaCount; i++) {
                 final boolean moved = media.moveToPosition(i);
                 if (moved) {
@@ -32,7 +33,9 @@ public class MusicFinder {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            media.close();
+            if (media != null) {
+                media.close();
+            }
         }
         return musicTracks;
     }

@@ -1,24 +1,19 @@
 package com.example.schalarm_android_app.utils.entitys;
 
 import android.app.Activity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
-import com.example.schalarm_android_app.R;
 import com.example.schalarm_android_app.activities.elements.TrackSelectorElement;
-import com.example.schalarm_android_app.utils.entitys.MusicTrack;
-import org.w3c.dom.Text;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class MusicSelectorAdapter extends BaseAdapter {
 
-    private ArrayList<MusicTrack> musicTracks;
+    private List<MusicTrack> musicTracks;
     private Activity parent;
 
-    public MusicSelectorAdapter(ArrayList<MusicTrack> musicTracks, Activity parent) {
+    public MusicSelectorAdapter(List<MusicTrack> musicTracks, Activity parent) {
         this.musicTracks = musicTracks;
         this.parent = parent;
     }

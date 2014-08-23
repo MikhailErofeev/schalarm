@@ -1,7 +1,6 @@
 package com.example.schalarm_android_app.main_settings.widgets;
 
 import android.app.Activity;
-import android.content.Context;
 import android.media.MediaPlayer;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,13 +9,14 @@ import com.example.schalarm_android_app.utils.entitys.MusicSelectorAdapter;
 import com.example.schalarm_android_app.utils.entitys.MusicTrack;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MusicSelectorListView extends ListView {
 
     private MediaPlayer mediaPlayer;
-    private ArrayList<MusicTrack> musicTracks = new ArrayList<>();
+    private List<MusicTrack> musicTracks = new ArrayList<>();
 
-    public MusicSelectorListView(Activity context, ArrayList<MusicTrack> musicTracks) {
+    public MusicSelectorListView(Activity context, List<MusicTrack> musicTracks) {
         super(context);
         super.setOnItemClickListener(onTrackClickListener);
         super.setAdapter(new MusicSelectorAdapter(musicTracks, context));

@@ -4,9 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import com.example.schalarm_android_app.main_settings.widgets.MusicSelectorListView;
-import com.example.schalarm_android_app.utils.entitys.MusicSelectorAdapter;
-import com.example.schalarm_android_app.utils.entitys.MusicTrack;
 import com.example.schalarm_android_app.utils.MusicFinder;
+import com.example.schalarm_android_app.utils.entitys.MusicTrack;
 
 import java.util.ArrayList;
 
@@ -22,7 +21,7 @@ public class SelectTrackActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainLay = new LinearLayout(this);
-        allAvailableTracks = MusicFinder.getAllAvailableMusicTracks(this);
+        allAvailableTracks = new ArrayList<>(MusicFinder.getAllAvailableMusicTracks(this));
         System.out.println(allAvailableTracks);
         mainLay.addView(new MusicSelectorListView(this, allAvailableTracks));
         setContentView(mainLay);
