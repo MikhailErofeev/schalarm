@@ -6,14 +6,17 @@
     <uses-sdk android:minSdkVersion="14"
               android:targetSdkVersion="14"/>
     <application android:label="@string/app_name" android:icon="@drawable/ic_launcher">
-        <activity android:name="StartActivity"
+        <activity android:name=".activities.StartActivity"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".main_settings.ScheduleCreateActivity"
+        <activity android:name=".activities.ScheduleCreateActivity"
+                  android:theme="@android:style/Theme.NoTitleBar">
+        </activity>
+        <activity android:name=".activities.SelectTrackActivity"
                   android:theme="@android:style/Theme.NoTitleBar">
         </activity>
     </application>

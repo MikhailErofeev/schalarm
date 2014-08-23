@@ -41,6 +41,26 @@
                     </LinearLayout>
                 </HorizontalScrollView>
                 <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" android:id="@+id/createScheduleTrackInfoLayout">
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" "
+                            android:id="@+id/createScheduleTrackInfoTrackName"/>
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" "
+                            android:id="@+id/createScheduleTrackInfoArtistInfo"/>
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="track info"
+                            android:id="@+id/createScheduleTrackInfoDurationInfo"/>
+                </LinearLayout>
+                <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent" android:id="@+id/clearSaveButtonContainer" android:layout_weight="1"

@@ -1,4 +1,4 @@
-package com.example.schalarm_android_app.main_settings.widgets.Listeners;
+package com.example.schalarm_android_app.main_settings.widgets.listeners;
 
 import android.view.View;
 

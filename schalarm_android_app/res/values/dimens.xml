@@ -2,4 +2,6 @@
 <resources>
     <dimen name="create_schedule_chronometer_left_margin">20dp</dimen>
     <dimen name="create_schedule_elements_top_margin">15dp</dimen>
+    <dimen name="select_track_element_left_margin">15dp</dimen>
+    <dimen name="select_track_element_top_margin">15dp</dimen>
 </resources>

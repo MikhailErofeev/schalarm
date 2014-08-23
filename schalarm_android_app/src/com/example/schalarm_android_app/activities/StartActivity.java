@@ -1,17 +1,12 @@
-package com.example.schalarm_android_app;
+package com.example.schalarm_android_app.activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import com.example.schalarm_android_app.main_settings.ScheduleCreateActivity;
-import com.github.mikhailerofeev.scholarm.local.stuff.GuiceModule;
-import com.google.inject.Guice;
+import com.example.schalarm_android_app.R;
 
 public class StartActivity extends Activity {
 
-    static {
-        Guice.createInjector(new GuiceModule());
-    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
