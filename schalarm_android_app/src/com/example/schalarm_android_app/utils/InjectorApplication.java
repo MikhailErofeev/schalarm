@@ -17,13 +17,6 @@ public class InjectorApplication extends Application {
     private static Injector injector;
 
 
-    private class ApplicationModule extends AbstractModule {
-        @Override
-        protected void configure() {
-            bind(Application.class).toInstance(InjectorApplication.this);
-        }
-    }
-
     public static <T> T get(Class<T> type) {
         return injector.getBinding(type).getProvider().get();
     }
@@ -31,5 +24,12 @@ public class InjectorApplication extends Application {
     public void onCreate() {
         injector = Guice.createInjector(new ApplicationModule(), new LocalQuestionBaseModule());
         context = getApplicationContext();
+    }
+
+    private class ApplicationModule extends AbstractModule {
+        @Override
+        protected void configure() {
+            bind(Application.class).toInstance(InjectorApplication.this);
+        }
     }
 }

@@ -28,7 +28,7 @@
                   android:screenOrientation="landscape"
                   android:theme="@android:style/Theme.NoTitleBar">
         </activity>
-        <activity android:name=".activities.TagsSelectorActivity"
+        <activity android:name=".activities.tagsSelectorActivity"
                   android:theme="@android:style/Theme.NoTitleBar">
         </activity>
     </application>

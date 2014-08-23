@@ -14,12 +14,11 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by FFX20413 on 23.08.2014.
  */
-public class TagsSelectorActivity extends Activity implements TagSelectedListener {
+public class tagsSelectorActivity extends Activity implements TagSelectedListener {
 
     public final static int GET_SELECTED_TAG_REQUEST_CODE = 0x25;
 
@@ -51,7 +50,7 @@ public class TagsSelectorActivity extends Activity implements TagSelectedListene
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
-        intent.putExtra(TagsSelectorActivity.class.getCanonicalName(), selectedTags);
+        intent.putExtra(tagsSelectorActivity.class.getCanonicalName(), selectedTags);
         setResult(GET_SELECTED_TAG_REQUEST_CODE, intent);
         finish();
         super.onBackPressed();
@@ -60,7 +59,7 @@ public class TagsSelectorActivity extends Activity implements TagSelectedListene
     private class ApplicationModule extends AbstractModule {
         @Override
         protected void configure() {
-            bind(Application.class).toInstance(TagsSelectorActivity.this.getApplication());
+            bind(Application.class).toInstance(tagsSelectorActivity.this.getApplication());
         }
     }
 }

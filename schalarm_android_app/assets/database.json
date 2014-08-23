@@ -1,0 +1,54 @@
+[
+    {
+        "id": 0,
+        "variants": {
+            "A": "da",
+            "B": "ne",
+            "C": "muu",
+            "D": "yarh"
+        },
+        "type": "TEXT",
+        "questionText": "skaji da",
+        "rightAnswers": ["A"],
+        "themeName": "programming"
+    },
+    {
+        "id": 1,
+        "variants": {
+            "A": "da",
+            "B": "ne",
+            "C": "muu",
+            "D": "yarh"
+        },
+        "type": "TEXT",
+        "questionText": "skaji muu",
+        "rightAnswers": ["C"],
+        "themeName": "programming"
+    },
+    {
+        "id": 2,
+        "variants": {
+            "A": "da",
+            "B": "ne",
+            "C": "muu",
+            "D": "yarh"
+        },
+        "type": "TEXT",
+        "questionText": "skaji yarh",
+        "rightAnswers": ["D"],
+        "themeName": "physics"
+    },
+    {
+        "id": 3,
+        "variants": {
+            "A": "da",
+            "B": "ne",
+            "C": "muu",
+            "D": "yarh"
+        },
+        "type": "TEXT",
+        "questionText": "dadadada",
+        "rightAnswers": ["A"],
+        "themeName": "programming"
+    }
+]

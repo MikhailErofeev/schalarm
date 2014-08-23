@@ -1,9 +1,7 @@
 package com.example.schalarm_android_app.activities.elements;
 
 import android.app.Activity;
-import android.content.Context;
 import android.widget.ListView;
-import com.example.schalarm_android_app.activities.TagsSelectorActivity;
 import com.github.mikhailerofeev.scholarm.api.entities.QuestionTheme;
 
 import java.util.List;

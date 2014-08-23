@@ -31,7 +31,7 @@ public class QuestionsServiceImpl implements QuestionsService {
         List<QuestionTheme> themes = getTopLevelThemes();
         addSubThemesReqursive(themesAndSubthemes, themesNames, themes);
         return questionsManager.getQuestions(themesAndSubthemes);
-    }
+    }  
 
     private void addSubThemesReqursive(Set<String> themesAndSubthemes, Set<String> themesNames, List<QuestionTheme> themes) {
         for (QuestionTheme questionTheme : themes) {

@@ -1,11 +1,8 @@
 package com.example.schalarm_android_app.activities;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.SubMenu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -19,12 +16,7 @@ import com.example.schalarm_android_app.main_settings.widgets.TagsSelectElement;
 import com.example.schalarm_android_app.utils.InjectorApplication;
 import com.example.schalarm_android_app.utils.MusicFinder;
 import com.example.schalarm_android_app.utils.entitys.MusicTrack;
-import com.github.mikhailerofeev.scholarm.api.entities.QuestionTheme;
 import com.github.mikhailerofeev.scholarm.api.services.QuestionsService;
-import com.github.mikhailerofeev.scholarm.local.stuff.LocalQuestionBaseModule;
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import org.joda.time.DateTime;
 
 import java.util.HashSet;
@@ -178,8 +170,8 @@ public class ScheduleCreateActivity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data != null && TagsSelectorActivity.GET_SELECTED_TAG_REQUEST_CODE == resultCode) {
-            selectedTags = (Set<String>) data.getSerializableExtra(TagsSelectorActivity.class.getCanonicalName());
+        if (data != null && tagsSelectorActivity.GET_SELECTED_TAG_REQUEST_CODE == resultCode) {
+            selectedTags = (Set<String>) data.getSerializableExtra(tagsSelectorActivity.class.getCanonicalName());
             System.out.println(selectedTags);
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -191,8 +183,8 @@ public class ScheduleCreateActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(parent, TagsSelectorActivity.class);
-                startActivityForResult(intent,  TagsSelectorActivity.GET_SELECTED_TAG_REQUEST_CODE);
+                intent.setClass(parent, tagsSelectorActivity.class);
+                startActivityForResult(intent, tagsSelectorActivity.GET_SELECTED_TAG_REQUEST_CODE);
             }
         });
     }

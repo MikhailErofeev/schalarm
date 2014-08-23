@@ -1,24 +1,26 @@
 package com.github.mikhailerofeev.scholarm.api.entities;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author m-erofeev
  * @since 22.08.14
  */
 public interface Question {
-  Type getType();
+    Type getType();
 
-  String getQuestionText();
+    String getQuestionText();
 
-  Map<Character, String> getVariants();
+    Map<Character, String> getVariants();
 
-  char getRightAnswer();
+    //can be one
+    Set<Character> getRightAnswers();
 
-  String getThemeName();
+    String getThemeName();
 
-  enum Type {
-    TEXT,
-    IMAGE
-  }
+    enum Type {
+        TEXT,
+        IMAGE
+    }
 }

@@ -2,7 +2,6 @@ package com.example.schalarm_android_app.activities.elements;
 
 import android.app.Activity;
 import android.content.Context;
-import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.example.schalarm_android_app.activities.TagsSelectorActivity;
 import com.github.mikhailerofeev.scholarm.api.entities.QuestionTheme;
-import com.github.mikhailerofeev.scholarm.api.services.QuestionsService;
 
 import java.util.List;
 
