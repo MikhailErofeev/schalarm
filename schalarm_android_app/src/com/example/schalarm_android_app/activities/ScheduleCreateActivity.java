@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.widget.*;
@@ -86,6 +87,11 @@ public class ScheduleCreateActivity extends Activity {
         tagsSelectElement = new TagsSelectElement(this);
         saveButton.setVisibility(View.INVISIBLE);
         clearButton.setVisibility(View.INVISIBLE);
+
+        TextView title = new TextView(parentContext);
+        title.setText("Tags..,");
+
+        tagsSelectElement.addView(title);
     }
 
     private void setListeners() {
@@ -146,10 +152,17 @@ public class ScheduleCreateActivity extends Activity {
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // tags
+        return super.onOptionsItemSelected(item);
+    }
+
     private void setTagContainerListener() {
         tagContainer.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+
                 for (Map.Entry<String, Set<String>> entry : tags.entrySet()) {
                     SubMenu subMenu = menu.addSubMenu(entry.getKey());
                     for (String subTag : entry.getValue()) {
