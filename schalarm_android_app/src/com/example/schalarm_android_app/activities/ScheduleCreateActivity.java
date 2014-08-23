@@ -138,7 +138,7 @@ public class ScheduleCreateActivity extends Activity {
     }
 
     private void setListeners() {
-        setTagContainerListener();
+        runTagsSelector();
         setOnOffWidgetListener();
         setOnTrackLayoutClickListener();
         setOnScheduleTimerClickListener();
@@ -182,7 +182,12 @@ public class ScheduleCreateActivity extends Activity {
         }
     }
 
-    private void setTagContainerListener() {
+
+    private void runTagsSelector() {
+
+    }
+
+    private void setTagContainerListener2() {
         tagContainer.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
