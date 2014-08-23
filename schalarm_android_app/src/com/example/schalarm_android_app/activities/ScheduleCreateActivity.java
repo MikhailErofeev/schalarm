@@ -1,6 +1,8 @@
 package com.example.schalarm_android_app.activities;
 
 import android.app.Activity;
+import android.app.Application;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.SubMenu;
@@ -19,6 +21,10 @@ import com.example.schalarm_android_app.utils.MusicFinder;
 import com.example.schalarm_android_app.utils.entitys.MusicTrack;
 import com.github.mikhailerofeev.scholarm.api.entities.QuestionTheme;
 import com.github.mikhailerofeev.scholarm.api.services.QuestionsService;
+import com.github.mikhailerofeev.scholarm.local.stuff.LocalQuestionBaseModule;
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import org.joda.time.DateTime;
 
 import java.util.HashSet;
@@ -126,10 +132,10 @@ public class ScheduleCreateActivity extends Activity {
     }
 
     private void setListeners() {
-        runTagsSelector();
         setOnOffWidgetListener();
         setOnTrackLayoutClickListener();
         setOnScheduleTimerClickListener();
+        setOnTagClickListener();
     }
 
     private void setOnScheduleTimerClickListener() {
@@ -170,30 +176,23 @@ public class ScheduleCreateActivity extends Activity {
         }
     }
 
-
-    private void runTagsSelector() {
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null && TagsSelectorActivity.GET_SELECTED_TAG_REQUEST_CODE == resultCode) {
+            selectedTags = (Set<String>) data.getSerializableExtra(TagsSelectorActivity.class.getCanonicalName());
+            System.out.println(selectedTags);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void setTagContainerListener2() {
-        tagContainer.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
-            @Override
-            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-                menu.setHeaderTitle(SELECT_TAGS);
-                for (QuestionTheme theme : questionsService.getTopLevelThemes()) {
-                    SubMenu subMenu = menu.addSubMenu(theme.getName());
-
-                    for (QuestionTheme subTag : theme.getChildren()) {
-                        subMenu.add(subTag.getName()).setCheckable(true);
-                    }
-                }
-            }
-        });
-
+    private void setOnTagClickListener() {
+        final Activity parent = this;
         tagContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openContextMenu(v);
+                Intent intent = new Intent();
+                intent.setClass(parent, TagsSelectorActivity.class);
+                startActivityForResult(intent,  TagsSelectorActivity.GET_SELECTED_TAG_REQUEST_CODE);
             }
         });
     }

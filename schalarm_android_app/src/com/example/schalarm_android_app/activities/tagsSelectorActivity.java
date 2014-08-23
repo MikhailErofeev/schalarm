@@ -2,6 +2,7 @@ package com.example.schalarm_android_app.activities;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import com.example.schalarm_android_app.activities.elements.TagSelectedListener;
@@ -20,8 +21,10 @@ import java.util.Set;
  */
 public class TagsSelectorActivity extends Activity implements TagSelectedListener {
 
+    public final static int GET_SELECTED_TAG_REQUEST_CODE = 0x25;
+
     private LinearLayout mainLay;
-    private Set<String> selectedTags;
+    private HashSet<String> selectedTags;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,7 @@ public class TagsSelectorActivity extends Activity implements TagSelectedListene
         Injector injector = Guice.createInjector(new ApplicationModule(), new LocalQuestionBaseModule());
         QuestionsService questionsService = injector.getBinding(QuestionsService.class).getProvider().get();
         mainLay.addView(new ThemeListView(this, this, questionsService.getTopLevelThemes()));
+        setContentView(mainLay);
         super.onCreate(savedInstanceState);
     }
 
@@ -41,8 +45,16 @@ public class TagsSelectorActivity extends Activity implements TagSelectedListene
 
     @Override
     public void tagSelected(String tag) {
-        System.out.println(tag);
         selectedTags.add(tag);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra(TagsSelectorActivity.class.getCanonicalName(), selectedTags);
+        setResult(GET_SELECTED_TAG_REQUEST_CODE, intent);
+        finish();
+        super.onBackPressed();
     }
 
     private class ApplicationModule extends AbstractModule {

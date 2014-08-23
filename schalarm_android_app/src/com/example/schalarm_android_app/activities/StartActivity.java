@@ -11,6 +11,6 @@ public class StartActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         startActivity(new Intent().setClass(this, ScheduleCreateActivity.class));
-        setContentView(R.layout.main);
+        finish();
     }
 }

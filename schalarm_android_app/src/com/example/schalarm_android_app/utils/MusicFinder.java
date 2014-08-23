@@ -32,10 +32,6 @@ public class MusicFinder {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if (media != null) {
-                media.close();
-            }
         }
         return musicTracks;
     }
