@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
+import com.example.schalarm_android_app.activities.callbacks.TagSelectActivityCallBack;
 import com.example.schalarm_android_app.utils.InjectorApplication;
 import com.github.mikhailerofeev.scholarm.api.services.QuestionsService;
 import com.github.mikhailerofeev.scholarm.local.stuff.LocalQuestionBaseModule;
@@ -29,16 +30,14 @@ public class TagsSelectorActivity extends Activity implements TagSelectedListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mainLay = new LinearLayout(this);
+        startActionMode(new TagSelectActivityCallBack(this));
         selectedTags = new HashSet<>();
-
         Intent intent = getIntent();
         if (intent != null) {
             selectedTagsFromScheduleCreator = (HashSet<String>) intent.getSerializableExtra(SELECTED_TAGS_INTENT_KEY);
         } else {
             selectedTagsFromScheduleCreator = new HashSet<>();
         }
-        System.out.println(selectedTagsFromScheduleCreator);
-
         QuestionsService questionsService = InjectorApplication.get(QuestionsService.class);
         mainLay.addView(new ThemeListView(this, this, selectedTagsFromScheduleCreator, questionsService.getTopLevelThemes()));
         setContentView(mainLay);
@@ -59,22 +58,13 @@ public class TagsSelectorActivity extends Activity implements TagSelectedListene
     public void onBackPressed() {
         Intent intent = new Intent();
         intent.putExtra(TagsSelectorActivity.class.getCanonicalName(), selectedTags);
-        {
-            if (selectedTags != null && !selectedTags.isEmpty()) {
-                intent.putExtra(TagsSelectorActivity.class.getCanonicalName(), selectedTags);
-            } else {
-                intent.putExtra(TagsSelectorActivity.class.getCanonicalName(), selectedTagsFromScheduleCreator);
-            }
-            setResult(GET_SELECTED_TAG_REQUEST_CODE, intent);
-            finish();
-            super.onBackPressed();
+        if (selectedTags != null && !selectedTags.isEmpty()) {
+            intent.putExtra(TagsSelectorActivity.class.getCanonicalName(), selectedTags);
+        } else {
+            intent.putExtra(TagsSelectorActivity.class.getCanonicalName(), selectedTagsFromScheduleCreator);
         }
-
-        class ApplicationModule extends AbstractModule {
-            @Override
-            protected void configure() {
-                bind(Application.class).toInstance(TagsSelectorActivity.this.getApplication());
-            }
-        }
+        setResult(GET_SELECTED_TAG_REQUEST_CODE, intent);
+        finish();
+        super.onBackPressed();
     }
 }

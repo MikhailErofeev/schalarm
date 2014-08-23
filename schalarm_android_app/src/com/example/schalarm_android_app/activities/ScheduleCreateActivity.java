@@ -6,14 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import com.example.schalarm_android_app.R;
-import com.example.schalarm_android_app.activities.elements.TagsSelectorActivity;
-import com.example.schalarm_android_app.activities.elements.TimerEditFragment;
+import com.example.schalarm_android_app.activities.callbacks.ScheduleCreateActivityCallBack;
+import com.example.schalarm_android_app.activities.elements.*;
 import com.example.schalarm_android_app.alarm.AlarmTask;
 import com.example.schalarm_android_app.alarm.AlarmTaskService;
 import com.example.schalarm_android_app.main_settings.widgets.OnOffWidget;
-import com.example.schalarm_android_app.main_settings.widgets.TagsSelectElement;
 import com.example.schalarm_android_app.utils.InjectorApplication;
 import com.example.schalarm_android_app.utils.MusicFinder;
 import com.example.schalarm_android_app.utils.entitys.MusicTrack;
@@ -23,34 +23,37 @@ import org.joda.time.DateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 /**
  * Created by FFX20413 on 22.08.2014.
  */
-public class ScheduleCreateActivity extends Activity {
+public class ScheduleCreateActivity extends Activity implements TrackSelectedListener {
 
-    public static final int SELECT_TRACK_REQUEST_CODE = 10;
-    public static final String TRACK_INFO_TAG = "track_info_tag";
-    public static final String SELECT_TAGS = "Select Tags";
     public static final String SCHEDULE_TIMER_KEY_FRAGMENT = "schedule_timer_key_fragment";
-
+    public static final String SHOW_SELECTED_TAGS = "Show selected Tags";
+    public static final String AVAILABLE_TRACK_FRAGMENT = "available_track_fragment";
+    public static final int MAX_QUERY_COUNT = 10;
 
     private static MusicTrack selectedTrack;
     private static long timeToStartTask;
+    private static int queryCount;
 
     private HashSet<String> selectedTags;
 
     private LinearLayout timerPluONOFFSwitchContainer;
     private OnOffWidget onOffWidget;
-    private LinearLayout tagContainer;
     private LinearLayout trackInfoLayout;
-    private TagsSelectElement tagsSelectElement;
-    private TextView scheduleTimer;
 
-    private TextView songGeneratorTextView;
-    private Button saveButton;
-    private Button clearButton;
+    private TextView scheduleTimer;
+    private TextView authorNameView;
+    private TextView trackNameView;
+
+    private Button showTagButton;
+    private Button selectTagButton;
+    private Button generateRandomTrackButton;
+    private Button selectFromAvailableButton;
+
+    private SeekBar countOfQuerySeekBar;
 
     private Activity parentContext;
     private QuestionsService questionsService;
@@ -63,18 +66,18 @@ public class ScheduleCreateActivity extends Activity {
         alarmTaskService = InjectorApplication.get(AlarmTaskService.class);
         parentContext = this;
         setContentView(R.layout.main_settings);
+        startActionMode(new ScheduleCreateActivityCallBack(this));
         findAllElements();
         initInstanceElements();
         setElementsOnContainers();
         setListeners();
-        setRandomMusic();
         updateAlarmTime();
     }
 
     private void setRandomMusic() {
         List<MusicTrack> allAvailableMusicTracks = MusicFinder.getAllAvailableMusicTracks(this);
         selectedTrack = allAvailableMusicTracks.get(new Random().nextInt(allAvailableMusicTracks.size()));
-        songGeneratorTextView.setText(selectedTrack.getTrackName() + " " + selectedTrack.getArtistName());
+        refreshViewTrackInfo();
     }
 
     public void updateAlarmTime() {
@@ -102,32 +105,72 @@ public class ScheduleCreateActivity extends Activity {
 
     private void findAllElements() {
         timerPluONOFFSwitchContainer = (LinearLayout) findViewById(R.id.onOffSwitchContainer);
-        saveButton = (Button) findViewById(R.id.saveButton);
-        clearButton = (Button) findViewById(R.id.clearButton);
+        showTagButton = (Button) findViewById(R.id.create_schedule_show_tag_button);
+        selectTagButton = (Button) findViewById(R.id.create_schedule_select_tag_button);
         trackInfoLayout = (LinearLayout) findViewById(R.id.createScheduleTrackInfoLayout);
         scheduleTimer = (TextView) findViewById(R.id.create_schedule_timer);
-        songGeneratorTextView = (TextView) findViewById(R.id.createScheduleTrackInfoTrackName);
-        tagContainer = (LinearLayout) findViewById(R.id.create_schedule_tag_container);
+        generateRandomTrackButton = (Button) findViewById(R.id.create_schedule_get_random_track);
+        selectFromAvailableButton = (Button) findViewById(R.id.create_schedule_get_available_tracks);
+        authorNameView = (TextView) findViewById(R.id.create_schedule_track_author_name_info);
+        trackNameView = (TextView) findViewById(R.id.create_schedule_track_name_info);
+        countOfQuerySeekBar = (SeekBar) findViewById(R.id.create_schedule_seek_bar);
     }
 
     private void initInstanceElements() {
         selectedTags = new HashSet<>();
         onOffWidget = new OnOffWidget(this);
-        tagsSelectElement = new TagsSelectElement(this);
-        saveButton.setVisibility(View.INVISIBLE);
-        clearButton.setVisibility(View.INVISIBLE);
-
-        TextView title = new TextView(parentContext);
-        title.setText("Tags..,");
-        tagsSelectElement.addView(title);
-        tagContainer.addView(tagsSelectElement);
     }
 
     private void setListeners() {
         setOnOffWidgetListener();
         setOnTrackLayoutClickListener();
         setOnScheduleTimerClickListener();
-        setOnTagClickListener();
+        setSelectTagListenerButton();
+        setShowSelectedTagButton();
+        setOnRandomSelectTrackButtonListener();
+        setOnAvailableButtonListener();
+        setOnSeekBarListener();
+    }
+
+    private void setOnSeekBarListener() {
+        countOfQuerySeekBar.setMax(MAX_QUERY_COUNT);
+        countOfQuerySeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                queryCount = progress;
+                // TODO
+                System.out.println(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+    }
+
+    private void setOnAvailableButtonListener() {
+        selectFromAvailableButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<MusicTrack> allAvailableMusicTracks = MusicFinder.getAllAvailableMusicTracks(parentContext);
+                getFragmentManager().beginTransaction().add(new AvailableTrackFragment(allAvailableMusicTracks), AVAILABLE_TRACK_FRAGMENT).commit();
+            }
+        });
+    }
+
+    private void setOnRandomSelectTrackButtonListener() {
+        generateRandomTrackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setRandomMusic();
+            }
+        });
     }
 
     private void setOnScheduleTimerClickListener() {
@@ -172,26 +215,40 @@ public class ScheduleCreateActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data != null && TagsSelectorActivity.GET_SELECTED_TAG_REQUEST_CODE == resultCode) {
             selectedTags = (HashSet<String>) data.getSerializableExtra(TagsSelectorActivity.class.getCanonicalName());
-            System.out.println(selectedTags);
-            if (data != null && TagsSelectorActivity.GET_SELECTED_TAG_REQUEST_CODE == resultCode) {
-                selectedTags = (HashSet<String>) data.getSerializableExtra(TagsSelectorActivity.class.getCanonicalName());
-            }
-            super.onActivityResult(requestCode, resultCode, data);
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void setOnTagClickListener() {
+    private void setSelectTagListenerButton() {
         final Activity parent = this;
-        tagContainer.setOnClickListener(new View.OnClickListener() {
+        selectTagButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(parent, TagsSelectorActivity.class);
-                startActivityForResult(intent, TagsSelectorActivity.GET_SELECTED_TAG_REQUEST_CODE);
                 intent.setClass(parent, TagsSelectorActivity.class);
                 intent.putExtra(TagsSelectorActivity.SELECTED_TAGS_INTENT_KEY, selectedTags);
                 startActivityForResult(intent, TagsSelectorActivity.GET_SELECTED_TAG_REQUEST_CODE);
             }
         });
+    }
+
+    private void setShowSelectedTagButton() {
+        showTagButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().add(new SelectedTagFragmentShower(selectedTags), SHOW_SELECTED_TAGS).commit();
+            }
+        });
+    }
+
+    @Override
+    public void trackHasSelected(MusicTrack musicTrack) {
+        selectedTrack = musicTrack;
+        refreshViewTrackInfo();
+    }
+
+    private void refreshViewTrackInfo() {
+        trackNameView.setText(" Track name - " + selectedTrack.getTrackName());
+        authorNameView.setText(" Track author - " + selectedTrack.getArtistName());
     }
 }

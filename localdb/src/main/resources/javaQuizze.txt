@@ -1,0 +1,1952 @@
+
+Given the classes below 
+
+public class Cert extends test 
+{
+    public final int getNumber()
+    {return 0;}
+}
+
+class test
+{
+    public final int getNumber()
+    {return -1;}
+}
+
+What will t.getNumber() return given the code below?
+
+test t = new Cert();
+t.getNumber();
+
+==========================
+1.) 0
+
+2.) -1
+
+3.) 1
+
+4.) This code will give a runtime error
+
+5.) This code has a compile time error
+==========================
+5.) This code has a compile time error
+###########################
+Given this program what is the output ?
+class Stain {public void stake(){System.out.println("argh ");}}
+class Brain extends Stain {public void stake(){ System.out.println("grey ");}}
+
+public class Cert extends Brain
+{
+    public static void main(String[] args)
+    {
+        Brain brain = new Cert(); brain.stake();
+        Stain wizard = new Cert(); wizard.stake();
+        Brain pain = new Stain(); pain.stake();
+    }
+
+    public void stake()
+    {System.out.print("Tokyo ");}
+}
+
+==========================
+1.) Tokyo Tokyo argh
+
+2.) Tokyo Tokyo grey
+
+3.) Tokyo Tokyo Tokyo
+
+4.) Compile error
+
+5.) Runtime error 
+==========================
+4.) Compile error
+###########################
+
+What is the output of the following ?
+
+class HumBug  {static void hummer(int timesToHum){ System.out.println(++timesToHum);}}
+public class Cert extends HumBug
+{
+    public static void main(String[] args)
+    {
+        HumBug humBug = new Cert(); humBug.hummer((short)10);
+    }
+     static void hummer(int x){ System.out.println(--x);}
+}
+
+==========================
+1.) 10
+
+2.) 11
+
+3.) 12
+
+4.) 9
+
+5.) Compile error
+
+6.) Runtime error 
+==========================
+2.) 11 
+###########################
+
+Choose all that are true
+class Rocket extends Thread implements Runnable {}
+
+==========================
+1.) Rocket IS A Thread and HAS A Runnable
+
+2.) Rocket IS A Thread and IS A Runnable
+
+3.) Rocket will not compile since it does not implement the run() method in Runnable
+
+4.) Rocket will have runtime errors if used as a Thread
+
+5.) Rocket IS A Thread and IS A Runnable even if it does not implement Runnable but extends Thread
+
+6.) Rocket needs to be declared abstract to compile 
+==========================
+2.) Rocket IS A Thread and IS A Runnable 
+5.) Rocket IS A Thread and IS A Runnable even if it does not implement Runnable but extends Thread 
+###########################
+Given this program what is the output ?
+class Taint extends Base  
+{
+    int carcass=7;
+    public static void main(String[] args)
+    {
+        new Taint().go();
+        Base base = new Taint();
+        base.go();
+        Base base2 = new Base(3);
+        base2.go();
+    }
+    public void go()
+    {
+        System.out.print(carcass + " ");
+    } 
+}
+
+class Base
+{
+    int carcass=-7;
+    public Base()
+    {
+        this(3);
+    }
+    public Base(int i)
+    {
+        carcass = i;
+        carcass *= i;
+    }    
+    public void go() 
+    {
+        carcass += 5;
+        System.out.println(carcass);
+    }    
+}
+
+==========================
+1.) 7 7 -7
+
+2.) -7 -7 14
+
+3.) 7 7 14
+
+4.) Runtime error
+
+5.) Compile time error 
+==========================
+3.) 7 7 14 
+###########################
+
+Choose all that are true, given this class
+class Glass extends klass  
+{
+    public static void main(String[] args)
+    {}
+    public void go()
+    {} 
+}
+
+class klass
+{
+    int carcass=-7;
+
+    public int getCarcass()
+    {
+        return carcass;
+    }
+
+    public void setCarcass(int carcass)
+    {
+        this.carcass = carcass;
+    }    
+}
+
+==========================
+1.) klass is well encapsulated
+
+2.) carcass is an example of polymorphism
+
+3.) carcass is an example of overriding
+
+4.) getter and setter methods for carcass breaks encapsulation
+
+5.) modifiers for the carcass variable break encapsulation 
+==========================
+5.) modifiers for the carcass variable break encapsulation 
+###########################
+What is the output ?
+public class Dog extends Animal  
+{
+    public static void main(String[] args)
+    {new Dog().go();}
+    public void go()
+    {
+        Animal a = new Dog();
+        a.shout();
+        a = (Dog) a; 
+        a.shout();
+        a = (Animal) a;
+        a.shout();
+        new Dog().shout();
+        a = ((Cat)a);
+        a.shout();
+    } 
+    public void shout(){System.out.print("bark ");}
+}
+
+class Animal{public void shout(){System.out.print("Generic scream ");}}
+class Cat extends Animal{public void shout(){System.out.print("Meow ");}}
+
+==========================
+1.) bark bark bark bark Exception
+
+2.) Generic scream bark Generic scream bark Meow
+
+3.) bark bark Generic scream bark Meow
+
+4.) No output is obtained
+
+5.) Compile time error 
+==========================
+1.) bark bark bark bark Exception 
+###########################
+
+What is the output ?
+public class Toast extends Boast 
+{
+    Integer eye=1;
+    public static void main(String... args)
+    {
+        Toast eye = new Toast(); 
+        new Devil(eye).honey(eye);
+        new Boast(eye).honey(eye);
+        new Toast().honey(eye);
+        System.out.print(eye.eye);
+    }
+    public void honey(Toast eye)
+    {
+        eye.eye = new Integer(-2);
+    }    
+    
+}
+
+class Boast extends Devil 
+{
+    public Boast(){System.out.print("");}
+    public Boast(Toast eye)
+    {
+        eye.eye = new Integer(5);
+    }
+    
+    public void honey(Toast eye)
+    {
+        eye.eye = new Integer(2);
+    }
+}
+
+class Devil
+{
+    public Devil(){System.out.print("");}
+    public Devil(Toast eye)
+    {
+        eye.eye = new Integer(1);
+    }
+    public void honey(Toast eye)
+    {
+        eye.eye = new Integer(9);
+    }    
+}
+
+==========================
+
+1.) 1
+
+2.) -2
+
+3.) 5
+
+4.) 2
+
+5.) 9
+
+6.) None of the above 
+==========================
+2.) -2 
+###########################
+
+How will you provide access to the hello field while ensuring that the class is well encapsulated ?
+Also reduce the coupling between the two classes.
+
+class One
+{
+    int bye;
+    int hi = Two.hello;
+}
+
+class Two
+{
+    public static int hello;
+    public int getHello()
+    {
+        return hello;
+    }
+    public void setHello(int hello)
+    {
+        this.hello = hello;
+    }
+}
+
+==========================
+1.) It cannot be done
+
+2.) Provide getters and setters for all variable
+
+3.) Mark variables private
+
+4.) Mark the class One and Two private
+
+5.) Use getter methods instead of accessing variables directly 
+==========================
+2.) Provide getters and setters for all variable
+
+3.) Mark variables private 
+
+5.) Use getter methods instead of accessing variables directly 
+###########################
+What is wrong with this class ?
+
+abstract class Marmaduke
+{
+    public void getNumber(){;} // #1
+    private Integer getInteger(){return Integer.MAX_VALUE + 1;} // #2
+    protected void fan(){System.out.println("fan");} // #3
+    String string(){return getInteger().toString();} // #4
+}
+==========================
+
+1.) There are no abstract methods
+
+2.) This class is fine
+
+3.) The semicolon at #1 should be removed if this class is to compile
+
+4.) This class will get a runtime error if used
+
+5.) There is a compile time error either at #2
+
+6.) There is a compile time error either at #3
+
+7.) There is a compile time error either at #4
+
+==========================
+2.) This class is fine 
+###########################
+Given this program what is the output ?
+
+public class Horsie
+{
+    public static void main(String... args) throws Exception 
+    {
+        Horsie horsie = new Horsie();
+        short x = 10;
+        long pants = 18;
+        String [] ten = {};
+        horsie.get(pants); horsie.get(x);  
+        horsie.get(3/2); horsie.get(ten);
+    }
+    
+    public void get(Long x)
+    {System.out.print("ants ");}
+
+    public void get(short x)
+    {System.out.print("in ");}
+    
+    public void get(int x)
+    {System.out.print("my ");}
+    
+    public void get(String... x)
+    {System.out.print("pants ");}
+    
+}
+==========================
+1.) ants my pants
+
+2.) ants in my pants
+
+3.) prints 'ants in my' and then a RuntimeException
+
+4.) ants my in pants
+
+5.) Compile error
+
+6.) Runtime error
+
+7.) None of the above 
+==========================
+2.) ants in my pants 
+###########################
+Which of the following are true ?
+==========================
+1.) A BufferedReader can accept a FileReader in its constructor
+
+2.) FileReaders can buffer read operations on their own
+
+3.) A programmer can rename a file using the renameTo(File x) function in the File class
+
+4.) Printwriters, BufferedWriters, FileWriters can be flushed and closed
+
+5.) To read a line from a file use the readLine() method in the FileReader class
+
+6.) PrintWriter can accept a File in its contructor but not a String 
+==========================
+1.) A BufferedReader can accept a FileReader in its constructor 
+3.) A programmer can rename a file using the renameTo(File x) function in the File class
+4.) Printwriters, BufferedWriters, FileWriters can be flushed and closed 
+###########################
+What is the output of this program ?
+
+public class Print 
+{
+    public static void main(String args[])   
+    {
+        float f1 = 12.3;
+        int i2 = -9;
+        System.out.printf("%1$(f %2$d n", f1,i2);
+    }
+}
+
+==========================
+1.) 12.300000 -9
+
+2.) 12.300000 9
+
+3.) 12.3 -9
+
+4.) 9-Dec
+
+5.) None of the above 
+==========================
+5.) None of the above 
+###########################
+What is the output of this program ?
+
+public class Print 
+{
+    public static void main(String args[])   
+    {
+        Pattern pattern = Pattern.compile("\\d [a-z]+");
+        Matcher matcher = pattern.matcher("123 a 34a ");
+        while (matcher.find())
+        {
+            System.out.println(matcher.start() + " " );
+        }
+    }
+}
+==========================
+1.) 1 6
+
+2.) 2 7
+
+3.) 2
+
+4.) 1
+
+5.) None of the above 
+==========================
+3.) 2 
+###########################
+What would be the output of this program ?
+
+public class Bug  
+{
+    public static void main(String args[]) 
+    {
+        DateFormat dateFormat = DateFormat.getDateInstance();
+        Date d = new Date();
+        System.out.println(dateFormat.format(d));
+    }
+}
+
+==========================
+1.) Jul 27 2008
+
+2.) Jan 1 1970
+
+3.) The output would be today's date
+
+4.) This program will not compile
+
+5.) None of the above 
+==========================
+3.) The output would be today's date 
+###########################
+What is the output ?
+
+public class Tow  
+{
+    static Integer duck;
+    public static void main(String... args)
+    {
+        int x = 10;
+        if (x++ >= 10)
+        {
+            int y = -5;
+            x += y;
+        }
+        int z = 2;
+        z *= x + 3/2;
+        System.out.println(z + go());
+    }
+    
+    public static int go() 
+    {
+        return duck;
+    }
+}
+==========================
+1.) 1
+
+2.) 0
+
+3.) -1
+
+4.) Compile error
+
+5.) RuntimeException 
+==========================
+5.) RuntimeException 
+###########################
+What would happen when this program is run ? If there is an output, what is it ?
+
+public class Cert extends Hen
+{
+    transient int i = 10;
+
+    volatile int y = 10;
+
+    public static void main(String... args) throws Exception
+    {
+        Cert trim = new Cert();
+        serialize(trim);
+        Cert trim2 = deserialize();
+        System.out.println(trim2.i + trim2.y + trim2.x);
+    }
+
+    private static Cert deserialize() throws Exception
+    {
+        File f = new File("test");
+        ObjectInputStream stream = new ObjectInputStream(new FileInputStream(f));
+        return (Cert)stream.readObject();
+    }
+
+    private static void serialize(Cert trim) throws Exception
+    {
+        File f = new File("test");
+        ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(f));
+        stream.writeObject(trim);
+        stream.flush();
+        stream.close();
+    }
+}
+
+class Hen implements Serializable
+{
+    int x = 10;
+}
+
+==========================
+1.) 10
+
+2.) 20
+
+3.) 30
+
+4.) 0
+
+5.) Compile error
+
+6.) Runtime error
+
+7.) None of the above 
+==========================
+2.) 20 
+###########################
+What could be the result of this program ?
+
+public class Egg 
+{
+    public static void main(String... args) 
+    {
+        String s = "I2wish2i2could2split2this2string";
+        s.setDelimiter("2");
+        String [] x = s.split();
+        for (String sea : x)
+        {
+            System.out.println(sea);
+        }
+    }
+}
+
+==========================
+1.) i wish i could split this string
+
+2.) iwishicouldsplitthisstring
+
+3.) I2wish2i2could2split2this2string
+
+4.) No output
+
+5.) None of the above 
+==========================
+5.) None of the above 
+###########################
+Given these lines of code
+
+StringBuffer s = new StringBuffer();
+DateFormat format = DateFormat.getInstance();
+ObjectOutputStream stream = new ObjectOutputStream(null);
+Pattern pattern = null;
+
+What are the import statements needed to ensure that the code compiles
+
+==========================
+1.) import java.io.ObjectOutputStream;
+
+2.) import java.util.DateFormat;
+
+3.) import java.text.DateFormat;
+
+4.) import java.util.regex.Pattern;
+
+5.) import java.util.Pattern;
+
+6.) import java.regex.Pattern; 
+==========================
+1.) import java.io.ObjectOutputStream; 
+3.) import java.text.DateFormat;
+4.) import java.util.regex.Pattern; 
+###########################
+What is NOT true about the serialized file that this program writes ?
+
+class Cert implements Serializable
+{
+    transient Integer x = 10;
+    Cert c = new Cert();
+    public static void main(String[] args) throws Exception 
+    {
+        Cert c = new Cert();
+        File file = new File("Test");
+        ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(file));
+        stream.writeObject(c);
+        stream.flush();
+        stream.close();
+    }
+}
+
+==========================
+1.) The file will not contain the value of transient int x
+
+2.) The file 'Test' is created on the fly if it does not exist
+
+3.) The file will contain the value of transient int x
+
+4.) None of the above 
+==========================
+4.) None of the above 
+###########################
+What is the output ? Assume that necessary imports have been made
+
+public class Lion  
+{
+    String name="";
+    public static void main(String... args)
+    {
+        String sl = "blion"; String sl2 = "Lion";
+        String sl3 = "sion";
+        Set set = new TreeSet();
+        set.add(sl2);
+        set.add(sl); set.add(sl3);
+        for (Object object: set)
+        {
+            System.out.println(object);
+        }
+    }
+    public String toString()
+    {
+        return name;
+    }
+}
+
+==========================
+1.) Lion blion sion
+
+2.) blion Lion sion
+
+3.) sion blion Lion
+
+4.) sion Lion blion
+
+5.) Compile error
+
+6.) Runtime error 
+==========================
+1.) Lion blion sion 
+###########################
+What is the output ? Assume imports have been made
+public class RedFlame  
+{
+    public static void main(String... args)
+    {
+        int tt = 11, qq = 22, as = 33;
+        List list = new ArrayList();
+        list.add(tt); list.add(qq); list.add(as);
+        int result=0;
+        for (Integer eye : list)
+        {
+            result += eye;
+        }
+        System.out.println(result);
+    }
+}
+==========================
+1.) 66
+
+2.) 55
+
+3.) 44
+
+4.) Compile error
+
+5.) Runtime error 
+==========================
+4.) Compile error 
+###########################
+What is the output of this program ? Assume all imports have been made. How will this array be sorted
+
+public class Compare  
+{
+    String name="";
+    public static void main(String... args)
+    {
+        Compare a = new Compare(); Compare b = new Compare();
+        Compare c = new Compare(); Compare d = new Compare();
+        Compare [] arr = new Compare[4];
+        arr[0] = a; arr[1] = b; 
+        arr[2] = c; arr[3] = d; 
+        Arrays.sort(arr);
+    }
+}
+==========================
+
+1.) It will be sorted according to name's natural order
+
+2.) There will be no sorting in natural order. The order is arbitary
+
+3.) The order is dependant on the way the variables are inserted
+
+4.) There is a compile time error in this program
+
+5.) There is a RuntimeException in this program
+
+6.) The sorting can take place only if Compare implements Comparator 
+==========================
+5.) There is a RuntimeException in this program 
+###########################
+
+Given this fragment
+
+Toll toll = new Toll();
+Toll toll2 = new Toll();
+
+What must be done so that the JVM understands whether toll and toll2 are the same or not ?
+
+==========================
+1.) Override public boolean hashCode() in Toll
+
+2.) Override public int hashCode() in Toll
+
+3.) Override public boolean toString() in Toll
+
+4.) Override public boolean equals() in Toll
+
+5.) Override public boolean equals(Object o) in Toll 
+==========================
+2.) Override public int hashCode() in Toll 
+5.) Override public boolean equals(Object o) in Toll 
+###########################
+Given this program what is the output ?
+
+public class Collier
+{
+    public static void main(String... args) 
+    {
+        List <String> sortedList = new ArrayList<String>();
+        sortedList.add("hello");
+        sortedList.add("HEllo");
+        sortedList.add("allo");
+        for (String string : sortedList)
+        {
+            System.out.print(string + " ");
+        }
+    }
+}
+==========================
+1.) allo HEllo hello
+
+2.) HEllo allo hello
+
+3.) HEllo hello allo
+
+4.) hello HEllo allo
+
+5.) None of the above 
+==========================
+4.) hello HEllo allo 
+###########################
+Which of the following produce compile time errors ?
+
+public class Tiny implements Serializable
+{
+    public static void main(String[] args)
+    {
+        List <? extends Serializable> list; // #1
+        list = new ArrayList<String>(); // #2
+        list = new ArrayList<Integer>(); // #3
+        list = new ArrayList<this>(); // #4
+        list = new ArrayList<Serializable>(); // #5
+        list.add(new Tiny()); // #6
+        list.add(new String()); // #7
+    }
+}
+==========================
+1.) // #1
+
+2.) // #2
+
+3.) // #3
+
+4.) // #4
+
+5.) // #5
+
+6.) // #6
+
+7.) // #7 
+==========================
+4.) // #4 
+6.) // #6
+7.) // #7 
+###########################
+Given this program what can be returned for a hash code implementation at #1 ?
+
+public class Dog
+{
+    int collarID;
+    String name;
+    public static void main(String[] args)
+    {            
+    }
+    
+    public boolean equals(Object arg0)
+    {
+        if (arg0 instanceof Dog)
+        {
+            Dog new_name = (Dog) arg0;
+            return collarID==new_name.collarID && new_name.name.equals(name);
+        }
+        return false;
+    }
+
+    public int hashCode()
+    {
+        // #1
+    }
+}
+==========================
+1.) return super.hashCode();
+
+2.) return 0;
+
+3.) return Math.random();
+
+4.) return collarID;
+
+5.) return toString().length();
+
+6.) return collarID + name; 
+==========================
+2.) return 0; 
+4.) return collarID; 
+###########################
+What would the chain of method calls in this program return as its iterator ?
+Determine what would be the output based on the iterator returned
+
+class Cert 
+{
+    public static void main(String[] args) throws IOException
+    {
+        NavigableSet<Integer> navigableSet = new TreeSet<Integer>();
+        List a = new ArrayList<Integer>();
+        a.add(1);
+        a.add(2);
+        a.add(-1);
+        navigableSet.addAll(a);
+        Iterator< Integer> iterator = navigableSet.descendingSet().headSet(1).iterator();
+        while (iterator.hasNext())
+        {
+            System.out.print(iterator.next() + " ");
+        }
+    }
+}
+
+==========================
+1.) 1 -1
+
+2.) -1 1
+
+3.) 2
+
+4.) 1 2
+
+5.) 2 1
+
+6.) None of the above 
+==========================
+3.) 2 
+###########################
+Which of the following are true ?
+
+public class Erode <X,Y,Z>  
+{
+    public static void main( String args[] )
+    {
+        Erode<Integer, String, Double> erode = new Erode<Integer, String, Double>();
+        erode.erode(1,"Hello", 1.1);
+    }
+    
+    public void erode(X x, Y y, Z z)
+    {
+        System.out.println( x.doubleValue() + " " + y.replaceAll("Hello","a"), z.byteValue()  );
+    }
+}
+==========================
+1.) This program will print 1.00 a 1
+
+2.) This program will print 1 a 1
+
+3.) This program will not compile since no more than 2 generics are allowed
+
+4.) This program will not compile since x,y,z should only be treated like Objects
+
+5.) There is a Runtime error in this program
+
+6.) None of the above 
+==========================
+4.) This program will not compile since x,y,z should only be treated like Objects 
+###########################
+Choose all that are true
+
+==========================
+1.) The Iterator interface makes use of Generics
+
+2.) Most operations on Collections that do not use generics result in compile time errors
+
+3.) Most operations on Collections that do not use generics result in warnings
+
+4.) An enhanced for loop cannot Iterate over a List if it uses generics
+
+5.) A Map < List<String> , String > is an incorrect statement which will not compile 
+==========================
+1.) The Iterator interface makes use of Generics 
+3.) Most operations on Collections that do not use generics result in warnings 
+###########################
+What is the output of this program ?
+
+public class Bug  
+{
+    public static void main(String args[]) 
+    {
+        List <String> list = new TreeList <String>();
+        list.add("1"); list.add("3");
+        list.add("4"); list.add("2");
+        for (String string : list)
+        {
+            System.out.print(string + " ");
+        }
+    }
+}
+==========================
+1.) 1 2 3 4
+
+2.) 1 3 4 2
+
+3.) 4 3 2 1
+
+4.) Compile error
+
+5.) Runtime error
+==========================
+4.) Compile error 
+###########################
+
+What is the output of this program ?
+
+public class Ruff   
+{
+    public static void main(String args[]) 
+    {
+        List <String> list = new ArrayList<String>();
+        list.add("a");
+        list.add("b");
+        list.add("c");
+        new Ruff().go(list);
+    }
+    
+    public void go(List list)
+    {
+        list.add(12.2);
+        for (Object o : list)
+        {
+            System.out.print(o + " ");
+        }
+    }
+}
+
+==========================
+1.) a b c
+
+2.) a b c 12.2
+
+3.) 12.2 a b c
+
+4.) Compile error
+
+5.) Runtime error 
+==========================
+2.) a b c 12.2 
+###########################
+Given this code what happens ?
+class SomeBody extends Thread implements Floral     
+{
+    public static void main(String[] args) throws Exception 
+    {
+        Floral floral = new SomeBody();
+        synchronized (floral)
+        {
+            ((SomeBody)floral).wait(1);
+        }
+    }
+    public void run(){}
+} 
+
+interface Floral 
+{}
+==========================
+1.) The code waits for 1 second and then exits
+
+2.) The code waits for 1 milli second and then exits
+
+3.) A compile time error exists in this code
+
+4.) This code will throw a runtime error
+
+5.) The JVM cannot synchronize on Floral since it is an interface
+
+6.) None of the above 
+==========================
+2.) The code waits for 1 milli second and then exits 
+###########################
+Given this program which of the following are true ?
+public class Toza  extends Thread 
+{
+    static int rabbit=0; static boolean shifter=false; Toza toza;
+    public Toza(){}
+    public Toza(Toza q)
+    {
+        toza = q;
+    }
+    public static void main(String[] args) throws Exception
+    {
+        Toza tozax = new Toza();
+        List<Toza> stinger = new ArrayList<Toza>(); Toza toza = new Toza(tozax);
+        stinger.add(toza); toza = new Toza(tozax);
+        stinger.add(toza); toza = new Toza(tozax);
+        stinger.add(toza); toza = new Toza(tozax);
+        stinger.add(toza); 
+        for (Object x : stinger)
+        {
+            ((Toza)x).start();
+        }
+        for (Toza q : stinger)
+        {
+            q.hunter();
+        }
+    }
+    public synchronized void hunter() throws Exception {while (!shifter){waiter();} System.out.print(rabbit);}
+    public synchronized void run()
+    {
+        rabbit++;
+        if (rabbit > 3)
+        {
+            shifter=true;
+        }
+    }
+    public void waiter() throws Exception {Thread.sleep(100);}
+}
+
+==========================
+1.) The output is guarenteed to be 4444
+
+2.) The output is guarenteed to be 1234
+
+3.) The output is guarenteed to be 1111
+
+4.) The output is not guarenteed
+
+5.) This program has a compile time error
+
+6.) This program has a runtime error
+
+==========================
+1.) The output is guarenteed to be 4444 
+###########################
+
+What is true about this program ?
+public class BaseMaster  
+{
+    public static void main(String[] args) throws Exception
+    {
+        Transistor transistor = new Transistor();
+        transistor.sleep(99);
+        System.out.println("Hashleep");
+    }
+}
+
+class Transistor extends Thread{public void run(){}}
+
+==========================
+1.) It outputs Hashleep
+
+2.) It sleeps for 99 seconds
+
+3.) It sleeps for 99 milli seconds
+
+4.) It does not output anything
+
+5.) The Transistor sleeps for sometime
+
+6.) The main thread sleeps for sometime 
+==========================
+1.) It outputs Hashleep 
+3.) It sleeps for 99 milli seconds
+6.) The main thread sleeps for sometime
+###########################
+
+What is true about the following program ?
+
+public class Fur extends Thread implements Runnable 
+{
+    public static void main( String args[] )
+    {
+        Thread thread = new Thread(new Fur());
+        thread.start(); // #1
+        thread.run(); // #2
+    }
+}
+
+==========================
+1.) This program will not compile
+
+2.) The line at #1 will start a new thread
+
+3.) The line at #2 will start a new thread
+
+4.) Fur cannot be a Thread and Runnable at the same time
+
+5.) None of the above 
+==========================
+2.) The line at #1 will start a new thread 
+###########################
+Which of the following are true ?
+
+public class Free extends Thread
+{
+    static int x=10;
+    public static void main( String args[] ) throws Exception 
+    {
+        Free free = new Free();
+        Thread thread = new Thread(free);
+        Thread thread2 = new Thread(free);
+        thread.start();
+        thread2.start();
+    }
+    
+    public synchronized void start()
+    {
+        System.out.print("start ");
+    }
+    
+    public synchronized void run()
+    {
+        System.out.print(++x + " ");;
+    }
+}
+==========================
+1.) The output is guaranteed to be 11 12
+
+2.) The output is guaranteed to be 10 11
+
+3.) The output is guaranteed to be start start 11 12
+
+4.) The output is guaranteed to be start start 10 11
+
+5.) The output cannot be guaranteed
+
+6.) None of the above
+
+==========================
+1.) The output is guaranteed to be 11 12 
+###########################
+
+How many locks are obtained when Hello World is printed ?
+
+public class Fern extends Thread
+{
+    public static void main(String args[]) throws Exception 
+    {
+        Thread thread = new Thread(new Fern());
+        thread.start();
+    }
+    
+    public synchronized void run()
+    {
+        synchronized (System.out)
+        {
+            gun();
+        }
+    }
+    
+    public synchronized void gun()
+    {
+        System.out.println("Hello world");
+    }
+}
+==========================
+1.) 1
+
+2.) 2
+
+3.) 3
+
+4.) No locks are obtained
+
+5.) None of the above 
+==========================
+2.) 2 
+###########################
+What is the result of running this program ?
+
+public class Drop extends Thread
+{
+    public static void main(String args[]) throws Exception  
+    {
+        Thread thread = new Thread(new Drop());
+        thread.start();
+    }
+
+    public void run()
+    {
+        System.out.print("world");
+    }   
+    
+    public synchronized void start()
+    {
+        System.out.println("Hello ");
+    }
+}
+
+==========================
+1.) The output will always be world
+
+2.) The output will always be Hello world
+
+3.) This program does not compile
+
+4.) This program will not run, but with Runtime errors
+
+5.) None of the above 
+==========================
+1.) The output will always be world 
+###########################
+
+How would you protect the variables x and y so that they have thread safe access ?
+
+public class Queen   
+{
+    private String x; private Long y;
+    public static void main(String args[]) throws Exception 
+    {
+    }
+}
+
+==========================
+1.) Introduce a getter and setter for each variable
+
+2.) Introduce a getter and setter for each variable and synchronize the methods
+
+3.) Introduce a getter and setter for each variable and synchronize the body over 'this'
+
+4.) The variables are thread safe on their own
+
+5.) Introduce a getter and setter for both variables together
+
+6.) Synchronize over Queen.class when accessing x and y but do not provide getters and setters 
+==========================
+2.) Introduce a getter and setter for each variable and synchronize the methods
+
+3.) Introduce a getter and setter for each variable and synchronize the body over 'this' 
+###########################
+What would be the output of this program ?
+
+public class Queen   
+{
+    public static void main(String args[]) throws Exception 
+    {
+        Test test = new Test();
+        test.start();
+    }
+}
+
+class Test extends Thread
+{
+    public void run()
+    {
+            interrupt();
+            System.out.println(interrupted());
+    }
+}
+
+==========================
+1.) FALSE
+
+2.) TRUE
+
+3.) No output
+
+4.) Compile time error
+
+5.) Runtime error 
+==========================
+2.) TRUE 
+###########################
+What must be done to make this code compile ?
+class Fire extends Ice 
+{
+    int yellow; //#1
+    public static void main(String... args)
+    {
+        yellow++;
+        new Fire().yellow++;
+    }
+    public static final void go(){} //#2
+
+}
+
+abstract class Ice
+{
+    public static final void go() //#3
+    {}    
+}
+==========================
+1.) yellow must be marked static
+
+2.) static final must be removed from #2
+
+3.) static final must be removed from #3
+
+4.) Ice must not be abstract
+
+5.) new Fire().yellow++; must be changed to yellow++ 
+==========================
+1.) yellow must be marked static
+
+2.) static final must be removed from #2
+
+3.) static final must be removed from #3 
+###########################
+Given this class what is the output ?
+public class One 
+{ 
+    public static void main(String [] args)
+    {
+        System.out.print(jeronimo.Feeder.THREE.ordinal());
+        System.out.print(jeronimo.Feeder.ONE.ordinal());
+        System.out.print(jeronimo.Feeder.TWO.ordinal());
+    }
+}
+
+class jeronimo
+{
+    public enum Feeder {ONE,TWO,THREE}
+}
+
+==========================
+1.) 312
+
+2.) 201
+
+3.) 0
+
+4.) 333
+
+5.) None of the above 
+==========================
+2.) 201 
+###########################
+Given this program what is the output ?
+public class Toast 
+{
+    static int x;
+    public static void main(String... args)
+    {
+        new Toast().findIt(x);
+        try
+        {
+            int y=15;
+            x += y;
+        }
+        finally
+        {
+            System.out.println(y);
+        }
+    }
+    public void findIt(int x)
+    {
+        x += 5;
+    }
+}
+
+==========================
+1.) 15
+
+2.) 20
+
+3.) 25
+
+4.) Compile error
+
+5.) Runtime error 
+==========================
+4.) Compile error 
+###########################
+Given this class
+
+public class Tear
+{
+    public static void main(String... args)
+    {
+        //#1
+    }   
+    private class Rain
+    {}
+}
+
+How do you instantiate the inner class at #1 ?
+
+==========================
+1.) Tear t = new Tear(); Tear.Rain terrain = Tear.Rain.new Rain();
+
+2.) Tear t = new Tear(); Tear.Rain terrain = new Tear.Rain();
+
+3.) Tear rabbit = new Tear(); Tear.Rain terrain = rabbit.new Rain();
+
+4.) Compile error no matter what is inserted at #1
+
+5.) None of the above 
+==========================
+3.) Tear rabbit = new Tear(); Tear.Rain terrain = rabbit.new Rain(); 
+###########################
+Given this program what is the output ?
+
+public class Train extends Bullet 
+{
+    static int x=1;
+    public static void main(String... args) throws Exception
+    {
+        new Train().gogogo();
+        System.out.println(x);
+    } 
+    
+    public void gogogo() throws Exception
+    {
+        super.gogogo();
+        x++;
+        throw new Exception();
+    }
+}
+
+class Bullet{ public void gogogo(){}}
+
+==========================
+1.) 0
+
+2.) 1
+
+3.) 2
+
+4.) Compile error
+
+5.) Runtime error
+
+6.) None of the above 
+==========================
+4.) Compile error 
+###########################
+What is the output of this program ?
+
+interface Face
+{
+    void ice();
+}
+
+
+public class Sickle implements Face
+{
+    public static void main()
+    {
+        new Sickle().ice();
+    }
+    void ice()
+    {System.out.println("yellow");}
+}
+==========================
+1.) yellow
+
+2.) Compile time error
+
+3.) NullPointerException
+
+4.) None of the above 
+==========================
+2.) Compile time error 
+###########################
+Which of the following will NOT compile ?
+
+int x= 10; // #1
+float f = 10.0; // #2
+int i = 10/3; // #3
+double d = 12.3f; // #4
+float f2 = 10; // #5
+
+==========================
+1.) #1
+
+2.) #2
+
+3.) #3
+
+4.) #4
+
+5.) #5 
+==========================
+2.) #2 
+###########################
+What is the output of the program ?
+
+public class Dainty implements sad 
+{
+    public static void main( String args[] )
+    {
+        new Dainty().go();
+    }
+    public void go()
+    {
+        System.out.println(tent++);
+    }
+}
+
+interface sad
+{
+    int tent=0;
+}
+==========================
+1.) 0
+
+2.) 1
+
+3.) 2
+
+4.) None of the above 
+==========================
+4.) None of the above 
+###########################
+At what line(s) do compilation fail ?
+
+class Cert extends hey // #1
+{
+    public static void main(String[] args) throws Exception // #2 
+    {
+    }
+}
+
+class hey // #3
+{
+    public static void main() // #4
+    {   
+    }
+}
+
+==========================
+1.) # 1
+
+2.) # 2
+
+3.) # 3
+
+4.) # 4
+
+5.) None of the above 
+==========================
+5.) None of the above
+###########################
+Given these methods, which comments about #1 and #2 are true ?
+Take into consideration if the entire method at #1 and #2 will compile
+
+    public void goLoizeez() // #1
+    {
+        int assert = 0;
+        System.out.println(assert);
+    }
+    
+    public void breakinson() // #2
+    {
+        assert true;
+        assert false;
+    }
+==========================
+1.) #1 will compile with java 1.3
+
+2.) #1 will compile with java 1.5 and above
+
+3.) #2 will compile with java 1.3
+
+4.) #2 will compile with java 1.5 and above
+
+5.) None of the above
+
+6.) Execution of some statements may result in an Error
+
+7.) assert should not be used in remote environments
+
+8.) false assertions lead to an Exception 
+==========================
+1.) #1 will compile with java 1.3 
+4.) #2 will compile with java 1.5 and above
+6.) Execution of some statements may result in an Error 
+###########################
+Given this program what code fragment(s) can be inserted ?
+
+class dodo
+{
+    void method() throws IOException
+    {
+        System.out.println("dog");
+    }
+}
+
+class Cert extends dodo
+{
+    public static void main(String[] args) 
+    {
+        try
+        {
+            new Cert().method();
+        } 
+        catch (Exception e)
+        {System.out.println("ouchie");}
+    }
+    // Insert code here
+}
+==========================
+1.) void method() throws FileNotFoundException {System.out.println("frog");}
+
+2.) void method() throws IOException {System.out.println("frog");}
+
+3.) void method() throws ArrayIndexOutOfBoundsError {System.out.println("frog");}
+
+4.) void method() throws Exception {System.out.println("frog");}
+
+5.) void method() {System.out.println("frog");}
+
+6.) void method() throws ReaderException {System.out.println("frog");}
+
+7.) void method() {super.method();} 
+==========================
+1.) void method() throws FileNotFoundException {System.out.println("frog");}
+
+2.) void method() throws IOException {System.out.println("frog");} 
+5.) void method() {System.out.println("frog");}
+###########################
+Given this program what is the output ?
+class Cert
+{
+    public static void main(String[] args) 
+    {
+        int x=10;
+
+        try
+        {
+            throw new IOException("" + ++x);
+        } 
+        catch (IOException e)
+        {
+            x++; 
+            try
+            {
+                throw new Exception();
+            } catch (Exception e1){} finally{x--;}
+        }
+        finally {System.out.println(++x);}
+    }
+}
+==========================
+1.) 10
+
+2.) 11
+
+3.) 12
+
+4.) 13
+
+5.) Compile error
+
+6.) Runtime error 
+==========================
+3.) 12 
+###########################
+Choose the all that apply
+==========================
+1.) Checked exceptions need to be handled by the calling code
+
+2.) NullPointerException is a checked Exception
+
+3.) RuntimeException is a checked Exception
+
+4.) Exception is a checked Exception
+
+5.) IOException is a RuntimeException 
+==========================
+1.) Checked exceptions need to be handled by the calling code 
+4.) Exception is a checked Exception 
+###########################
+Given this program and the invocation 'java Take 1 2 3 4 5' what is the output ?
+
+public class Take    
+{
+    public static void main(String... args)
+    {
+        int counter=1;
+        for (counter=1;;counter++)
+        {
+            if (counter == 4) break;
+            System.out.println(args[counter]);
+        }
+    } 
+}
+==========================
+1.) 1 2 3 4
+
+2.) 1 2 3
+
+3.) 2 3 4
+
+4.) 3 4 5
+
+5.) 2 3 4 5
+
+6.) None of the above 
+==========================
+3.) 2 3 4 
+###########################
+Given this program what is the output ?
+
+public class Ten
+{
+    public static void main(String... args) 
+    {
+        int x=10;
+        do
+        {
+            x++;
+        } while (x > 50);
+        System.out.println(x);
+    }
+}
+
+==========================
+1.) 10
+
+2.) 11
+
+3.) 12
+
+4.) None of the above 
+==========================
+2.) 11 
+###########################
+
+Which of the following are true regarding this loop ?
+
+for (Object o : i)
+{}
+
+==========================
+1.) This is an enhanced for loop
+
+2.) i may be an Integer[], Object[], iterator, or a Comparable
+
+3.) There is more than one syntax for this loop
+
+4.) for (Object o : list) where list is an ArrayList will compile
+
+5.) for (Object o : list.iterator()) where list is an ArrayList will compile
+
+6.) This loop is available in java 1.4 and above 
+==========================
+1.) This is an enhanced for loop 
+4.) for (Object o : list) where list is an ArrayList will compile 
+###########################
+
+What is the result of running this program ?
+
+public class Oak 
+{
+    public static void main(String args[])  
+    {
+        try
+        {
+            Integer i =null;
+            i.toString();
+        }
+        catch (Exception e)
+        {
+            try
+            {
+                System.out.println("One ");
+                Integer i =null;
+                i.toString();                
+            }
+            catch (Exception x)
+            {
+                System.out.println("Two ");
+                Integer i =null;
+                i.toString();                   
+            }
+            finally
+            {
+                System.out.println("Three ");
+                Integer i =null;
+                i.toString();                            
+            }
+        }
+        finally
+        {
+            System.out.println("Four ");
+        }
+    }
+}
+
+
+==========================
+1.) One Two Three Four
+
+2.) One Two Three Four NullpointerException
+
+3.) One Two
+
+4.) One Three Four
+
+5.) This program does not compile since the main method does not handle the exception
+
+6.) None of the above 
+==========================
+2.) One Two Three Four NullpointerException 
+###########################
+What is an island of isolation ?
+==========================
+1.) A situation where the JVM leaks memory that cannot be fixed, leading to an OutOfMemoryError
+
+2.) When the JVM crashes it writes data in seperate files called islands
+
+3.) A CPU intensive operation that is isolated to a class or a method
+
+4.) A situation where objects connect to each other and form an island that can still be GCed
+
+5.) None of the above 
+==========================
+4.) A situation where objects connect to each other and form an island that can still be GCed 
+###########################
+Which of these lines will compile ?
+class Cert
+{
+    public static void main(String[] args)
+    {
+        new Cert().go();
+    }
+    public void go()
+    {
+        Feast.ing feast = Feast.ing.Less; // 1
+        Feast f = new Feast(); f.ing feast =Feast.ing.More; // 2
+        Feast.ing feast3 = Feast.ing.NotAtAll; // 3
+        boolean x = (Feast.ing.More != Feast.ing.Less); // 4
+        Feast.ing.More.ordinal(); // 5 
+    }
+}
+class Feast
+{
+    enum ing
+    {
+        More, Less, NotAtAll;
+    };
+}
+==========================
+1.) 1
+
+2.) 2
+
+3.) 3
+
+4.) 4
+
+5.) 5 
+==========================
+1.) 1
+
+3.) 3
+
+4.) 4
+
+5.) 5 

@@ -59,14 +59,14 @@ public class QuestionsServiceImpl implements QuestionsService {
         QuestionTheme PYTHON = new QuestionThemeImpl("PYTHON", null);
         QuestionTheme GO = new QuestionThemeImpl("GO", null);
 
-        top.add(new QuestionThemeImpl("programming", Arrays.asList(
+        top.add(new QuestionThemeImpl("Programming", Arrays.asList(
                 java, sql, C, CPLUSPLUS, CSHURP, ADA, ASM, GO, Groovy, PHP, PYTHON, LISP)));
 
 
         QuestionTheme optics = new QuestionThemeImpl("optics", null);
         QuestionTheme thermodynamics = new QuestionThemeImpl("thermodynamics", null);
 
-        top.add(new QuestionThemeImpl("physics", Arrays.asList(optics, thermodynamics)));
+        top.add(new QuestionThemeImpl("Physics", Arrays.asList(optics, thermodynamics)));
 
         QuestionTheme German = new QuestionThemeImpl("German", null);
         QuestionTheme Russian = new QuestionThemeImpl("Russian", null);
@@ -75,7 +75,7 @@ public class QuestionsServiceImpl implements QuestionsService {
         QuestionTheme Korean = new QuestionThemeImpl("Korean", null);
         QuestionTheme French = new QuestionThemeImpl("French", null);
 
-        top.add(new QuestionThemeImpl("Speak Lang", Arrays.asList(
+        top.add(new QuestionThemeImpl("Speaks", Arrays.asList(
                 German, Russian, English, Japan, Korean, French)));
 
         QuestionTheme Maya = new QuestionThemeImpl("Maya", null);

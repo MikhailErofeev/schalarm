@@ -56,7 +56,7 @@ public class ThemeSelectorAdapter extends BaseAdapter {
             final SelectedCheckBoxElement selectedCheckBoxElement = (SelectedCheckBoxElement) view;
             setMainThemeListener(selectedCheckBoxElement);
             setCheckBocksForMainThemeListener(selectedCheckBoxElement);
-            if (selectedTagsFromScheduleCreator.contains(selectedCheckBoxElement.getTagName())) {
+            if (selectedTagsFromScheduleCreator != null && selectedTagsFromScheduleCreator.contains(selectedCheckBoxElement.getTagName())) {
                 selectedCheckBoxElement.getCheckBox().setChecked(true);
             }
             view.setLayoutParams(new AbsListView.LayoutParams(parent.getResources().getDisplayMetrics().widthPixels,
@@ -113,14 +113,12 @@ public class ThemeSelectorAdapter extends BaseAdapter {
         private CheckBox checkBox;
         private LinearLayout leftGravity;
         private LinearLayout rightGravity;
-        private Context context;
 
         public SelectedCheckBoxElement(Context context, String name) {
             super(context);
-            this.context = context;
             setOrientation(HORIZONTAL);
             setGravity(Gravity.CENTER_VERTICAL);
-            setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.WRAP_CONTENT));
 
             leftGravity = new LinearLayout(context);
             rightGravity = new LinearLayout(context);
@@ -148,12 +146,6 @@ public class ThemeSelectorAdapter extends BaseAdapter {
 
         public CheckBox getCheckBox() {
             return checkBox;
-        }
-
-        public void createNewCheckBox() {
-            checkBox = new CheckBox(context);
-            checkBox.setChecked(true);
-            refreshDrawableState();
         }
     }
 }
