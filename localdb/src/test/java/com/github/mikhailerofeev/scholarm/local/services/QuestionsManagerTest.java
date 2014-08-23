@@ -39,14 +39,14 @@ public class QuestionsManagerTest {
     assertTrue(emptyList.isEmpty());
 
     List<QuestionImpl> questions = Lists.newArrayList();
-    ImmutableMap<Question.Key, String> qa = ImmutableMap.<Question.Key, String>builder().
-        put(Question.Key.A, "da").
-        put(Question.Key.B, "ne").
-        put(Question.Key.C, "muu").
-        put(Question.Key.D, "yarh").build();
-    questions.add(new QuestionImpl(-1L, qa, Question.Type.TEXT, "skaji da", Question.Key.A, "programming"));
-    questions.add(new QuestionImpl(-1L, qa, Question.Type.TEXT, "skaji muu", Question.Key.C, "programming"));
-    questions.add(new QuestionImpl(-1L, qa, Question.Type.TEXT, "skaji yarh", Question.Key.D, "physics"));
+    ImmutableMap<Character, String> qa = ImmutableMap.<Character, String>builder().
+        put('A', "da").
+        put('B', "ne").
+        put('C', "muu").
+        put('D', "yarh").build();
+    questions.add(new QuestionImpl(-1L, qa, Question.Type.TEXT, "skaji da", 'A', "programming"));
+    questions.add(new QuestionImpl(-1L, qa, Question.Type.TEXT, "skaji muu", 'C', "programming"));
+    questions.add(new QuestionImpl(-1L, qa, Question.Type.TEXT, "skaji yarh", 'D', "physics"));
 
     questionsManager.addQuestions(questions);
     List<Question> programmingQuestions = questionsManager.getQuestions(Sets.newHashSet("programming"));
@@ -55,7 +55,7 @@ public class QuestionsManagerTest {
     assertEquals(1, physics.size());
 
     List<QuestionImpl> questions2 = Lists.newArrayList();
-    questions2.add(new QuestionImpl(-1L, qa, Question.Type.TEXT, "dadadada", Question.Key.A, "programming"));
+    questions2.add(new QuestionImpl(-1L, qa, Question.Type.TEXT, "dadadada", 'A', "programming"));
     questionsManager.addQuestions(questions2);
     programmingQuestions = questionsManager.getQuestions(Sets.newHashSet("programming"));
     assertEquals(3, programmingQuestions.size());

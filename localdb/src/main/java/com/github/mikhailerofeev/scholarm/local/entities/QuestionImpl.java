@@ -10,13 +10,13 @@ import java.util.Map;
  */
 public class QuestionImpl implements Question {
   private long id;
-  private final Map<Key, String> variants;
+  private final Map<Character, String> variants;
   private final Type type;
   private final String questionText;
-  private final Question.Key rightAnswer;
+  private final char rightAnswer;
   private final String themeName;
 
-  public QuestionImpl(long id, Map<Key, String> variants, Type type, String questionText, Key rightAnswer, String themeName) {
+  public QuestionImpl(long id, Map<Character, String> variants, Type type, String questionText, char rightAnswer, String themeName) {
     this.id = id;
     this.variants = variants;
     this.type = type;
@@ -44,12 +44,12 @@ public class QuestionImpl implements Question {
   }
 
   @Override
-  public Map<Key, String> getVariants() {
+  public Map<Character, String> getVariants() {
     return variants;
   }
 
   @Override
-  public Key getRightAnswer() {
+  public char getRightAnswer() {
     return rightAnswer;
   }
 

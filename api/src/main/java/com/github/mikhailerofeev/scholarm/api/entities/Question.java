@@ -11,18 +11,14 @@ public interface Question {
 
   String getQuestionText();
 
-  Map<Key, String> getVariants();
+  Map<Character, String> getVariants();
 
-  Key getRightAnswer();
+  char getRightAnswer();
 
   String getThemeName();
 
   enum Type {
     TEXT,
     IMAGE
-  }
-
-  enum Key {
-    A, B, C, D
   }
 }
