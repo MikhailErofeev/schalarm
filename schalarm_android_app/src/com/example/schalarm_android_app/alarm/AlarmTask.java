@@ -3,10 +3,10 @@ package com.example.schalarm_android_app.alarm;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import com.example.schalarm_android_app.activities.QueryShowerActivity;
 import com.example.schalarm_android_app.utils.entitys.MusicTrack;
 import org.joda.time.DateTime;
 
+import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.Set;
 
@@ -36,25 +36,30 @@ public class AlarmTask implements Runnable {
         try {
             while (DateTime.now().getMillis() < taskStartTimeInMillis) {
                 long diff = taskStartTimeInMillis - DateTime.now().getMillis();
-                Thread.sleep(diff);
+                Thread.sleep(diff / 2);
             }
             startPlayMusic();
             runQueryActivity();
             //@todo add new task!
         } catch (InterruptedException ignored) {
-            // look down
+            System.out.println(Thread.currentThread().getName() + " interrupted");
         }
     }
 
     private void runQueryActivity() {
         Intent intent = new Intent();
-        intent.setClass(parent, QueryShowerActivity.class);
-        parent.startActivity(intent);
+//        intent.setClass(parent, QueryShowerActivity.class);
+//        parent.startActivity(intent);
     }
 
     private void startPlayMusic() {
         try {
-            mediaPlayer.setDataSource(musicTrack.getFilePath());
+            if (musicTrack != null) {
+                mediaPlayer.setDataSource(musicTrack.getFilePath());
+            } else {
+                FileDescriptor stubMusic = parent.getApplication().getAssets().openFd("ussr_db_alarm.mp3").getFileDescriptor();
+                mediaPlayer.setDataSource(stubMusic);
+            }
             mediaPlayer.setLooping(true);
             mediaPlayer.prepare();
             mediaPlayer.start();

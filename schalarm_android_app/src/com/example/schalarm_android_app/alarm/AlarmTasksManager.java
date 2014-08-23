@@ -19,6 +19,9 @@ public class AlarmTasksManager {
     }
 
     public void shutdownTask() {
-        task.interrupt();
+        if (task != null) {
+            task.interrupt();
+            task = null;
+        }
     }
 }

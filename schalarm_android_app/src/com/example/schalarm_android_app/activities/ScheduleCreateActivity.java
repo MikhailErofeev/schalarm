@@ -75,6 +75,7 @@ public class ScheduleCreateActivity extends Activity {
         setElementsOnContainers();
         setListeners();
         setRandomMusic();
+        updateAlarmTime();
     }
 
     private void setRandomMusic() {
@@ -83,7 +84,14 @@ public class ScheduleCreateActivity extends Activity {
         songGeneratorTextView.setText(selectedTrack.getTrackName() + " " + selectedTrack.getArtistName());
     }
 
-    public void convertToIntTimerValues() {
+    public void updateAlarmTime() {
+        DateTime alarmTime = getAlarmTime();
+        timeToStartTask = alarmTime.getMillis();
+        alarmTasksManager.shutdownTask();
+        startUpdatedTaskIfOn();
+    }
+
+    public DateTime getAlarmTime() {
         String time = scheduleTimer.getText().toString();
         String[] hh2MM = time.split(":");
         int hours = Integer.parseInt(hh2MM[0]);
@@ -92,8 +100,7 @@ public class ScheduleCreateActivity extends Activity {
         if (DateTime.now().isAfter(alarmTime)) {
             alarmTime = alarmTime.plusDays(1);
         }
-        timeToStartTask = alarmTime.getMillis();
-        startUpdatedTaskIfOn();
+        return alarmTime;
     }
 
     private void setElementsOnContainers() {

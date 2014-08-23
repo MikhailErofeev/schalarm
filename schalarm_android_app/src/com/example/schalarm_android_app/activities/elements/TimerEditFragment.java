@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import com.example.schalarm_android_app.R;
 import com.example.schalarm_android_app.activities.ScheduleCreateActivity;
+import org.joda.time.DateTime;
 
 /**
  * Created by FFX20413 on 23.08.2014.
@@ -28,8 +29,9 @@ public class TimerEditFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         timePicker = new TimePicker(getActivity());
         timePicker.setIs24HourView(true);
-        timePicker.setCurrentHour(0);
-        timePicker.setCurrentMinute(0);
+        DateTime alarmTime = ((ScheduleCreateActivity) getActivity()).getAlarmTime();
+        timePicker.setCurrentHour(alarmTime.getHourOfDay());
+        timePicker.setCurrentMinute(alarmTime.getMinuteOfDay());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(TITLE).setPositiveButton(YES, new DialogInterface.OnClickListener() {
@@ -49,7 +51,7 @@ public class TimerEditFragment extends DialogFragment {
     private void saveSelectedTime() {
         TextView timer = (TextView) getActivity().findViewById(R.id.create_schedule_timer);
         timer.setText(timePicker.getCurrentHour() + ":" + timePicker.getCurrentMinute());
-        ((ScheduleCreateActivity) getActivity()).convertToIntTimerValues();
+        ((ScheduleCreateActivity) getActivity()).updateAlarmTime();
     }
 
     private void removeTime() {
