@@ -60,9 +60,9 @@ public class ScheduleCreateActivity extends Activity {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         questionsService = InjectorApplication.get(QuestionsService.class);
         alarmTaskService = InjectorApplication.get(AlarmTaskService.class);
-        super.onCreate(savedInstanceState);
         parentContext = this;
         setContentView(R.layout.main_settings);
         findAllElements();

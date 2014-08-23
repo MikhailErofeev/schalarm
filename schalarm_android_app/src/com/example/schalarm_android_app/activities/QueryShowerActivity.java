@@ -2,7 +2,13 @@ package com.example.schalarm_android_app.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import com.example.schalarm_android_app.R;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,9 +21,25 @@ public class QueryShowerActivity extends Activity {
         add("Programming");
     }};
 
+    private TextView questionText;
+    private LinearLayout answers;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.qa);
+        questionText = (TextView) findViewById(R.id.question_text);
+        questionText.setText("Custom text");
+        answers = (LinearLayout) findViewById(R.id.answers_list);
+
+        ArrayList<View> buttons = new ArrayList<>();
+        Button exampleBtn = new Button(this.getApplicationContext());
+        buttons.add(exampleBtn);
+        Button closeBtn = new Button(this.getApplicationContext());
+        buttons.add(exampleBtn);
+        buttons.add(closeBtn);
+
+        answers.addTouchables(buttons);
     }
 
     @Override

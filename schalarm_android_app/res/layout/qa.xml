@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:weightSum="2">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" android:id="@+id/settingsScrollerParent"
+            android:longClickable="false" android:focusable="false">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/settingsElementContainer"
+                android:layout_weight="2">
+            <HorizontalScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/create_schedule_tag_show" android:layout_marginTop="@dimen/create_schedule_elements_top_margin">
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" android:id="@+id/create_schedule_tag_container">
+                </LinearLayout>
+            </HorizontalScrollView>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" android:id="@+id/createScheduleTrackInfoLayout"
+                    android:weightSum="1">
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="248dp"
+                        android:text="question text\ntext\ntext\n\text"
+                        android:id="@+id/question_text"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" "
+                        android:id="@+id/createScheduleTrackInfoArtistInfo"/>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/answers_list" android:layout_weight="1.88">
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" android:id="@+id/clearSaveButtonContainer" android:layout_weight="1"
+                    android:layout_marginTop="@dimen/create_schedule_elements_top_margin">
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
