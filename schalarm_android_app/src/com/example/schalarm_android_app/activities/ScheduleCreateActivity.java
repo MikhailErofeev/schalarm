@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.schalarm_android_app.R;
@@ -39,6 +40,7 @@ public class ScheduleCreateActivity extends Activity {
 
     public static final int SELECT_TRACK_REQUEST_CODE = 10;
     public static final String TRACK_INFO_TAG = "track_info_tag";
+    public static final String SELECT_TAGS = "Select Tags";
 
     private static Set<String> selectedTags = new HashSet<String>() {{
         add("Programmers");
@@ -52,6 +54,7 @@ public class ScheduleCreateActivity extends Activity {
     private LinearLayout tagContainer;
     private LinearLayout trackInfoLayout;
     private TagsSelectElement tagsSelectElement;
+    private LinearLayout tagsContainer;
     private TextView scheduleTimer;
     private TimerEditFragment timerEditFragment;
     private TextView songGeneratorTextView;
@@ -81,7 +84,6 @@ public class ScheduleCreateActivity extends Activity {
         List<MusicTrack> allAvailableMusicTracks = MusicFinder.getAllAvailableMusicTracks(this);
         selectedTrack = allAvailableMusicTracks.get(new Random().nextInt(allAvailableMusicTracks.size()));
         songGeneratorTextView.setText(selectedTrack.getTrackName() + " " + selectedTrack.getArtistName());
-
     }
 
     private void convertToIntTimerValues() {
@@ -108,6 +110,7 @@ public class ScheduleCreateActivity extends Activity {
         trackInfoLayout = (LinearLayout) findViewById(R.id.createScheduleTrackInfoLayout);
         scheduleTimer = (TextView) findViewById(R.id.create_schedule_timer);
         songGeneratorTextView = (TextView) findViewById(R.id.createScheduleTrackInfoTrackName);
+        tagContainer = (LinearLayout) findViewById(R.id.create_schedule_tag_container);
     }
 
     private void initInstanceElements() {
@@ -119,13 +122,12 @@ public class ScheduleCreateActivity extends Activity {
 
         TextView title = new TextView(parentContext);
         title.setText("Tags..,");
-
         tagsSelectElement.addView(title);
+        tagContainer.addView(tagsSelectElement);
     }
 
     private void setListeners() {
         setTagContainerListener();
-        setSaveButtonClickListener();
         setOnOffWidgetListener();
         setOnTrackLayoutClickListener();
         setOnScheduleTimerClickListener();
@@ -138,23 +140,6 @@ public class ScheduleCreateActivity extends Activity {
                 getFragmentManager().beginTransaction().add(new TimerEditFragment(), "key").commit();
             }
         });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data != null) {
-            switch (requestCode) {
-                case SELECT_TRACK_REQUEST_CODE: {
-                    setSelectedTrack(data);
-                }
-                break;
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    private void setSelectedTrack(Intent data) {
-        selectedTrack = (MusicTrack) data.getSerializableExtra(TRACK_INFO_TAG);
     }
 
     private void setOnTrackLayoutClickListener() {
@@ -180,30 +165,16 @@ public class ScheduleCreateActivity extends Activity {
         });
     }
 
-    private void setSaveButtonClickListener() {
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // tags
-        return super.onOptionsItemSelected(item);
-    }
-
     private void setTagContainerListener() {
         tagContainer.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-
+                menu.setHeaderTitle(SELECT_TAGS);
                 for (QuestionTheme theme : questionsService.getTopLevelThemes()) {
                     SubMenu subMenu = menu.addSubMenu(theme.getName());
+
                     for (QuestionTheme subTag : theme.getChildren()) {
-                        subMenu.add(subTag.getName());
+                        subMenu.add(subTag.getName()).setCheckable(true);
                     }
                 }
             }

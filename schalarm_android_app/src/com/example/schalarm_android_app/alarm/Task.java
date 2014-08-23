@@ -32,7 +32,7 @@ public class Task implements Runnable {
         try {
             Thread.sleep(taskStartTime);
             startPlayMusic();
-            runQueryActivity();
+         //   runQueryActivity();
         } catch (InterruptedException ignored) {
             // look down
         }
