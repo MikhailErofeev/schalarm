@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.schalarm_android_app.R;
+import com.example.schalarm_android_app.activities.elements.TagsSelectorActivity;
 import com.example.schalarm_android_app.activities.elements.TimerEditFragment;
 import com.example.schalarm_android_app.alarm.AlarmTask;
 import com.example.schalarm_android_app.alarm.AlarmTaskService;
@@ -32,20 +33,19 @@ public class ScheduleCreateActivity extends Activity {
     public static final int SELECT_TRACK_REQUEST_CODE = 10;
     public static final String TRACK_INFO_TAG = "track_info_tag";
     public static final String SELECT_TAGS = "Select Tags";
+    public static final String SCHEDULE_TIMER_KEY_FRAGMENT = "schedule_timer_key_fragment";
 
-    private static Set<String> selectedTags = new HashSet<String>() {{
-        add("Programmers");
-    }};
 
     private static MusicTrack selectedTrack;
     private static long timeToStartTask;
+
+    private HashSet<String> selectedTags;
 
     private LinearLayout timerPluONOFFSwitchContainer;
     private OnOffWidget onOffWidget;
     private LinearLayout tagContainer;
     private LinearLayout trackInfoLayout;
     private TagsSelectElement tagsSelectElement;
-    private LinearLayout tagsContainer;
     private TextView scheduleTimer;
 
     private TextView songGeneratorTextView;
@@ -111,6 +111,7 @@ public class ScheduleCreateActivity extends Activity {
     }
 
     private void initInstanceElements() {
+        selectedTags = new HashSet<>();
         onOffWidget = new OnOffWidget(this);
         tagsSelectElement = new TagsSelectElement(this);
         saveButton.setVisibility(View.INVISIBLE);
@@ -133,7 +134,7 @@ public class ScheduleCreateActivity extends Activity {
         scheduleTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().add(new TimerEditFragment(), "key").commit();
+                getFragmentManager().beginTransaction().add(new TimerEditFragment(), SCHEDULE_TIMER_KEY_FRAGMENT).commit();
             }
         });
     }
@@ -169,11 +170,14 @@ public class ScheduleCreateActivity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data != null && tagsSelectorActivity.GET_SELECTED_TAG_REQUEST_CODE == resultCode) {
-            selectedTags = (Set<String>) data.getSerializableExtra(tagsSelectorActivity.class.getCanonicalName());
+        if (data != null && TagsSelectorActivity.GET_SELECTED_TAG_REQUEST_CODE == resultCode) {
+            selectedTags = (HashSet<String>) data.getSerializableExtra(TagsSelectorActivity.class.getCanonicalName());
             System.out.println(selectedTags);
+            if (data != null && TagsSelectorActivity.GET_SELECTED_TAG_REQUEST_CODE == resultCode) {
+                selectedTags = (HashSet<String>) data.getSerializableExtra(TagsSelectorActivity.class.getCanonicalName());
+            }
+            super.onActivityResult(requestCode, resultCode, data);
         }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void setOnTagClickListener() {
@@ -182,8 +186,11 @@ public class ScheduleCreateActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(parent, tagsSelectorActivity.class);
-                startActivityForResult(intent, tagsSelectorActivity.GET_SELECTED_TAG_REQUEST_CODE);
+                intent.setClass(parent, TagsSelectorActivity.class);
+                startActivityForResult(intent, TagsSelectorActivity.GET_SELECTED_TAG_REQUEST_CODE);
+                intent.setClass(parent, TagsSelectorActivity.class);
+                intent.putExtra(TagsSelectorActivity.SELECTED_TAGS_INTENT_KEY, selectedTags);
+                startActivityForResult(intent, TagsSelectorActivity.GET_SELECTED_TAG_REQUEST_CODE);
             }
         });
     }

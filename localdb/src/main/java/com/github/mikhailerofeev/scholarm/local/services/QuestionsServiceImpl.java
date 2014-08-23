@@ -45,12 +45,48 @@ public class QuestionsServiceImpl implements QuestionsService {
     @Override
     public List<QuestionTheme> getTopLevelThemes() {
         List<QuestionTheme> top = new ArrayList<>();
+
         QuestionTheme java = new QuestionThemeImpl("java", null);
         QuestionTheme sql = new QuestionThemeImpl("sql", null);
-        top.add(new QuestionThemeImpl("programming", Arrays.asList(java, sql)));
+        QuestionTheme CPLUSPLUS = new QuestionThemeImpl("C++", null);
+        QuestionTheme LISP = new QuestionThemeImpl("Lisp", null);
+        QuestionTheme ASM = new QuestionThemeImpl("ASM", null);
+        QuestionTheme ADA = new QuestionThemeImpl("ADA", null);
+        QuestionTheme CSHURP = new QuestionThemeImpl("C#", null);
+        QuestionTheme C = new QuestionThemeImpl("C", null);
+        QuestionTheme Groovy = new QuestionThemeImpl("Groovy", null);
+        QuestionTheme PHP = new QuestionThemeImpl("PHP", null);
+        QuestionTheme PYTHON = new QuestionThemeImpl("PYTHON", null);
+        QuestionTheme GO = new QuestionThemeImpl("GO", null);
+
+        top.add(new QuestionThemeImpl("programming", Arrays.asList(
+                java, sql, C, CPLUSPLUS, CSHURP, ADA, ASM, GO, Groovy, PHP, PYTHON, LISP)));
+
+
         QuestionTheme optics = new QuestionThemeImpl("optics", null);
         QuestionTheme thermodynamics = new QuestionThemeImpl("thermodynamics", null);
+
         top.add(new QuestionThemeImpl("physics", Arrays.asList(optics, thermodynamics)));
+
+        QuestionTheme German = new QuestionThemeImpl("German", null);
+        QuestionTheme Russian = new QuestionThemeImpl("Russian", null);
+        QuestionTheme English = new QuestionThemeImpl("English", null);
+        QuestionTheme Japan = new QuestionThemeImpl("Japan", null);
+        QuestionTheme Korean = new QuestionThemeImpl("Korean", null);
+        QuestionTheme French = new QuestionThemeImpl("French", null);
+
+        top.add(new QuestionThemeImpl("Speak Lang", Arrays.asList(
+                German, Russian, English, Japan, Korean, French)));
+
+        QuestionTheme Maya = new QuestionThemeImpl("Maya", null);
+        QuestionTheme Joseph = new QuestionThemeImpl("Joseph Stalin", null);
+        QuestionTheme Hurricane = new QuestionThemeImpl("Hurricane Katrina", null);
+        QuestionTheme Italy = new QuestionThemeImpl("Italy", null);
+        QuestionTheme London = new QuestionThemeImpl("London", null);
+        QuestionTheme Cowboys = new QuestionThemeImpl("Cowboys", null);
+
+        top.add(new QuestionThemeImpl("History", Arrays.asList(
+                Maya, Joseph, Hurricane, Italy, London, Cowboys)));
         return top;
     }
 }

@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import com.github.mikhailerofeev.scholarm.api.entities.QuestionTheme;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,7 +24,7 @@ public class SubTagsSelectFragment extends DialogFragment {
     private String[] subTags;
     private boolean[] selects;
     private Set<String> result;
-
+    private HashSet<String> selectedTagsFromScheduleCreator;
     private static final String SELECT_SUB_TAGS = "Select sub tags";
 
 
@@ -31,10 +32,21 @@ public class SubTagsSelectFragment extends DialogFragment {
 
     }
 
-    public SubTagsSelectFragment(List<QuestionTheme> children) {
-        subTags = children.toArray(new String[children.size()]);
+    public SubTagsSelectFragment(HashSet<String> selectedTagsFromScheduleCreator, List<QuestionTheme> children) {
+        subTags = new String[children.size()];
+        for (int i = 0; i < children.size(); i++) {
+            QuestionTheme q = children.get(i);
+            subTags[i] = q.getName();
+        }
         selects = new boolean[children.size()];
         result = new HashSet<>();
+        System.out.println(selectedTagsFromScheduleCreator);
+        for (int i = 0; i < subTags.length; i++) {
+            if (selectedTagsFromScheduleCreator.contains(subTags[i])) {
+                System.out.println(subTags[i]);
+                selects[i] = true;
+            }
+        }
     }
 
     @Override
@@ -52,8 +64,19 @@ public class SubTagsSelectFragment extends DialogFragment {
         }).setPositiveButton(OK, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                for (String tags : result) {
-                    ((TagSelectedListener) getActivity()).tagSelected(tags);
+                if (result != null && !result.isEmpty()) {
+                    for (String tags : result) {
+                        ((TagSelectedListener) getActivity()).tagSelected(tags);
+                    }
+                } else if (selectedTagsFromScheduleCreator != null) {
+                    for (String subTag : subTags) {
+                        if (selectedTagsFromScheduleCreator.contains(subTag)) {
+                            result.add(subTag);
+                        }
+                    }
+                    for (String tags : result) {
+                        ((TagSelectedListener) getActivity()).tagSelected(tags);
+                    }
                 }
             }
         }).setNegativeButton(CANCEL, new DialogInterface.OnClickListener() {
@@ -62,6 +85,6 @@ public class SubTagsSelectFragment extends DialogFragment {
                 // TODO
             }
         });
-        return super.onCreateDialog(savedInstanceState);
+        return builder.create();
     }
 }
