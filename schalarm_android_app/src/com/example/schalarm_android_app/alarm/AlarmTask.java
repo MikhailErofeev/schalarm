@@ -2,6 +2,7 @@ package com.example.schalarm_android_app.alarm;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import com.example.schalarm_android_app.utils.entitys.MusicTrack;
 import org.joda.time.DateTime;
@@ -16,6 +17,7 @@ import java.util.Set;
 public class AlarmTask implements Runnable {
 
     private final MediaPlayer mediaPlayer;
+
     private final MusicTrack musicTrack;
     private final Set<String> tags;
     private final long taskStartTimeInMillis;
@@ -24,6 +26,7 @@ public class AlarmTask implements Runnable {
 
     public AlarmTask(Activity parent, Set<String> tags, MusicTrack musicTrack, long taskStartTimeInMillis) {
         this.mediaPlayer = new MediaPlayer();
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         this.tags = tags;
         this.musicTrack = musicTrack;
         
@@ -57,14 +60,14 @@ public class AlarmTask implements Runnable {
             if (musicTrack != null) {
                 mediaPlayer.setDataSource(musicTrack.getFilePath());
             } else {
-                FileDescriptor stubMusic = parent.getApplication().getAssets().openFd("ussr_db_alarm.mp3").getFileDescriptor();
+                FileDescriptor stubMusic = parent.getApplication().getAssets().openFd("ussr_dnb_alarm.mp3").getFileDescriptor();
                 mediaPlayer.setDataSource(stubMusic);
             }
             mediaPlayer.setLooping(true);
             mediaPlayer.prepare();
             mediaPlayer.start();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.example.schalarm_android_app.R;
 import com.example.schalarm_android_app.activities.elements.TimerEditFragment;
 import com.example.schalarm_android_app.alarm.AlarmTask;
-import com.example.schalarm_android_app.alarm.AlarmTasksManager;
+import com.example.schalarm_android_app.alarm.AlarmTaskService;
 import com.example.schalarm_android_app.main_settings.widgets.OnOffWidget;
 import com.example.schalarm_android_app.main_settings.widgets.TagsSelectElement;
 import com.example.schalarm_android_app.utils.MusicFinder;
@@ -60,13 +60,13 @@ public class ScheduleCreateActivity extends Activity {
 
     private Activity parentContext;
     private QuestionsService questionsService;
-    private AlarmTasksManager alarmTasksManager;
+    private AlarmTaskService alarmTaskService;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         Injector injector = Guice.createInjector(new ApplicationModule(), new LocalQuestionBaseModule());
         questionsService = injector.getBinding(QuestionsService.class).getProvider().get();
-        alarmTasksManager = injector.getBinding(AlarmTasksManager.class).getProvider().get();
+        alarmTaskService = injector.getBinding(AlarmTaskService.class).getProvider().get();
         super.onCreate(savedInstanceState);
         parentContext = this;
         setContentView(R.layout.main_settings);
@@ -87,7 +87,7 @@ public class ScheduleCreateActivity extends Activity {
     public void updateAlarmTime() {
         DateTime alarmTime = getAlarmTime();
         timeToStartTask = alarmTime.getMillis();
-        alarmTasksManager.shutdownTask();
+        alarmTaskService.shutdownTask();
         startUpdatedTaskIfOn();
     }
 
@@ -169,7 +169,7 @@ public class ScheduleCreateActivity extends Activity {
                 if (((OnOffWidget) v).isChecked()) {
                     startUpdatedTaskIfOn();
                 } else {
-                    alarmTasksManager.shutdownTask();
+                    alarmTaskService.shutdownTask();
                 }
             }
         });
@@ -177,8 +177,8 @@ public class ScheduleCreateActivity extends Activity {
 
     private void startUpdatedTaskIfOn() {
         if (onOffWidget.isChecked()) {
-            AlarmTask task = new AlarmTask(this, selectedTags, selectedTrack, timeToStartTask);
-            alarmTasksManager.startTask(task);
+            AlarmTask task = new AlarmTask(this, selectedTags, null, timeToStartTask);
+            alarmTaskService.startTask(task);
         }
     }
 

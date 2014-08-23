@@ -31,7 +31,7 @@ public class TimerEditFragment extends DialogFragment {
         timePicker.setIs24HourView(true);
         DateTime alarmTime = ((ScheduleCreateActivity) getActivity()).getAlarmTime();
         timePicker.setCurrentHour(alarmTime.getHourOfDay());
-        timePicker.setCurrentMinute(alarmTime.getMinuteOfDay());
+        timePicker.setCurrentMinute(alarmTime.getMinuteOfHour());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(TITLE).setPositiveButton(YES, new DialogInterface.OnClickListener() {
