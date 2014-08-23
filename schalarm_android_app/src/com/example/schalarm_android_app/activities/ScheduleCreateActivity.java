@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.*;
 import com.example.schalarm_android_app.R;
@@ -14,6 +15,7 @@ import com.example.schalarm_android_app.main_settings.widgets.*;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -148,9 +150,15 @@ public class ScheduleCreateActivity extends Activity {
         tagContainer.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-
+                for (Map.Entry<String, Set<String>> entry : tags.entrySet()) {
+                    SubMenu subMenu = menu.addSubMenu(entry.getKey());
+                    for (String subTag : entry.getValue()) {
+                        subMenu.add(subTag);
+                    }
+                }
             }
         });
+
         tagContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
