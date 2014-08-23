@@ -48,18 +48,13 @@
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=" "
+                            android:text="Generate Song"
                             android:id="@+id/createScheduleTrackInfoTrackName"/>
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=" "
                             android:id="@+id/createScheduleTrackInfoArtistInfo"/>
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Select ringtone"
-                            android:id="@+id/createScheduleTrackInfoDurationInfo"/>
                 </LinearLayout>
                 <LinearLayout
                         android:orientation="horizontal"

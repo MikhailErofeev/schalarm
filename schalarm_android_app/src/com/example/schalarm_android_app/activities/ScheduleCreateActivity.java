@@ -18,6 +18,7 @@ import com.example.schalarm_android_app.alarm.AlarmManager;
 import com.example.schalarm_android_app.alarm.Task;
 import com.example.schalarm_android_app.main_settings.widgets.OnOffWidget;
 import com.example.schalarm_android_app.main_settings.widgets.TagsSelectElement;
+import com.example.schalarm_android_app.utils.MusicFinder;
 import com.example.schalarm_android_app.utils.entitys.MusicTrack;
 import com.github.mikhailerofeev.scholarm.api.entities.QuestionTheme;
 import com.github.mikhailerofeev.scholarm.api.services.QuestionsService;
@@ -27,6 +28,8 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -51,7 +54,7 @@ public class ScheduleCreateActivity extends Activity {
     private TagsSelectElement tagsSelectElement;
     private TextView scheduleTimer;
     private TimerEditFragment timerEditFragment;
-
+    private TextView songGeneratorTextView;
     private Button saveButton;
     private Button clearButton;
 
@@ -71,8 +74,15 @@ public class ScheduleCreateActivity extends Activity {
         initInstanceElements();
         setElementsOnContainers();
         setListeners();
+        setRandomMusic();
     }
 
+    private void setRandomMusic() {
+        List<MusicTrack> allAvailableMusicTracks = MusicFinder.getAllAvailableMusicTracks(this);
+        selectedTrack = allAvailableMusicTracks.get(new Random().nextInt(allAvailableMusicTracks.size()));
+        songGeneratorTextView.setText(selectedTrack.getTrackName() + " " + selectedTrack.getArtistName());
+
+    }
 
     private void convertToIntTimerValues() {
         String time = scheduleTimer.getText().toString();
@@ -97,6 +107,7 @@ public class ScheduleCreateActivity extends Activity {
         tagContainer = (LinearLayout) findViewById(R.id.create_schedule_tag_container);
         trackInfoLayout = (LinearLayout) findViewById(R.id.createScheduleTrackInfoLayout);
         scheduleTimer = (TextView) findViewById(R.id.create_schedule_timer);
+        songGeneratorTextView = (TextView) findViewById(R.id.createScheduleTrackInfoTrackName);
     }
 
     private void initInstanceElements() {
@@ -150,9 +161,7 @@ public class ScheduleCreateActivity extends Activity {
         trackInfoLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent requester = new Intent();
-                requester.setClass(parentContext, SelectTrackActivity.class);
-                startActivityForResult(requester, SELECT_TRACK_REQUEST_CODE);
+                setRandomMusic();
             }
         });
     }
