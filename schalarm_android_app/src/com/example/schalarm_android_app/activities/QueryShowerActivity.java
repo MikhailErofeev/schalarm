@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.schalarm_android_app.R;
+import com.example.schalarm_android_app.alarm.AlarmTask;
+import com.example.schalarm_android_app.alarm.AlarmTaskService;
 import com.example.schalarm_android_app.utils.InjectorApplication;
 import com.github.mikhailerofeev.scholarm.api.entities.Question;
 import com.github.mikhailerofeev.scholarm.api.services.QuestionsService;
@@ -26,21 +28,38 @@ public class QueryShowerActivity extends Activity {
     }};
 
     QuestionsService questionsService;
-
+    AlarmTaskService alarmTaskService;
 
     private TextView questionText;
     private LinearLayout answersLayout;
 
+    private int rightAnswers;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        rightAnswers = 0;
         setContentView(R.layout.qa);
         questionText = (TextView) findViewById(R.id.question_text);
         answersLayout = (LinearLayout) findViewById(R.id.answers_list);
         questionsService = InjectorApplication.get(QuestionsService.class);
+        alarmTaskService = InjectorApplication.get(AlarmTaskService.class);
         Question question1 = getNextQuestion();
-        boolean canQuit = false;
-        setNewQuestion(question1, canQuit);
+        setNewQuestion(question1, checkCanQuitAdnStopAlarm());
+    }
+
+    private boolean checkCanQuitAdnStopAlarm() {
+        AlarmTask alarmTask = alarmTaskService.geAlarmTask();
+        int minimalRightAnswers = 3;
+        boolean canQuite = rightAnswers >= minimalRightAnswers;
+        if (alarmTask != null && alarmTask.isActive()) {
+            if (canQuite) {                
+                alarmTaskService.shutdownTask(); //todo create next day task
+            }
+            return canQuite;
+        } else {
+            return true;
+        }
     }
 
     private Random random = new Random();
@@ -60,6 +79,7 @@ public class QueryShowerActivity extends Activity {
         }
         if (canQuit) {
             Button closeBtn = new Button(this.getApplicationContext());
+            closeBtn.setText("leave");
             answersLayout.addView(closeBtn);
         }
     }
@@ -82,16 +102,19 @@ public class QueryShowerActivity extends Activity {
                     Character answer = (Character) btn.getTag();
                     boolean correct = rightAnswer.equals(answer);
                     if (correct) {
+                        QueryShowerActivity.this.rightAnswers++;
                         btn.setBackgroundColor(Color.GREEN);
                     } else {
                         btn.setBackgroundColor(Color.RED);
                         answersBtns.get(rightAnswer).setBackgroundColor(Color.GREEN);
                     }
+                    blockButtons(answersBtns.values());
                     final Handler handler = new Handler();
+                    final boolean canQuit = checkCanQuitAdnStopAlarm();
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            setNewQuestion(getNextQuestion(), false);
+                            setNewQuestion(getNextQuestion(), canQuit);
                         }
                     }, 2000);
 
@@ -101,8 +124,16 @@ public class QueryShowerActivity extends Activity {
         }
     }
 
+    private void blockButtons(Collection<Button> values) {
+        for (Button value : values) {
+            value.setEnabled(false);
+        }
+    }
+
     @Override
     public void onBackPressed() {
-
+        if (checkCanQuitAdnStopAlarm()) {
+            super.onBackPressed();
+        }
     }
 }

@@ -23,6 +23,7 @@ public class AlarmTask implements Runnable {
     private final Set<String> tags;
     private final long taskStartTimeInMillis;
     private final Activity parent;
+    private boolean isActive;
 
 
     public AlarmTask(Activity parent, Set<String> tags, MusicTrack musicTrack, long taskStartTimeInMillis) {
@@ -30,9 +31,10 @@ public class AlarmTask implements Runnable {
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         this.tags = tags;
         this.musicTrack = musicTrack;
-        
+
         this.taskStartTimeInMillis = taskStartTimeInMillis;
         this.parent = parent;
+        isActive = false;
     }
 
     @Override
@@ -40,17 +42,22 @@ public class AlarmTask implements Runnable {
         try {
             while (DateTime.now().getMillis() < taskStartTimeInMillis) {
                 long diff = taskStartTimeInMillis - DateTime.now().getMillis();
-                Thread.sleep(diff / 2);
+                Thread.sleep(diff / 2); //to better accuracy
             }
+            isActive = true;
             startPlayMusic();
-            runQueryActivity();
+            runQuestionsActivity();
             //@todo add new task!
         } catch (InterruptedException ignored) {
             System.out.println(Thread.currentThread().getName() + " interrupted");
         }
     }
 
-    private void runQueryActivity() {
+    public boolean isActive() {
+        return isActive;
+    }
+
+    private void runQuestionsActivity() {
         Intent intent = new Intent();
         intent.setClass(parent, QueryShowerActivity.class);
         parent.startActivity(intent);
@@ -76,6 +83,7 @@ public class AlarmTask implements Runnable {
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.stop();
         }
+        isActive = false;
         Thread.currentThread().interrupt();
     }
 }
