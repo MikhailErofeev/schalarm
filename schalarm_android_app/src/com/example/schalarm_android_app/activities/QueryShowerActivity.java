@@ -35,7 +35,6 @@ public class QueryShowerActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.qa);
-        Question question = null;
         questionText = (TextView) findViewById(R.id.question_text);
         answersLayout = (LinearLayout) findViewById(R.id.answers_list);
         questionsService = InjectorApplication.get(QuestionsService.class);
