@@ -213,8 +213,8 @@ public class ScheduleCreateActivity extends Activity implements TrackSelectedLis
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data != null && tagsSelectorActivity.GET_SELECTED_TAG_REQUEST_CODE == resultCode) {
-            selectedTags = (HashSet<String>) data.getSerializableExtra(tagsSelectorActivity.class.getCanonicalName());
+        if (data != null && tagsSelectorActivityTmp.GET_SELECTED_TAG_REQUEST_CODE == resultCode) {
+            selectedTags = (HashSet<String>) data.getSerializableExtra(tagsSelectorActivityTmp.class.getCanonicalName());
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -225,9 +225,9 @@ public class ScheduleCreateActivity extends Activity implements TrackSelectedLis
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(parent, tagsSelectorActivity.class);
-                intent.putExtra(tagsSelectorActivity.SELECTED_TAGS_INTENT_KEY, selectedTags);
-                startActivityForResult(intent, tagsSelectorActivity.GET_SELECTED_TAG_REQUEST_CODE);
+                intent.setClass(parent, tagsSelectorActivityTmp.class);
+                intent.putExtra(tagsSelectorActivityTmp.SELECTED_TAGS_INTENT_KEY, selectedTags);
+                startActivityForResult(intent, tagsSelectorActivityTmp.GET_SELECTED_TAG_REQUEST_CODE);
             }
         });
     }

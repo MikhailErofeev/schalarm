@@ -13,7 +13,7 @@ import java.util.HashSet;
 /**
  * Created by FFX20413 on 23.08.2014.
  */
-public class tagsSelectorActivity extends Activity implements TagSelectedListener {
+public class tagsSelectorActivityTmp extends Activity implements TagSelectedListener {
 
     public final static int GET_SELECTED_TAG_REQUEST_CODE = 0x25;
     public static final String SELECTED_TAGS_INTENT_KEY = "selected_tags_intent_key";
@@ -52,11 +52,11 @@ public class tagsSelectorActivity extends Activity implements TagSelectedListene
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
-        intent.putExtra(tagsSelectorActivity.class.getCanonicalName(), selectedTags);
+        intent.putExtra(tagsSelectorActivityTmp.class.getCanonicalName(), selectedTags);
         if (selectedTags != null && !selectedTags.isEmpty()) {
-            intent.putExtra(tagsSelectorActivity.class.getCanonicalName(), selectedTags);
+            intent.putExtra(tagsSelectorActivityTmp.class.getCanonicalName(), selectedTags);
         } else {
-            intent.putExtra(tagsSelectorActivity.class.getCanonicalName(), selectedTagsFromScheduleCreator);
+            intent.putExtra(tagsSelectorActivityTmp.class.getCanonicalName(), selectedTagsFromScheduleCreator);
         }
         setResult(GET_SELECTED_TAG_REQUEST_CODE, intent);
         finish();
