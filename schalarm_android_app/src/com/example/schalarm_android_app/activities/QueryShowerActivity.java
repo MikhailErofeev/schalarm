@@ -23,10 +23,6 @@ import java.util.*;
  * Created by FFX20413 on 23.08.2014.
  */
 public class QueryShowerActivity extends Activity {
-    private static Set<String> tags = new HashSet<String>() {{
-        add("programming");
-    }};
-
     QuestionsService questionsService;
     AlarmTaskService alarmTaskService;
 
@@ -34,6 +30,7 @@ public class QueryShowerActivity extends Activity {
     private LinearLayout answersLayout;
 
     private int rightAnswers;
+    Set<String> tags;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +41,7 @@ public class QueryShowerActivity extends Activity {
         answersLayout = (LinearLayout) findViewById(R.id.answers_list);
         questionsService = InjectorApplication.get(QuestionsService.class);
         alarmTaskService = InjectorApplication.get(AlarmTaskService.class);
+        tags = alarmTaskService.geAlarmTask().getTags();
         Question question1 = getNextQuestion();
         setNewQuestion(question1, checkCanQuitAdnStopAlarm());
     }
@@ -51,12 +49,12 @@ public class QueryShowerActivity extends Activity {
     private boolean checkCanQuitAdnStopAlarm() {
         AlarmTask alarmTask = alarmTaskService.geAlarmTask();
         int minimalRightAnswers = 3;
-        boolean canQuite = rightAnswers >= minimalRightAnswers;
+        boolean canQuit = rightAnswers >= minimalRightAnswers;
         if (alarmTask != null && alarmTask.isActive()) {
-            if (canQuite) {                
+            if (canQuit) {
                 alarmTaskService.shutdownTask(); //todo create next day task
             }
-            return canQuite;
+            return canQuit;
         } else {
             return true;
         }
@@ -80,6 +78,12 @@ public class QueryShowerActivity extends Activity {
         if (canQuit) {
             Button closeBtn = new Button(this.getApplicationContext());
             closeBtn.setText("leave");
+            closeBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
             answersLayout.addView(closeBtn);
         }
     }

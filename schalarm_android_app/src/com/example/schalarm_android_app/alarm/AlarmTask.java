@@ -86,4 +86,8 @@ public class AlarmTask implements Runnable {
         isActive = false;
         Thread.currentThread().interrupt();
     }
+
+    public Set<String> getTags() {
+        return tags;
+    }
 }
