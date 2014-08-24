@@ -63,7 +63,7 @@ public class QuestionsManagerTest {
     }
 
     @Test
-    public void buildJavaQuiz() throws IOException {
+    public void buildQuiz() throws IOException {
         File tmpDir = Files.createTempDir();
         tmpDir.deleteOnExit();
 
@@ -74,8 +74,10 @@ public class QuestionsManagerTest {
 
         QuestionsManager questionsManager = new QuestionsManager(mockApplication);
         questionsManager.init();
-        List<QuestionImpl> questions = GenerateJavaQuestions.getQuestions();
-        questionsManager.addQuestions(questions);
+        List<QuestionImpl> javaQuestions = GenerateJavaQuestions.getQuestions();
+        questionsManager.addQuestions(javaQuestions);
+        List<QuestionImpl> engQuestions = GenerateEnglishQuestions.getQuestions();
+        questionsManager.addQuestions(engQuestions);
         questionsManager.getQuestions(Sets.newHashSet("java"));
     }
 }

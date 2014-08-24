@@ -39,7 +39,6 @@ public class GenerateJavaQuestions {
             if (s.equals(questionBlock)) {
                 state = State.question;
                 questionList.add(buildQuestion(question, key2answ, rightAnswsers));
-                System.out.println(question);
                 key2answ.clear();
                 rightAnswsers.clear();
                 question = "";
