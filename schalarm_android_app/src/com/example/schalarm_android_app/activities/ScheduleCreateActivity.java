@@ -206,7 +206,7 @@ public class ScheduleCreateActivity extends Activity implements TrackSelectedLis
 
     private void startUpdatedTaskIfOn() {
         if (onOffWidget.isChecked()) {
-            AlarmTask task = new AlarmTask(this, selectedTags, null, timeToStartTask);
+            AlarmTask task = new AlarmTask(this, selectedTags, selectedTrack, timeToStartTask);
             alarmTaskService.startTask(task);
         }
     }
