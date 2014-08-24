@@ -1,24 +1,19 @@
 package com.example.schalarm_android_app.activities.elements;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import com.example.schalarm_android_app.activities.callbacks.TagSelectActivityCallBack;
 import com.example.schalarm_android_app.utils.InjectorApplication;
 import com.github.mikhailerofeev.scholarm.api.services.QuestionsService;
-import com.github.mikhailerofeev.scholarm.local.stuff.LocalQuestionBaseModule;
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 
 import java.util.HashSet;
 
 /**
  * Created by FFX20413 on 23.08.2014.
  */
-public class TagsSelectorActivity extends Activity implements TagSelectedListener {
+public class tagsSelectorActivity extends Activity implements TagSelectedListener {
 
     public final static int GET_SELECTED_TAG_REQUEST_CODE = 0x25;
     public static final String SELECTED_TAGS_INTENT_KEY = "selected_tags_intent_key";
@@ -57,11 +52,11 @@ public class TagsSelectorActivity extends Activity implements TagSelectedListene
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
-        intent.putExtra(TagsSelectorActivity.class.getCanonicalName(), selectedTags);
+        intent.putExtra(tagsSelectorActivity.class.getCanonicalName(), selectedTags);
         if (selectedTags != null && !selectedTags.isEmpty()) {
-            intent.putExtra(TagsSelectorActivity.class.getCanonicalName(), selectedTags);
+            intent.putExtra(tagsSelectorActivity.class.getCanonicalName(), selectedTags);
         } else {
-            intent.putExtra(TagsSelectorActivity.class.getCanonicalName(), selectedTagsFromScheduleCreator);
+            intent.putExtra(tagsSelectorActivity.class.getCanonicalName(), selectedTagsFromScheduleCreator);
         }
         setResult(GET_SELECTED_TAG_REQUEST_CODE, intent);
         finish();

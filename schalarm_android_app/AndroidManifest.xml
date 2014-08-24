@@ -29,7 +29,7 @@
                   android:screenOrientation="portrait"
                   android:theme="@android:style/Theme.Holo.Light.NoActionBar">
         </activity>
-        <activity android:name=".activities.elements.TagsSelectorActivity"
+        <activity android:name=".activities.elements.tagsSelectorActivity"
                   android:theme="@android:style/Theme.Holo.Light.NoActionBar"
                   android:screenOrientation="portrait">
         </activity>

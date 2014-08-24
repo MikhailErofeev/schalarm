@@ -26,11 +26,11 @@ public class QuestionsServiceImpl implements QuestionsService {
     }
 
     @Override
-    public List<Question> getQuestions(Set<String> themesNames) {
-        Set<String> themesAndSubthemes = new HashSet<>();
+    public List<Question> getQuestions(Set<String> tags) {
+        Set<String> resultTags = new HashSet<>();
         List<QuestionTheme> themes = getTopLevelThemes();
-        addSubThemesReqursive(themesAndSubthemes, themesNames, themes);
-        return questionsManager.getQuestions(themesAndSubthemes);
+        addSubThemesReqursive(resultTags, tags, themes);
+        return questionsManager.getQuestions(resultTags);
     }  
 
     private void addSubThemesReqursive(Set<String> themesAndSubthemes, Set<String> themesNames, List<QuestionTheme> themes) {
@@ -59,7 +59,7 @@ public class QuestionsServiceImpl implements QuestionsService {
         QuestionTheme PYTHON = new QuestionThemeImpl("PYTHON", null);
         QuestionTheme GO = new QuestionThemeImpl("GO", null);
 
-        top.add(new QuestionThemeImpl("Programming", Arrays.asList(
+        top.add(new QuestionThemeImpl("programming", Arrays.asList(
                 java, sql, C, CPLUSPLUS, CSHURP, ADA, ASM, GO, Groovy, PHP, PYTHON, LISP)));
 
 
@@ -75,7 +75,7 @@ public class QuestionsServiceImpl implements QuestionsService {
         QuestionTheme Korean = new QuestionThemeImpl("Korean", null);
         QuestionTheme French = new QuestionThemeImpl("French", null);
 
-        top.add(new QuestionThemeImpl("Speaks", Arrays.asList(
+        top.add(new QuestionThemeImpl("Languages", Arrays.asList(
                 German, Russian, English, Japan, Korean, French)));
 
         QuestionTheme Maya = new QuestionThemeImpl("Maya", null);
