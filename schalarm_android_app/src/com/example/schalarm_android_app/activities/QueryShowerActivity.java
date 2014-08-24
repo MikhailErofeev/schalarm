@@ -41,9 +41,13 @@ public class QueryShowerActivity extends Activity {
         answersLayout = (LinearLayout) findViewById(R.id.answers_list);
         questionsService = InjectorApplication.get(QuestionsService.class);
         alarmTaskService = InjectorApplication.get(AlarmTaskService.class);
-//        tags = alarmTaskService.geAlarmTask().getTags();
-        tags = new HashSet<>();
-        tags.add("java");
+        AlarmTask alarmTask = alarmTaskService.geAlarmTask();
+        if (alarmTask == null) {
+            tags = new HashSet<>();
+            tags.add("java");
+        } else {
+            tags = alarmTask.getTags();
+        }
         Question question1 = getNextQuestion();
         setNewQuestion(question1, checkCanQuitAdnStopAlarm());
     }
