@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -59,5 +60,22 @@ public class QuestionsManagerTest {
         questionsManager.addQuestions(questions2);
         programmingQuestions = questionsManager.getQuestions(Sets.newHashSet("programming"));
         assertEquals(3, programmingQuestions.size());
+    }
+
+    @Test
+    public void buildJavaQuiz() throws IOException {
+        File tmpDir = Files.createTempDir();
+        tmpDir.deleteOnExit();
+
+        Application mockApplication = mock(Application.class);
+        Context context = mock(Context.class);
+        doReturn(context).when(mockApplication).getApplicationContext();
+        doReturn(tmpDir).when(context).getFilesDir();
+
+        QuestionsManager questionsManager = new QuestionsManager(mockApplication);
+        questionsManager.init();
+        List<QuestionImpl> questions = GenerateJavaQuestions.getQuestions();
+        questionsManager.addQuestions(questions);
+        questionsManager.getQuestions(Sets.newHashSet("java"));
     }
 }

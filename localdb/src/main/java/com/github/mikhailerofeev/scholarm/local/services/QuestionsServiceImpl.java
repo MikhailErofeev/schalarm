@@ -8,7 +8,6 @@ import com.google.inject.Inject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -27,10 +26,10 @@ public class QuestionsServiceImpl implements QuestionsService {
 
     @Override
     public List<Question> getQuestions(Set<String> tags) {
-        Set<String> resultTags = new HashSet<>();
-        List<QuestionTheme> themes = getTopLevelThemes();
-        addSubThemesReqursive(resultTags, tags, themes);
-        return questionsManager.getQuestions(resultTags);
+//        Set<String> resultTags = new HashSet<>();
+//        List<QuestionTheme> themes = getTopLevelThemes();
+//        addSubThemesReqursive(resultTags, tags, themes);
+        return questionsManager.getQuestions(tags);
     }  
 
     private void addSubThemesReqursive(Set<String> themesAndSubthemes, Set<String> themesNames, List<QuestionTheme> themes) {

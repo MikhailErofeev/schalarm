@@ -9,10 +9,10 @@ public class StartActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Intent intent = new Intent();
-//        intent.setClass(this, QueryShowerActivity.class);
-//        startActivity(intent);
-        startActivity(new Intent().setClass(this, ScheduleCreateActivity.class));
+        Intent intent = new Intent();
+        intent.setClass(this, QueryShowerActivity.class);
+        startActivity(intent);
+//        startActivity(new Intent().setClass(this, ScheduleCreateActivity.class));
         finish();
     }
 }

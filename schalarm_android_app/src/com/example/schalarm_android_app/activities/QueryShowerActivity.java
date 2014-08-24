@@ -41,7 +41,9 @@ public class QueryShowerActivity extends Activity {
         answersLayout = (LinearLayout) findViewById(R.id.answers_list);
         questionsService = InjectorApplication.get(QuestionsService.class);
         alarmTaskService = InjectorApplication.get(AlarmTaskService.class);
-        tags = alarmTaskService.geAlarmTask().getTags();
+//        tags = alarmTaskService.geAlarmTask().getTags();
+        tags = new HashSet<>();
+        tags.add("java");
         Question question1 = getNextQuestion();
         setNewQuestion(question1, checkCanQuitAdnStopAlarm());
     }
@@ -65,7 +67,12 @@ public class QueryShowerActivity extends Activity {
     private Question getNextQuestion() {
         List<Question> questions = questionsService.getQuestions(tags);
         int index = random.nextInt(questions.size());
-        return questions.get(index);
+        Question question = questions.get(index);
+        if (question.getRightAnswers().size() > 1) { //@fixme
+            return getNextQuestion();
+        } else {
+            return question;
+        }
     }
 
     private void setNewQuestion(final Question question, boolean canQuit) {

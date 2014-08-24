@@ -2,69 +2,856 @@
     {
         "id": 0,
         "variants": {
-            "A": "13",
-            "B": "Compilation fails due to multiple errors",
-            "C": "Compilation fails due to an error on line 6",
-            "D": "Compilation fails due to an error on line 7",
-            "E": "Compilation fails due to an error on line 11",
-            "F": "Compilation fails due to an error on line 12",
-            "G": "42"
+            "3": " 1",
+            "2": " -1",
+            "1": " 0",
+            "5": " This code has a compile time error",
+            "4": " This code will give a runtime error"
         },
         "type": "TEXT",
-        "questionText": "Given: \
-        4. public class Frodo extends Hobbit { \
-5. 	public static void main(String[] args) { \
-6. 		Short myGold = 7; \
-7. 		System.out.println(countGold(myGold, 6)); \
-8. 	} \
-9. } \
-10. class Hobbit { \
-11. 	int countGold(int x, int y) { return x + y; } \
-12. } \
-What is the result?",
-        "rightAnswers": ["A"],
-        "themeName": "programming"
+        "questionText": "Given the classes below \npublic class Cert extends test \n{\n    public final int getNumber()\n    {return 0;}\n}\nclass test\n{\n    public final int getNumber()\n    {return -1;}\n}\nWhat will t.getNumber() return given the code below?\ntest t \u003d new Cert();\nt.getNumber();",
+        "rightAnswers": ["5"],
+        "themeName": "java"
     },
     {
         "id": 1,
         "variants": {
-            "A": "13",
-            "B": "Compilation fails due to multiple errors",
-            "C": "Compilation fails due to an error on line 6",
-            "D": "Compilation fails due to an error on line 7",
-            "E": "Compilation fails due to an error on line 11",
-            "F": "Compilation fails due to an error on line 12",
-            "G": "42"
+            "3": " Tokyo Tokyo Tokyo",
+            "2": " Tokyo Tokyo grey",
+            "1": " Tokyo Tokyo argh",
+            "5": " Runtime error ",
+            "4": " Compile error"
         },
         "type": "TEXT",
-        "questionText": "skaji muu",
-        "rightAnswers": ["A"],
-        "themeName": "programming"
+        "questionText": "Given this program what is the output ?\nclass Stain {public void stake(){System.out.println(\"argh \");}}\nclass Brain extends Stain {public void stake(){ System.out.println(\"grey \");}}\npublic class Cert extends Brain\n{\n    public static void main(String[] args)\n    {\n        Brain brain \u003d new Cert(); brain.stake();\n        Stain wizard \u003d new Cert(); wizard.stake();\n        Brain pain \u003d new Stain(); pain.stake();\n    }\n    public void stake()\n    {System.out.print(\"Tokyo \");}\n}",
+        "rightAnswers": ["4"],
+        "themeName": "java"
     },
     {
         "id": 2,
         "variants": {
-            "A": "da",
-            "B": "ne",
-            "C": "muu",
-            "D": "yarh"
+            "3": " 12",
+            "2": " 11",
+            "1": " 10",
+            "6": " Runtime error ",
+            "5": " Compile error",
+            "4": " 9"
         },
         "type": "TEXT",
-        "questionText": "skaji yarh",
-        "rightAnswers": ["D"],
-        "themeName": "physics"
+        "questionText": "What is the output of the following ?\nclass HumBug  {static void hummer(int timesToHum){ System.out.println(++timesToHum);}}\npublic class Cert extends HumBug\n{\n    public static void main(String[] args)\n    {\n        HumBug humBug \u003d new Cert(); humBug.hummer((short)10);\n    }\n     static void hummer(int x){ System.out.println(--x);}\n}",
+        "rightAnswers": ["2"],
+        "themeName": "java"
     },
     {
         "id": 3,
         "variants": {
-            "A": "da",
-            "B": "ne",
-            "C": "muu",
-            "D": "yarh"
+            "3": " Rocket will not compile since it does not implement the run() method in Runnable",
+            "2": " Rocket IS A Thread and IS A Runnable",
+            "1": " Rocket IS A Thread and HAS A Runnable",
+            "6": " Rocket needs to be declared abstract to compile ",
+            "5": " Rocket IS A Thread and IS A Runnable even if it does not implement Runnable but extends Thread",
+            "4": " Rocket will have runtime errors if used as a Thread"
         },
         "type": "TEXT",
-        "questionText": "dadadada",
-        "rightAnswers": ["A"],
-        "themeName": "programming"
+        "questionText": "Choose all that are true\nclass Rocket extends Thread implements Runnable {}",
+        "rightAnswers": ["2", "5"],
+        "themeName": "java"
+    },
+    {
+        "id": 4,
+        "variants": {
+            "3": " 7 7 14",
+            "2": " -7 -7 14",
+            "1": " 7 7 -7",
+            "5": " Compile time error ",
+            "4": " Runtime error"
+        },
+        "type": "TEXT",
+        "questionText": "Given this program what is the output ?\nclass Taint extends Base  \n{\n    int carcass\u003d7;\n    public static void main(String[] args)\n    {\n        new Taint().go();\n        Base base \u003d new Taint();\n        base.go();\n        Base base2 \u003d new Base(3);\n        base2.go();\n    }\n    public void go()\n    {\n        System.out.print(carcass + \" \");\n    } \n}\nclass Base\n{\n    int carcass\u003d-7;\n    public Base()\n    {\n        this(3);\n    }\n    public Base(int i)\n    {\n        carcass \u003d i;\n        carcass *\u003d i;\n    }    \n    public void go() \n    {\n        carcass +\u003d 5;\n        System.out.println(carcass);\n    }    \n}",
+        "rightAnswers": ["3"],
+        "themeName": "java"
+    },
+    {
+        "id": 5,
+        "variants": {
+            "3": " carcass is an example of overriding",
+            "2": " carcass is an example of polymorphism",
+            "1": " klass is well encapsulated",
+            "5": " modifiers for the carcass variable break encapsulation ",
+            "4": " getter and setter methods for carcass breaks encapsulation"
+        },
+        "type": "TEXT",
+        "questionText": "Choose all that are true, given this class\nclass Glass extends klass  \n{\n    public static void main(String[] args)\n    {}\n    public void go()\n    {} \n}\nclass klass\n{\n    int carcass\u003d-7;\n    public int getCarcass()\n    {\n        return carcass;\n    }\n    public void setCarcass(int carcass)\n    {\n        this.carcass \u003d carcass;\n    }    \n}",
+        "rightAnswers": ["5"],
+        "themeName": "java"
+    },
+    {
+        "id": 6,
+        "variants": {
+            "3": " bark bark Generic scream bark Meow",
+            "2": " Generic scream bark Generic scream bark Meow",
+            "1": " bark bark bark bark Exception",
+            "5": " Compile time error ",
+            "4": " No output is obtained"
+        },
+        "type": "TEXT",
+        "questionText": "What is the output ?\npublic class Dog extends Animal  \n{\n    public static void main(String[] args)\n    {new Dog().go();}\n    public void go()\n    {\n        Animal a \u003d new Dog();\n        a.shout();\n        a \u003d (Dog) a; \n        a.shout();\n        a \u003d (Animal) a;\n        a.shout();\n        new Dog().shout();\n        a \u003d ((Cat)a);\n        a.shout();\n    } \n    public void shout(){System.out.print(\"bark \");}\n}\nclass Animal{public void shout(){System.out.print(\"Generic scream \");}}\nclass Cat extends Animal{public void shout(){System.out.print(\"Meow \");}}",
+        "rightAnswers": ["1"],
+        "themeName": "java"
+    },
+    {
+        "id": 7,
+        "variants": {
+            "3": " 5",
+            "2": " -2",
+            "1": " 1",
+            "6": " None of the above ",
+            "5": " 9",
+            "4": " 2"
+        },
+        "type": "TEXT",
+        "questionText": "What is the output ?\npublic class Toast extends Boast \n{\n    Integer eye\u003d1;\n    public static void main(String... args)\n    {\n        Toast eye \u003d new Toast(); \n        new Devil(eye).honey(eye);\n        new Boast(eye).honey(eye);\n        new Toast().honey(eye);\n        System.out.print(eye.eye);\n    }\n    public void honey(Toast eye)\n    {\n        eye.eye \u003d new Integer(-2);\n    }    \n    \n}\nclass Boast extends Devil \n{\n    public Boast(){System.out.print(\"\");}\n    public Boast(Toast eye)\n    {\n        eye.eye \u003d new Integer(5);\n    }\n    \n    public void honey(Toast eye)\n    {\n        eye.eye \u003d new Integer(2);\n    }\n}\nclass Devil\n{\n    public Devil(){System.out.print(\"\");}\n    public Devil(Toast eye)\n    {\n        eye.eye \u003d new Integer(1);\n    }\n    public void honey(Toast eye)\n    {\n        eye.eye \u003d new Integer(9);\n    }    \n}",
+        "rightAnswers": ["2"],
+        "themeName": "java"
+    },
+    {
+        "id": 8,
+        "variants": {
+            "3": " Mark variables private",
+            "2": " Provide getters and setters for all variable",
+            "1": " It cannot be done",
+            "5": " Use getter methods instead of accessing variables directly ",
+            "4": " Mark the class One and Two private"
+        },
+        "type": "TEXT",
+        "questionText": "How will you provide access to the hello field while ensuring that the class is well encapsulated ?\nAlso reduce the coupling between the two classes.\nclass One\n{\n    int bye;\n    int hi \u003d Two.hello;\n}\nclass Two\n{\n    public static int hello;\n    public int getHello()\n    {\n        return hello;\n    }\n    public void setHello(int hello)\n    {\n        this.hello \u003d hello;\n    }\n}",
+        "rightAnswers": ["3", "2", "5"],
+        "themeName": "java"
+    },
+    {
+        "id": 9,
+        "variants": {
+            "3": " The semicolon at #1 should be removed if this class is to compile",
+            "2": " This class is fine",
+            "1": " There are no abstract methods",
+            "7": " There is a compile time error either at #4",
+            "6": " There is a compile time error either at #3",
+            "5": " There is a compile time error either at #2",
+            "4": " This class will get a runtime error if used"
+        },
+        "type": "TEXT",
+        "questionText": "What is wrong with this class ?\nabstract class Marmaduke\n{\n    public void getNumber(){;} // #1\n    private Integer getInteger(){return Integer.MAX_VALUE + 1;} // #2\n    protected void fan(){System.out.println(\"fan\");} // #3\n    String string(){return getInteger().toString();} // #4\n}",
+        "rightAnswers": ["2"],
+        "themeName": "java"
+    },
+    {
+        "id": 10,
+        "variants": {
+            "3": " prints \u0027ants in my\u0027 and then a RuntimeException",
+            "2": " ants in my pants",
+            "1": " ants my pants",
+            "7": " None of the above ",
+            "6": " Runtime error",
+            "5": " Compile error",
+            "4": " ants my in pants"
+        },
+        "type": "TEXT",
+        "questionText": "Given this program what is the output ?\npublic class Horsie\n{\n    public static void main(String... args) throws Exception \n    {\n        Horsie horsie \u003d new Horsie();\n        short x \u003d 10;\n        long pants \u003d 18;\n        String [] ten \u003d {};\n        horsie.get(pants); horsie.get(x);  \n        horsie.get(3/2); horsie.get(ten);\n    }\n    \n    public void get(Long x)\n    {System.out.print(\"ants \");}\n    public void get(short x)\n    {System.out.print(\"in \");}\n    \n    public void get(int x)\n    {System.out.print(\"my \");}\n    \n    public void get(String... x)\n    {System.out.print(\"pants \");}\n    \n}",
+        "rightAnswers": ["2"],
+        "themeName": "java"
+    },
+    {
+        "id": 11,
+        "variants": {
+            "3": " A programmer can rename a file using the renameTo(File x) function in the File class",
+            "2": " FileReaders can buffer read operations on their own",
+            "1": " A BufferedReader can accept a FileReader in its constructor",
+            "6": " PrintWriter can accept a File in its contructor but not a String ",
+            "5": " To read a line from a file use the readLine() method in the FileReader class",
+            "4": " Printwriters, BufferedWriters, FileWriters can be flushed and closed"
+        },
+        "type": "TEXT",
+        "questionText": "Which of the following are true ?",
+        "rightAnswers": ["3", "1", "4"],
+        "themeName": "java"
+    },
+    {
+        "id": 12,
+        "variants": {
+            "3": " 12.3 -9",
+            "2": " 12.300000 9",
+            "1": " 12.300000 -9",
+            "5": " None of the above ",
+            "4": " 9-Dec"
+        },
+        "type": "TEXT",
+        "questionText": "What is the output of this program ?\npublic class Print \n{\n    public static void main(String args[])   \n    {\n        float f1 \u003d 12.3;\n        int i2 \u003d -9;\n        System.out.printf(\"%1$(f %2$d n\", f1,i2);\n    }\n}",
+        "rightAnswers": ["5"],
+        "themeName": "java"
+    },
+    {
+        "id": 13,
+        "variants": {
+            "3": " 2",
+            "2": " 2 7",
+            "1": " 1 6",
+            "5": " None of the above ",
+            "4": " 1"
+        },
+        "type": "TEXT",
+        "questionText": "What is the output of this program ?\npublic class Print \n{\n    public static void main(String args[])   \n    {\n        Pattern pattern \u003d Pattern.compile(\"\\\\d [a-z]+\");\n        Matcher matcher \u003d pattern.matcher(\"123 a 34a \");\n        while (matcher.find())\n        {\n            System.out.println(matcher.start() + \" \" );\n        }\n    }\n}",
+        "rightAnswers": ["3"],
+        "themeName": "java"
+    },
+    {
+        "id": 14,
+        "variants": {
+            "3": " The output would be today\u0027s date",
+            "2": " Jan 1 1970",
+            "1": " Jul 27 2008",
+            "5": " None of the above ",
+            "4": " This program will not compile"
+        },
+        "type": "TEXT",
+        "questionText": "What would be the output of this program ?\npublic class Bug  \n{\n    public static void main(String args[]) \n    {\n        DateFormat dateFormat \u003d DateFormat.getDateInstance();\n        Date d \u003d new Date();\n        System.out.println(dateFormat.format(d));\n    }\n}",
+        "rightAnswers": ["3"],
+        "themeName": "java"
+    },
+    {
+        "id": 15,
+        "variants": {
+            "3": " -1",
+            "2": " 0",
+            "1": " 1",
+            "5": " RuntimeException ",
+            "4": " Compile error"
+        },
+        "type": "TEXT",
+        "questionText": "What is the output ?\npublic class Tow  \n{\n    static Integer duck;\n    public static void main(String... args)\n    {\n        int x \u003d 10;\n        if (x++ \u003e\u003d 10)\n        {\n            int y \u003d -5;\n            x +\u003d y;\n        }\n        int z \u003d 2;\n        z *\u003d x + 3/2;\n        System.out.println(z + go());\n    }\n    \n    public static int go() \n    {\n        return duck;\n    }\n}",
+        "rightAnswers": ["5"],
+        "themeName": "java"
+    },
+    {
+        "id": 16,
+        "variants": {
+            "3": " 30",
+            "2": " 20",
+            "1": " 10",
+            "7": " None of the above ",
+            "6": " Runtime error",
+            "5": " Compile error",
+            "4": " 0"
+        },
+        "type": "TEXT",
+        "questionText": "What would happen when this program is run ? If there is an output, what is it ?\npublic class Cert extends Hen\n{\n    transient int i \u003d 10;\n    volatile int y \u003d 10;\n    public static void main(String... args) throws Exception\n    {\n        Cert trim \u003d new Cert();\n        serialize(trim);\n        Cert trim2 \u003d deserialize();\n        System.out.println(trim2.i + trim2.y + trim2.x);\n    }\n    private static Cert deserialize() throws Exception\n    {\n        File f \u003d new File(\"test\");\n        ObjectInputStream stream \u003d new ObjectInputStream(new FileInputStream(f));\n        return (Cert)stream.readObject();\n    }\n    private static void serialize(Cert trim) throws Exception\n    {\n        File f \u003d new File(\"test\");\n        ObjectOutputStream stream \u003d new ObjectOutputStream(new FileOutputStream(f));\n        stream.writeObject(trim);\n        stream.flush();\n        stream.close();\n    }\n}\nclass Hen implements Serializable\n{\n    int x \u003d 10;\n}",
+        "rightAnswers": ["2"],
+        "themeName": "java"
+    },
+    {
+        "id": 17,
+        "variants": {
+            "3": " I2wish2i2could2split2this2string",
+            "2": " iwishicouldsplitthisstring",
+            "1": " i wish i could split this string",
+            "5": " None of the above ",
+            "4": " No output"
+        },
+        "type": "TEXT",
+        "questionText": "What could be the result of this program ?\npublic class Egg \n{\n    public static void main(String... args) \n    {\n        String s \u003d \"I2wish2i2could2split2this2string\";\n        s.setDelimiter(\"2\");\n        String [] x \u003d s.split();\n        for (String sea : x)\n        {\n            System.out.println(sea);\n        }\n    }\n}",
+        "rightAnswers": ["5"],
+        "themeName": "java"
+    },
+    {
+        "id": 18,
+        "variants": {
+            "3": " import java.text.DateFormat;",
+            "2": " import java.util.DateFormat;",
+            "1": " import java.io.ObjectOutputStream;",
+            "6": " import java.regex.Pattern; ",
+            "5": " import java.util.Pattern;",
+            "4": " import java.util.regex.Pattern;"
+        },
+        "type": "TEXT",
+        "questionText": "Given these lines of code\nStringBuffer s \u003d new StringBuffer();\nDateFormat format \u003d DateFormat.getInstance();\nObjectOutputStream stream \u003d new ObjectOutputStream(null);\nPattern pattern \u003d null;\nWhat are the import statements needed to ensure that the code compiles",
+        "rightAnswers": ["3", "1", "4"],
+        "themeName": "java"
+    },
+    {
+        "id": 19,
+        "variants": {
+            "3": " The file will contain the value of transient int x",
+            "2": " The file \u0027Test\u0027 is created on the fly if it does not exist",
+            "1": " The file will not contain the value of transient int x",
+            "4": " None of the above "
+        },
+        "type": "TEXT",
+        "questionText": "What is NOT true about the serialized file that this program writes ?\nclass Cert implements Serializable\n{\n    transient Integer x \u003d 10;\n    Cert c \u003d new Cert();\n    public static void main(String[] args) throws Exception \n    {\n        Cert c \u003d new Cert();\n        File file \u003d new File(\"Test\");\n        ObjectOutputStream stream \u003d new ObjectOutputStream(new FileOutputStream(file));\n        stream.writeObject(c);\n        stream.flush();\n        stream.close();\n    }\n}",
+        "rightAnswers": ["4"],
+        "themeName": "java"
+    },
+    {
+        "id": 20,
+        "variants": {
+            "3": " sion blion Lion",
+            "2": " blion Lion sion",
+            "1": " Lion blion sion",
+            "6": " Runtime error ",
+            "5": " Compile error",
+            "4": " sion Lion blion"
+        },
+        "type": "TEXT",
+        "questionText": "What is the output ? Assume that necessary imports have been made\npublic class Lion  \n{\n    String name\u003d\"\";\n    public static void main(String... args)\n    {\n        String sl \u003d \"blion\"; String sl2 \u003d \"Lion\";\n        String sl3 \u003d \"sion\";\n        Set set \u003d new TreeSet();\n        set.add(sl2);\n        set.add(sl); set.add(sl3);\n        for (Object object: set)\n        {\n            System.out.println(object);\n        }\n    }\n    public String toString()\n    {\n        return name;\n    }\n}",
+        "rightAnswers": ["1"],
+        "themeName": "java"
+    },
+    {
+        "id": 21,
+        "variants": {
+            "3": " 44",
+            "2": " 55",
+            "1": " 66",
+            "5": " Runtime error ",
+            "4": " Compile error"
+        },
+        "type": "TEXT",
+        "questionText": "What is the output ? Assume imports have been made\npublic class RedFlame  \n{\n    public static void main(String... args)\n    {\n        int tt \u003d 11, qq \u003d 22, as \u003d 33;\n        List list \u003d new ArrayList();\n        list.add(tt); list.add(qq); list.add(as);\n        int result\u003d0;\n        for (Integer eye : list)\n        {\n            result +\u003d eye;\n        }\n        System.out.println(result);\n    }\n}",
+        "rightAnswers": ["4"],
+        "themeName": "java"
+    },
+    {
+        "id": 22,
+        "variants": {
+            "3": " The order is dependant on the way the variables are inserted",
+            "2": " There will be no sorting in natural order. The order is arbitary",
+            "1": " It will be sorted according to name\u0027s natural order",
+            "6": " The sorting can take place only if Compare implements Comparator ",
+            "5": " There is a RuntimeException in this program",
+            "4": " There is a compile time error in this program"
+        },
+        "type": "TEXT",
+        "questionText": "What is the output of this program ? Assume all imports have been made. How will this array be sorted\npublic class Compare  \n{\n    String name\u003d\"\";\n    public static void main(String... args)\n    {\n        Compare a \u003d new Compare(); Compare b \u003d new Compare();\n        Compare c \u003d new Compare(); Compare d \u003d new Compare();\n        Compare [] arr \u003d new Compare[4];\n        arr[0] \u003d a; arr[1] \u003d b; \n        arr[2] \u003d c; arr[3] \u003d d; \n        Arrays.sort(arr);\n    }\n}",
+        "rightAnswers": ["5"],
+        "themeName": "java"
+    },
+    {
+        "id": 23,
+        "variants": {
+            "3": " Override public boolean toString() in Toll",
+            "2": " Override public int hashCode() in Toll",
+            "1": " Override public boolean hashCode() in Toll",
+            "5": " Override public boolean equals(Object o) in Toll ",
+            "4": " Override public boolean equals() in Toll"
+        },
+        "type": "TEXT",
+        "questionText": "Given this fragment\nToll toll \u003d new Toll();\nToll toll2 \u003d new Toll();\nWhat must be done so that the JVM understands whether toll and toll2 are the same or not ?",
+        "rightAnswers": ["2", "5"],
+        "themeName": "java"
+    },
+    {
+        "id": 24,
+        "variants": {
+            "3": " HEllo hello allo",
+            "2": " HEllo allo hello",
+            "1": " allo HEllo hello",
+            "5": " None of the above ",
+            "4": " hello HEllo allo"
+        },
+        "type": "TEXT",
+        "questionText": "Given this program what is the output ?\npublic class Collier\n{\n    public static void main(String... args) \n    {\n        List \u003cString\u003e sortedList \u003d new ArrayList\u003cString\u003e();\n        sortedList.add(\"hello\");\n        sortedList.add(\"HEllo\");\n        sortedList.add(\"allo\");\n        for (String string : sortedList)\n        {\n            System.out.print(string + \" \");\n        }\n    }\n}",
+        "rightAnswers": ["4"],
+        "themeName": "java"
+    },
+    {
+        "id": 25,
+        "variants": {
+            "3": " // #3",
+            "2": " // #2",
+            "1": " // #1",
+            "7": " // #7 ",
+            "6": " // #6",
+            "5": " // #5",
+            "4": " // #4"
+        },
+        "type": "TEXT",
+        "questionText": "Which of the following produce compile time errors ?\npublic class Tiny implements Serializable\n{\n    public static void main(String[] args)\n    {\n        List \u003c? extends Serializable\u003e list; // #1\n        list \u003d new ArrayList\u003cString\u003e(); // #2\n        list \u003d new ArrayList\u003cInteger\u003e(); // #3\n        list \u003d new ArrayList\u003cthis\u003e(); // #4\n        list \u003d new ArrayList\u003cSerializable\u003e(); // #5\n        list.add(new Tiny()); // #6\n        list.add(new String()); // #7\n    }\n}",
+        "rightAnswers": ["7", "6", "4"],
+        "themeName": "java"
+    },
+    {
+        "id": 26,
+        "variants": {
+            "3": " return Math.random();",
+            "2": " return 0;",
+            "1": " return super.hashCode();",
+            "6": " return collarID + name; ",
+            "5": " return toString().length();",
+            "4": " return collarID;"
+        },
+        "type": "TEXT",
+        "questionText": "Given this program what can be returned for a hash code implementation at #1 ?\npublic class Dog\n{\n    int collarID;\n    String name;\n    public static void main(String[] args)\n    {            \n    }\n    \n    public boolean equals(Object arg0)\n    {\n        if (arg0 instanceof Dog)\n        {\n            Dog new_name \u003d (Dog) arg0;\n            return collarID\u003d\u003dnew_name.collarID \u0026\u0026 new_name.name.equals(name);\n        }\n        return false;\n    }\n    public int hashCode()\n    {\n        // #1\n    }\n}",
+        "rightAnswers": ["2", "4"],
+        "themeName": "java"
+    },
+    {
+        "id": 27,
+        "variants": {
+            "3": " 2",
+            "2": " -1 1",
+            "1": " 1 -1",
+            "6": " None of the above ",
+            "5": " 2 1",
+            "4": " 1 2"
+        },
+        "type": "TEXT",
+        "questionText": "What would the chain of method calls in this program return as its iterator ?\nDetermine what would be the output based on the iterator returned\nclass Cert \n{\n    public static void main(String[] args) throws IOException\n    {\n        NavigableSet\u003cInteger\u003e navigableSet \u003d new TreeSet\u003cInteger\u003e();\n        List a \u003d new ArrayList\u003cInteger\u003e();\n        a.add(1);\n        a.add(2);\n        a.add(-1);\n        navigableSet.addAll(a);\n        Iterator\u003c Integer\u003e iterator \u003d navigableSet.descendingSet().headSet(1).iterator();\n        while (iterator.hasNext())\n        {\n            System.out.print(iterator.next() + \" \");\n        }\n    }\n}",
+        "rightAnswers": ["3"],
+        "themeName": "java"
+    },
+    {
+        "id": 28,
+        "variants": {
+            "3": " This program will not compile since no more than 2 generics are allowed",
+            "2": " This program will print 1 a 1",
+            "1": " This program will print 1.00 a 1",
+            "6": " None of the above ",
+            "5": " There is a Runtime error in this program",
+            "4": " This program will not compile since x,y,z should only be treated like Objects"
+        },
+        "type": "TEXT",
+        "questionText": "Which of the following are true ?\npublic class Erode \u003cX,Y,Z\u003e  \n{\n    public static void main( String args[] )\n    {\n        Erode\u003cInteger, String, Double\u003e erode \u003d new Erode\u003cInteger, String, Double\u003e();\n        erode.erode(1,\"Hello\", 1.1);\n    }\n    \n    public void erode(X x, Y y, Z z)\n    {\n        System.out.println( x.doubleValue() + \" \" + y.replaceAll(\"Hello\",\"a\"), z.byteValue()  );\n    }\n}",
+        "rightAnswers": ["4"],
+        "themeName": "java"
+    },
+    {
+        "id": 29,
+        "variants": {
+            "3": " Most operations on Collections that do not use generics result in warnings",
+            "2": " Most operations on Collections that do not use generics result in compile time errors",
+            "1": " The Iterator interface makes use of Generics",
+            "5": " A Map \u003c List\u003cString\u003e , String \u003e is an incorrect statement which will not compile ",
+            "4": " An enhanced for loop cannot Iterate over a List if it uses generics"
+        },
+        "type": "TEXT",
+        "questionText": "Choose all that are true",
+        "rightAnswers": ["3", "1"],
+        "themeName": "java"
+    },
+    {
+        "id": 30,
+        "variants": {
+            "3": " 4 3 2 1",
+            "2": " 1 3 4 2",
+            "1": " 1 2 3 4",
+            "5": " Runtime error",
+            "4": " Compile error"
+        },
+        "type": "TEXT",
+        "questionText": "What is the output of this program ?\npublic class Bug  \n{\n    public static void main(String args[]) \n    {\n        List \u003cString\u003e list \u003d new TreeList \u003cString\u003e();\n        list.add(\"1\"); list.add(\"3\");\n        list.add(\"4\"); list.add(\"2\");\n        for (String string : list)\n        {\n            System.out.print(string + \" \");\n        }\n    }\n}",
+        "rightAnswers": ["4"],
+        "themeName": "java"
+    },
+    {
+        "id": 31,
+        "variants": {
+            "3": " 12.2 a b c",
+            "2": " a b c 12.2",
+            "1": " a b c",
+            "5": " Runtime error ",
+            "4": " Compile error"
+        },
+        "type": "TEXT",
+        "questionText": "What is the output of this program ?\npublic class Ruff   \n{\n    public static void main(String args[]) \n    {\n        List \u003cString\u003e list \u003d new ArrayList\u003cString\u003e();\n        list.add(\"a\");\n        list.add(\"b\");\n        list.add(\"c\");\n        new Ruff().go(list);\n    }\n    \n    public void go(List list)\n    {\n        list.add(12.2);\n        for (Object o : list)\n        {\n            System.out.print(o + \" \");\n        }\n    }\n}",
+        "rightAnswers": ["2"],
+        "themeName": "java"
+    },
+    {
+        "id": 32,
+        "variants": {
+            "3": " A compile time error exists in this code",
+            "2": " The code waits for 1 milli second and then exits",
+            "1": " The code waits for 1 second and then exits",
+            "6": " None of the above ",
+            "5": " The JVM cannot synchronize on Floral since it is an interface",
+            "4": " This code will throw a runtime error"
+        },
+        "type": "TEXT",
+        "questionText": "Given this code what happens ?\nclass SomeBody extends Thread implements Floral     \n{\n    public static void main(String[] args) throws Exception \n    {\n        Floral floral \u003d new SomeBody();\n        synchronized (floral)\n        {\n            ((SomeBody)floral).wait(1);\n        }\n    }\n    public void run(){}\n} \ninterface Floral \n{}",
+        "rightAnswers": ["2"],
+        "themeName": "java"
+    },
+    {
+        "id": 33,
+        "variants": {
+            "3": " The output is guarenteed to be 1111",
+            "2": " The output is guarenteed to be 1234",
+            "1": " The output is guarenteed to be 4444",
+            "6": " This program has a runtime error",
+            "5": " This program has a compile time error",
+            "4": " The output is not guarenteed"
+        },
+        "type": "TEXT",
+        "questionText": "Given this program which of the following are true ?\npublic class Toza  extends Thread \n{\n    static int rabbit\u003d0; static boolean shifter\u003dfalse; Toza toza;\n    public Toza(){}\n    public Toza(Toza q)\n    {\n        toza \u003d q;\n    }\n    public static void main(String[] args) throws Exception\n    {\n        Toza tozax \u003d new Toza();\n        List\u003cToza\u003e stinger \u003d new ArrayList\u003cToza\u003e(); Toza toza \u003d new Toza(tozax);\n        stinger.add(toza); toza \u003d new Toza(tozax);\n        stinger.add(toza); toza \u003d new Toza(tozax);\n        stinger.add(toza); toza \u003d new Toza(tozax);\n        stinger.add(toza); \n        for (Object x : stinger)\n        {\n            ((Toza)x).start();\n        }\n        for (Toza q : stinger)\n        {\n            q.hunter();\n        }\n    }\n    public synchronized void hunter() throws Exception {while (!shifter){waiter();} System.out.print(rabbit);}\n    public synchronized void run()\n    {\n        rabbit++;\n        if (rabbit \u003e 3)\n        {\n            shifter\u003dtrue;\n        }\n    }\n    public void waiter() throws Exception {Thread.sleep(100);}\n}",
+        "rightAnswers": ["1"],
+        "themeName": "java"
+    },
+    {
+        "id": 34,
+        "variants": {
+            "3": " It sleeps for 99 milli seconds",
+            "2": " It sleeps for 99 seconds",
+            "1": " It outputs Hashleep",
+            "6": " The main thread sleeps for sometime ",
+            "5": " The Transistor sleeps for sometime",
+            "4": " It does not output anything"
+        },
+        "type": "TEXT",
+        "questionText": "What is true about this program ?\npublic class BaseMaster  \n{\n    public static void main(String[] args) throws Exception\n    {\n        Transistor transistor \u003d new Transistor();\n        transistor.sleep(99);\n        System.out.println(\"Hashleep\");\n    }\n}\nclass Transistor extends Thread{public void run(){}}",
+        "rightAnswers": ["3", "1", "6"],
+        "themeName": "java"
+    },
+    {
+        "id": 35,
+        "variants": {
+            "3": " The line at #2 will start a new thread",
+            "2": " The line at #1 will start a new thread",
+            "1": " This program will not compile",
+            "5": " None of the above ",
+            "4": " Fur cannot be a Thread and Runnable at the same time"
+        },
+        "type": "TEXT",
+        "questionText": "What is true about the following program ?\npublic class Fur extends Thread implements Runnable \n{\n    public static void main( String args[] )\n    {\n        Thread thread \u003d new Thread(new Fur());\n        thread.start(); // #1\n        thread.run(); // #2\n    }\n}",
+        "rightAnswers": ["2"],
+        "themeName": "java"
+    },
+    {
+        "id": 36,
+        "variants": {
+            "3": " The output is guaranteed to be start start 11 12",
+            "2": " The output is guaranteed to be 10 11",
+            "1": " The output is guaranteed to be 11 12",
+            "6": " None of the above",
+            "5": " The output cannot be guaranteed",
+            "4": " The output is guaranteed to be start start 10 11"
+        },
+        "type": "TEXT",
+        "questionText": "Which of the following are true ?\npublic class Free extends Thread\n{\n    static int x\u003d10;\n    public static void main( String args[] ) throws Exception \n    {\n        Free free \u003d new Free();\n        Thread thread \u003d new Thread(free);\n        Thread thread2 \u003d new Thread(free);\n        thread.start();\n        thread2.start();\n    }\n    \n    public synchronized void start()\n    {\n        System.out.print(\"start \");\n    }\n    \n    public synchronized void run()\n    {\n        System.out.print(++x + \" \");;\n    }\n}",
+        "rightAnswers": ["1"],
+        "themeName": "java"
+    },
+    {
+        "id": 37,
+        "variants": {
+            "3": " 3",
+            "2": " 2",
+            "1": " 1",
+            "5": " None of the above ",
+            "4": " No locks are obtained"
+        },
+        "type": "TEXT",
+        "questionText": "How many locks are obtained when Hello World is printed ?\npublic class Fern extends Thread\n{\n    public static void main(String args[]) throws Exception \n    {\n        Thread thread \u003d new Thread(new Fern());\n        thread.start();\n    }\n    \n    public synchronized void run()\n    {\n        synchronized (System.out)\n        {\n            gun();\n        }\n    }\n    \n    public synchronized void gun()\n    {\n        System.out.println(\"Hello world\");\n    }\n}",
+        "rightAnswers": ["2"],
+        "themeName": "java"
+    },
+    {
+        "id": 38,
+        "variants": {
+            "3": " This program does not compile",
+            "2": " The output will always be Hello world",
+            "1": " The output will always be world",
+            "5": " None of the above ",
+            "4": " This program will not run, but with Runtime errors"
+        },
+        "type": "TEXT",
+        "questionText": "What is the result of running this program ?\npublic class Drop extends Thread\n{\n    public static void main(String args[]) throws Exception  \n    {\n        Thread thread \u003d new Thread(new Drop());\n        thread.start();\n    }\n    public void run()\n    {\n        System.out.print(\"world\");\n    }   \n    \n    public synchronized void start()\n    {\n        System.out.println(\"Hello \");\n    }\n}",
+        "rightAnswers": ["1"],
+        "themeName": "java"
+    },
+    {
+        "id": 39,
+        "variants": {
+            "3": " Introduce a getter and setter for each variable and synchronize the body over \u0027this\u0027",
+            "2": " Introduce a getter and setter for each variable and synchronize the methods",
+            "1": " Introduce a getter and setter for each variable",
+            "6": " Synchronize over Queen.class when accessing x and y but do not provide getters and setters ",
+            "5": " Introduce a getter and setter for both variables together",
+            "4": " The variables are thread safe on their own"
+        },
+        "type": "TEXT",
+        "questionText": "How would you protect the variables x and y so that they have thread safe access ?\npublic class Queen   \n{\n    private String x; private Long y;\n    public static void main(String args[]) throws Exception \n    {\n    }\n}",
+        "rightAnswers": ["3", "2"],
+        "themeName": "java"
+    },
+    {
+        "id": 40,
+        "variants": {
+            "3": " No output",
+            "2": " TRUE",
+            "1": " FALSE",
+            "5": " Runtime error ",
+            "4": " Compile time error"
+        },
+        "type": "TEXT",
+        "questionText": "What would be the output of this program ?\npublic class Queen   \n{\n    public static void main(String args[]) throws Exception \n    {\n        Test test \u003d new Test();\n        test.start();\n    }\n}\nclass Test extends Thread\n{\n    public void run()\n    {\n            interrupt();\n            System.out.println(interrupted());\n    }\n}",
+        "rightAnswers": ["2"],
+        "themeName": "java"
+    },
+    {
+        "id": 41,
+        "variants": {
+            "3": " static final must be removed from #3",
+            "2": " static final must be removed from #2",
+            "1": " yellow must be marked static",
+            "5": " new Fire().yellow++; must be changed to yellow++ ",
+            "4": " Ice must not be abstract"
+        },
+        "type": "TEXT",
+        "questionText": "What must be done to make this code compile ?\nclass Fire extends Ice \n{\n    int yellow; //#1\n    public static void main(String... args)\n    {\n        yellow++;\n        new Fire().yellow++;\n    }\n    public static final void go(){} //#2\n}\nabstract class Ice\n{\n    public static final void go() //#3\n    {}    \n}",
+        "rightAnswers": ["3", "2", "1"],
+        "themeName": "java"
+    },
+    {
+        "id": 42,
+        "variants": {
+            "3": " 0",
+            "2": " 201",
+            "1": " 312",
+            "5": " None of the above ",
+            "4": " 333"
+        },
+        "type": "TEXT",
+        "questionText": "Given this class what is the output ?\npublic class One \n{ \n    public static void main(String [] args)\n    {\n        System.out.print(jeronimo.Feeder.THREE.ordinal());\n        System.out.print(jeronimo.Feeder.ONE.ordinal());\n        System.out.print(jeronimo.Feeder.TWO.ordinal());\n    }\n}\nclass jeronimo\n{\n    public enum Feeder {ONE,TWO,THREE}\n}",
+        "rightAnswers": ["2"],
+        "themeName": "java"
+    },
+    {
+        "id": 43,
+        "variants": {
+            "3": " 25",
+            "2": " 20",
+            "1": " 15",
+            "5": " Runtime error ",
+            "4": " Compile error"
+        },
+        "type": "TEXT",
+        "questionText": "Given this program what is the output ?\npublic class Toast \n{\n    static int x;\n    public static void main(String... args)\n    {\n        new Toast().findIt(x);\n        try\n        {\n            int y\u003d15;\n            x +\u003d y;\n        }\n        finally\n        {\n            System.out.println(y);\n        }\n    }\n    public void findIt(int x)\n    {\n        x +\u003d 5;\n    }\n}",
+        "rightAnswers": ["4"],
+        "themeName": "java"
+    },
+    {
+        "id": 44,
+        "variants": {
+            "3": " Tear rabbit \u003d new Tear(); Tear.Rain terrain \u003d rabbit.new Rain();",
+            "2": " Tear t \u003d new Tear(); Tear.Rain terrain \u003d new Tear.Rain();",
+            "1": " Tear t \u003d new Tear(); Tear.Rain terrain \u003d Tear.Rain.new Rain();",
+            "5": " None of the above ",
+            "4": " Compile error no matter what is inserted at #1"
+        },
+        "type": "TEXT",
+        "questionText": "Given this class\npublic class Tear\n{\n    public static void main(String... args)\n    {\n        //#1\n    }   \n    private class Rain\n    {}\n}\nHow do you instantiate the inner class at #1 ?",
+        "rightAnswers": ["3"],
+        "themeName": "java"
+    },
+    {
+        "id": 45,
+        "variants": {
+            "3": " 2",
+            "2": " 1",
+            "1": " 0",
+            "6": " None of the above ",
+            "5": " Runtime error",
+            "4": " Compile error"
+        },
+        "type": "TEXT",
+        "questionText": "Given this program what is the output ?\npublic class Train extends Bullet \n{\n    static int x\u003d1;\n    public static void main(String... args) throws Exception\n    {\n        new Train().gogogo();\n        System.out.println(x);\n    } \n    \n    public void gogogo() throws Exception\n    {\n        super.gogogo();\n        x++;\n        throw new Exception();\n    }\n}\nclass Bullet{ public void gogogo(){}}",
+        "rightAnswers": ["4"],
+        "themeName": "java"
+    },
+    {
+        "id": 46,
+        "variants": {
+            "3": " NullPointerException",
+            "2": " Compile time error",
+            "1": " yellow",
+            "4": " None of the above "
+        },
+        "type": "TEXT",
+        "questionText": "What is the output of this program ?\ninterface Face\n{\n    void ice();\n}\npublic class Sickle implements Face\n{\n    public static void main()\n    {\n        new Sickle().ice();\n    }\n    void ice()\n    {System.out.println(\"yellow\");}\n}",
+        "rightAnswers": ["2"],
+        "themeName": "java"
+    },
+    {
+        "id": 47,
+        "variants": {
+            "3": " #3",
+            "2": " #2",
+            "1": " #1",
+            "5": " #5 ",
+            "4": " #4"
+        },
+        "type": "TEXT",
+        "questionText": "Which of the following will NOT compile ?\nint x\u003d 10; // #1\nfloat f \u003d 10.0; // #2\nint i \u003d 10/3; // #3\ndouble d \u003d 12.3f; // #4\nfloat f2 \u003d 10; // #5",
+        "rightAnswers": ["2"],
+        "themeName": "java"
+    },
+    {
+        "id": 48,
+        "variants": {
+            "3": " 2",
+            "2": " 1",
+            "1": " 0",
+            "4": " None of the above "
+        },
+        "type": "TEXT",
+        "questionText": "What is the output of the program ?\npublic class Dainty implements sad \n{\n    public static void main( String args[] )\n    {\n        new Dainty().go();\n    }\n    public void go()\n    {\n        System.out.println(tent++);\n    }\n}\ninterface sad\n{\n    int tent\u003d0;\n}",
+        "rightAnswers": ["4"],
+        "themeName": "java"
+    },
+    {
+        "id": 49,
+        "variants": {
+            "3": " # 3",
+            "2": " # 2",
+            "1": " # 1",
+            "5": " None of the above ",
+            "4": " # 4"
+        },
+        "type": "TEXT",
+        "questionText": "At what line(s) do compilation fail ?\nclass Cert extends hey // #1\n{\n    public static void main(String[] args) throws Exception // #2 \n    {\n    }\n}\nclass hey // #3\n{\n    public static void main() // #4\n    {   \n    }\n}",
+        "rightAnswers": ["5"],
+        "themeName": "java"
+    },
+    {
+        "id": 50,
+        "variants": {
+            "3": " #2 will compile with java 1.3",
+            "2": " #1 will compile with java 1.5 and above",
+            "1": " #1 will compile with java 1.3",
+            "7": " assert should not be used in remote environments",
+            "6": " Execution of some statements may result in an Error",
+            "5": " None of the above",
+            "4": " #2 will compile with java 1.5 and above",
+            "8": " false assertions lead to an Exception "
+        },
+        "type": "TEXT",
+        "questionText": "Given these methods, which comments about #1 and #2 are true ?\nTake into consideration if the entire method at #1 and #2 will compile\n    public void goLoizeez() // #1\n    {\n        int assert \u003d 0;\n        System.out.println(assert);\n    }\n    \n    public void breakinson() // #2\n    {\n        assert true;\n        assert false;\n    }",
+        "rightAnswers": ["1", "6", "4"],
+        "themeName": "java"
+    },
+    {
+        "id": 51,
+        "variants": {
+            "3": " void method() throws ArrayIndexOutOfBoundsError {System.out.println(\"frog\");}",
+            "2": " void method() throws IOException {System.out.println(\"frog\");}",
+            "1": " void method() throws FileNotFoundException {System.out.println(\"frog\");}",
+            "7": " void method() {super.method();} ",
+            "6": " void method() throws ReaderException {System.out.println(\"frog\");}",
+            "5": " void method() {System.out.println(\"frog\");}",
+            "4": " void method() throws Exception {System.out.println(\"frog\");}"
+        },
+        "type": "TEXT",
+        "questionText": "Given this program what code fragment(s) can be inserted ?\nclass dodo\n{\n    void method() throws IOException\n    {\n        System.out.println(\"dog\");\n    }\n}\nclass Cert extends dodo\n{\n    public static void main(String[] args) \n    {\n        try\n        {\n            new Cert().method();\n        } \n        catch (Exception e)\n        {System.out.println(\"ouchie\");}\n    }\n    // Insert code here\n}",
+        "rightAnswers": ["2", "1", "5"],
+        "themeName": "java"
+    },
+    {
+        "id": 52,
+        "variants": {
+            "3": " 12",
+            "2": " 11",
+            "1": " 10",
+            "6": " Runtime error ",
+            "5": " Compile error",
+            "4": " 13"
+        },
+        "type": "TEXT",
+        "questionText": "Given this program what is the output ?\nclass Cert\n{\n    public static void main(String[] args) \n    {\n        int x\u003d10;\n        try\n        {\n            throw new IOException(\"\" + ++x);\n        } \n        catch (IOException e)\n        {\n            x++; \n            try\n            {\n                throw new Exception();\n            } catch (Exception e1){} finally{x--;}\n        }\n        finally {System.out.println(++x);}\n    }\n}",
+        "rightAnswers": ["3"],
+        "themeName": "java"
+    },
+    {
+        "id": 53,
+        "variants": {
+            "3": " RuntimeException is a checked Exception",
+            "2": " NullPointerException is a checked Exception",
+            "1": " Checked exceptions need to be handled by the calling code",
+            "5": " IOException is a RuntimeException ",
+            "4": " Exception is a checked Exception"
+        },
+        "type": "TEXT",
+        "questionText": "Choose the all that apply",
+        "rightAnswers": ["1", "4"],
+        "themeName": "java"
+    },
+    {
+        "id": 54,
+        "variants": {
+            "3": " 2 3 4",
+            "2": " 1 2 3",
+            "1": " 1 2 3 4",
+            "6": " None of the above ",
+            "5": " 2 3 4 5",
+            "4": " 3 4 5"
+        },
+        "type": "TEXT",
+        "questionText": "Given this program and the invocation \u0027java Take 1 2 3 4 5\u0027 what is the output ?\npublic class Take    \n{\n    public static void main(String... args)\n    {\n        int counter\u003d1;\n        for (counter\u003d1;;counter++)\n        {\n            if (counter \u003d\u003d 4) break;\n            System.out.println(args[counter]);\n        }\n    } \n}",
+        "rightAnswers": ["3"],
+        "themeName": "java"
+    },
+    {
+        "id": 55,
+        "variants": {
+            "3": " 12",
+            "2": " 11",
+            "1": " 10",
+            "4": " None of the above "
+        },
+        "type": "TEXT",
+        "questionText": "Given this program what is the output ?\npublic class Ten\n{\n    public static void main(String... args) \n    {\n        int x\u003d10;\n        do\n        {\n            x++;\n        } while (x \u003e 50);\n        System.out.println(x);\n    }\n}",
+        "rightAnswers": ["2"],
+        "themeName": "java"
+    },
+    {
+        "id": 56,
+        "variants": {
+            "3": " There is more than one syntax for this loop",
+            "2": " i may be an Integer[], Object[], iterator, or a Comparable",
+            "1": " This is an enhanced for loop",
+            "6": " This loop is available in java 1.4 and above ",
+            "5": " for (Object o : list.iterator()) where list is an ArrayList will compile",
+            "4": " for (Object o : list) where list is an ArrayList will compile"
+        },
+        "type": "TEXT",
+        "questionText": "Which of the following are true regarding this loop ?\nfor (Object o : i)\n{}",
+        "rightAnswers": ["1", "4"],
+        "themeName": "java"
+    },
+    {
+        "id": 57,
+        "variants": {
+            "3": " One Two",
+            "2": " One Two Three Four NullpointerException",
+            "1": " One Two Three Four",
+            "6": " None of the above ",
+            "5": " This program does not compile since the main method does not handle the exception",
+            "4": " One Three Four"
+        },
+        "type": "TEXT",
+        "questionText": "What is the result of running this program ?\npublic class Oak \n{\n    public static void main(String args[])  \n    {\n        try\n        {\n            Integer i \u003dnull;\n            i.toString();\n        }\n        catch (Exception e)\n        {\n            try\n            {\n                System.out.println(\"One \");\n                Integer i \u003dnull;\n                i.toString();                \n            }\n            catch (Exception x)\n            {\n                System.out.println(\"Two \");\n                Integer i \u003dnull;\n                i.toString();                   \n            }\n            finally\n            {\n                System.out.println(\"Three \");\n                Integer i \u003dnull;\n                i.toString();                            \n            }\n        }\n        finally\n        {\n            System.out.println(\"Four \");\n        }\n    }\n}",
+        "rightAnswers": ["2"],
+        "themeName": "java"
+    },
+    {
+        "id": 58,
+        "variants": {
+            "3": " A CPU intensive operation that is isolated to a class or a method",
+            "2": " When the JVM crashes it writes data in seperate files called islands",
+            "1": " A situation where the JVM leaks memory that cannot be fixed, leading to an OutOfMemoryError",
+            "5": " None of the above ",
+            "4": " A situation where objects connect to each other and form an island that can still be GCed"
+        },
+        "type": "TEXT",
+        "questionText": "What is an island of isolation ?",
+        "rightAnswers": ["4"],
+        "themeName": "java"
     }
 ]
