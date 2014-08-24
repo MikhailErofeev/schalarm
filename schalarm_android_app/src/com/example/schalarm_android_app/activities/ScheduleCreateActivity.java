@@ -1,11 +1,9 @@
 package com.example.schalarm_android_app.activities;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -40,7 +38,7 @@ public class ScheduleCreateActivity extends Activity implements TrackSelectedLis
 
     private MusicTrack selectedTrack;
     private long timeToStartTask;
-    private int queryCount;
+    private int queryCount = 1;
 
     private HashSet<String> selectedTags;
 
@@ -242,7 +240,7 @@ public class ScheduleCreateActivity extends Activity implements TrackSelectedLis
 
     private void startUpdatedTaskIfOn() {
         if (onOffWidget.isChecked()) {
-            AlarmTask task = new AlarmTask(this, selectedTags, selectedTrack, timeToStartTask);
+            AlarmTask task = new AlarmTask(this, selectedTags, selectedTrack, timeToStartTask, queryCount);
             alarmTaskService.startTask(task);
         }
     }

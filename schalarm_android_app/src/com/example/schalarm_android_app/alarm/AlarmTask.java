@@ -23,9 +23,11 @@ public class AlarmTask implements Runnable {
     private final Set<String> tags;
     private final long taskStartTimeInMillis;
     private final Activity parent;
+    private final int minimalRightAnswers;
     private boolean isActive;
 
-    public AlarmTask(Activity parent, Set<String> tags, MusicTrack musicTrack, long taskStartTimeInMillis) {
+    public AlarmTask(Activity parent, Set<String> tags, MusicTrack musicTrack, long taskStartTimeInMillis, int minimalRightAnswers) {
+        this.minimalRightAnswers = minimalRightAnswers;
         this.mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         this.tags = tags;
@@ -60,6 +62,10 @@ public class AlarmTask implements Runnable {
         Intent intent = new Intent();
         intent.setClass(parent, QueryShowerActivity.class);
         parent.startActivity(intent);
+    }
+
+    public int getMinimalRightAnswers() {
+        return minimalRightAnswers;
     }
 
     private void startPlayMusic() {

@@ -54,7 +54,13 @@ public class QueryShowerActivity extends Activity {
 
     private boolean checkCanQuitAdnStopAlarm() {
         AlarmTask alarmTask = alarmTaskService.geAlarmTask();
-        int minimalRightAnswers = 3;
+        int minimalRightAnswers;
+        if (alarmTask == null) {
+            minimalRightAnswers = 3;
+        } else {
+            minimalRightAnswers = alarmTask.getMinimalRightAnswers();
+        }
+
         boolean canQuit = rightAnswers >= minimalRightAnswers;
         if (alarmTask != null && alarmTask.isActive()) {
             if (canQuit) {
