@@ -1,9 +1,11 @@
 package com.example.schalarm_android_app.activities;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -16,6 +18,7 @@ import com.example.schalarm_android_app.alarm.AlarmTaskService;
 import com.example.schalarm_android_app.main_settings.widgets.OnOffWidget;
 import com.example.schalarm_android_app.utils.InjectorApplication;
 import com.example.schalarm_android_app.utils.MusicFinder;
+import com.example.schalarm_android_app.utils.SettingsSaver;
 import com.example.schalarm_android_app.utils.entitys.MusicTrack;
 import com.github.mikhailerofeev.scholarm.api.services.QuestionsService;
 import org.joda.time.DateTime;
@@ -33,10 +36,11 @@ public class ScheduleCreateActivity extends Activity implements TrackSelectedLis
     public static final String SHOW_SELECTED_TAGS = "Show selected Tags";
     public static final String AVAILABLE_TRACK_FRAGMENT = "available_track_fragment";
     public static final int MAX_QUERY_COUNT = 10;
+    public static final int CANT_BE_LOWER = 1;
 
-    private static MusicTrack selectedTrack;
-    private static long timeToStartTask;
-    private static int queryCount;
+    private MusicTrack selectedTrack;
+    private long timeToStartTask;
+    private int queryCount;
 
     private HashSet<String> selectedTags;
 
@@ -72,6 +76,19 @@ public class ScheduleCreateActivity extends Activity implements TrackSelectedLis
         setElementsOnContainers();
         setListeners();
         updateAlarmTime();
+        SettingsSaver.Setting setting = SettingsSaver.loadSettings(this);
+        if (setting != null) {
+            setDataFromSettings(setting);
+        }
+    }
+
+    public void setDataFromSettings(SettingsSaver.Setting dataFromSettings) {
+        selectedTags = dataFromSettings.getTags();
+        selectedTrack = dataFromSettings.getMusicTrack();
+        refreshViewTrackInfo();
+        scheduleTimer.setText(dataFromSettings.getTimerText());
+        onOffWidget.setChecked(dataFromSettings.getOnOffState());
+        countOfQuerySeekBar.setProgress(dataFromSettings.getSeekProgressState());
     }
 
     private void setRandomMusic() {
@@ -85,6 +102,17 @@ public class ScheduleCreateActivity extends Activity implements TrackSelectedLis
         timeToStartTask = alarmTime.getMillis();
         alarmTaskService.shutdownTask();
         startUpdatedTaskIfOn();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (onOffWidget.isChecked()) {
+            SettingsSaver.saveSettings(this, new SettingsSaver.Setting(queryCount,
+                    onOffWidget.isChecked(), selectedTags, selectedTrack, scheduleTimer.getText().toString()));
+        } else {
+            SettingsSaver.removeSettings(this);
+        }
+        super.onBackPressed();
     }
 
     public DateTime getAlarmTime() {
@@ -133,13 +161,21 @@ public class ScheduleCreateActivity extends Activity implements TrackSelectedLis
     }
 
     private void setOnSeekBarListener() {
+        final TextView seekMaxTextView = (TextView) findViewById(R.id.create_schedule_max_seek_bar_value_view);
+        countOfQuerySeekBar.setLayoutParams(
+                new LinearLayout.LayoutParams(
+                        new LinearLayout.LayoutParams((int) (getResources().getDisplayMetrics().widthPixels / 1.2),
+                                LinearLayout.LayoutParams.WRAP_CONTENT)));
         countOfQuerySeekBar.setMax(MAX_QUERY_COUNT);
+        countOfQuerySeekBar.setProgress(CANT_BE_LOWER);
         countOfQuerySeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 queryCount = progress;
-                // TODO
-                System.out.println(progress);
+                if (progress < CANT_BE_LOWER) {
+                    countOfQuerySeekBar.setProgress(CANT_BE_LOWER);
+                }
+                seekMaxTextView.setText(String.valueOf(progress));
             }
 
             @Override

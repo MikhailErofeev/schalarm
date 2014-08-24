@@ -25,7 +25,6 @@ public class AlarmTask implements Runnable {
     private final Activity parent;
     private boolean isActive;
 
-
     public AlarmTask(Activity parent, Set<String> tags, MusicTrack musicTrack, long taskStartTimeInMillis) {
         this.mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);

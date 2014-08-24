@@ -35,6 +35,6 @@ public class ScheduleCreateActivityCallBack implements ActionMode.Callback {
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
-        parent.finish();
+        parent.onBackPressed();
     }
 }

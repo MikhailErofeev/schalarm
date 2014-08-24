@@ -135,7 +135,7 @@
                             android:id="@+id/create_schedule_track_author_name_info"/>
                     <Button android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Get random track"
+                            android:text="Random track"
                             android:id="@+id/create_schedule_get_random_track"/>
                     <Button android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -158,17 +158,23 @@
                 <LinearLayout android:layout_width="match_parent"
                               android:layout_height="wrap_content"
                               android:gravity="center"
-                        android:orientation="horizontal">
+                              android:orientation="horizontal">
                     <TextView android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
-                            android:text="0"/>
-                <SeekBar android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:id="@+id/create_schedule_seek_bar"
-                        />
+                              android:text="  "/>
                     <TextView android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
-                              android:text="10"/>
+                              android:text="1"/>
+                    <SeekBar android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:id="@+id/create_schedule_seek_bar"
+                            />
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="1"
+                              android:id="@+id/create_schedule_max_seek_bar_value_view"
+                              android:layout_weight="1"
+                            />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
