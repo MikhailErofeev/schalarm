@@ -9,57 +9,58 @@ import com.example.schalarm_android_app.utils.InjectorApplication;
 import com.github.mikhailerofeev.scholarm.api.services.QuestionsService;
 
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by FFX20413 on 23.08.2014.
  */
+
 public class TagsSelectorActivity extends Activity implements TagSelectedListener {
 
     public final static int GET_SELECTED_TAG_REQUEST_CODE = 0x25;
     public static final String SELECTED_TAGS_INTENT_KEY = "selected_tags_intent_key";
 
-    private LinearLayout mainLay;
-    private HashSet<String> selectedTags;
-    private HashSet<String> selectedTagsFromScheduleCreator;
+    private HashSet<String> currentSelectedTags;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mainLay = new LinearLayout(this);
         startActionMode(new TagSelectActivityCallBack(this));
-        selectedTags = new HashSet<>();
-        Intent intent = getIntent();
-        if (intent != null) {
-            selectedTagsFromScheduleCreator = (HashSet<String>) intent.getSerializableExtra(SELECTED_TAGS_INTENT_KEY);
-        } else {
-            selectedTagsFromScheduleCreator = new HashSet<>();
-        }
+        createCurrentSelectedTags();
         QuestionsService questionsService = InjectorApplication.get(QuestionsService.class);
-        mainLay.addView(new ThemeListView(this, this, selectedTagsFromScheduleCreator, questionsService.getTopLevelThemes()));
+        LinearLayout mainLay = new LinearLayout(this);
+        mainLay.addView(new ThemeListView(this, this, currentSelectedTags, questionsService.getTopLevelThemes()));
         setContentView(mainLay);
         super.onCreate(savedInstanceState);
     }
 
+    private void createCurrentSelectedTags() {
+        Intent intent = getIntent();
+        if (intent != null)
+            currentSelectedTags = new HashSet<>((HashSet<String>) intent.getSerializableExtra(SELECTED_TAGS_INTENT_KEY));
+        else
+            currentSelectedTags = new HashSet<>();
+    }
+
     @Override
     public void tagUnselected(String tag) {
-        selectedTags.remove(tag);
+        currentSelectedTags.remove(tag);
+    }
+
+    @Override
+    public void tagsSelected(Set<String> tags) {
+        currentSelectedTags.addAll(tags);
     }
 
     @Override
     public void tagSelected(String tag) {
-        selectedTags.add(tag);
+        currentSelectedTags.add(tag);
     }
 
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
-        intent.putExtra(TagsSelectorActivity.class.getCanonicalName(), selectedTags);
-        if (selectedTags != null && !selectedTags.isEmpty()) {
-            intent.putExtra(TagsSelectorActivity.class.getCanonicalName(), selectedTags);
-        } else {
-            intent.putExtra(TagsSelectorActivity.class.getCanonicalName(), selectedTagsFromScheduleCreator);
-        }
+        intent.putExtra(TagsSelectorActivity.class.getCanonicalName(), currentSelectedTags);
         setResult(GET_SELECTED_TAG_REQUEST_CODE, intent);
-        finish();
         super.onBackPressed();
     }
 }

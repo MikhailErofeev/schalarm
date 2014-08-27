@@ -7,7 +7,9 @@ import java.util.List;
  * @since 22.08.14
  */
 public interface QuestionTheme {
-  String getName();
+    String getName();
 
-  List<QuestionTheme> getChildren();
+    List<QuestionTheme> getChildren();
+
+    String toString();
 }

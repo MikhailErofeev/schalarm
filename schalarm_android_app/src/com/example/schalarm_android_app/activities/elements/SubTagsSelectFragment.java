@@ -3,88 +3,82 @@ package com.example.schalarm_android_app.activities.elements;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import com.example.schalarm_android_app.R;
 import com.github.mikhailerofeev.scholarm.api.entities.QuestionTheme;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by FFX20413 on 23.08.2014.
  */
+
 public class SubTagsSelectFragment extends DialogFragment {
 
-
-    public static final String OK = "Ok";
-    public static final String CANCEL = "Cancel";
-    private String[] subTags;
-    private boolean[] selects;
-    private Set<String> result;
+    private String[] subTagsArray;
+    private boolean[] checkedSubTagsStateArray;
     private HashSet<String> selectedTagsFromScheduleCreator;
-    private static final String SELECT_SUB_TAGS = "Select sub tags";
 
-
-    public SubTagsSelectFragment() {
-
-    }
+    private final Set<String> result;
+    private final DialogInterface.OnClickListener positiveListener;
+    private final DialogInterface.OnMultiChoiceClickListener multiChoiceListener;
 
     public SubTagsSelectFragment(HashSet<String> selectedTagsFromScheduleCreator, List<QuestionTheme> children) {
-        subTags = new String[children.size()];
-        for (int i = 0; i < children.size(); i++) {
-            QuestionTheme q = children.get(i);
-            subTags[i] = q.getName();
-        }
-        selects = new boolean[children.size()];
-        result = new HashSet<>();
-        System.out.println(selectedTagsFromScheduleCreator);
-        for (int i = 0; i < subTags.length; i++) {
-            if (selectedTagsFromScheduleCreator.contains(subTags[i])) {
-                System.out.println(subTags[i]);
-                selects[i] = true;
+        this.selectedTagsFromScheduleCreator = selectedTagsFromScheduleCreator;
+        this.result = new HashSet<>(selectedTagsFromScheduleCreator);
+        createSubTags(children);
+        createCheckedStateArray(children);
+        positiveListener = createPositiveListener();
+        multiChoiceListener = createMultiChoiceListener();
+    }
+
+    private void createCheckedStateArray(List<QuestionTheme> children) {
+        checkedSubTagsStateArray = new boolean[children.size()];
+        for (int i = 0; i < checkedSubTagsStateArray.length; i++) {
+            if (selectedTagsFromScheduleCreator.contains(children.get(i).getName())) {
+                checkedSubTagsStateArray[i] = true;
             }
+        }
+    }
+
+    private void createSubTags(List<QuestionTheme> children) {
+        subTagsArray = new String[children.size()];
+        for (int i = 0; i < children.size(); i++) {
+            subTagsArray[i] = children.get(i).getName();
         }
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(SELECT_SUB_TAGS).setMultiChoiceItems(subTags, selects, new DialogInterface.OnMultiChoiceClickListener() {
+        builder.setTitle(getString(R.string.sub_tags_select_title))
+                .setMultiChoiceItems(subTagsArray, checkedSubTagsStateArray, multiChoiceListener)
+                .setPositiveButton(gS(R.string.ok_button), positiveListener);
+        return builder.create();
+    }
+
+    private DialogInterface.OnMultiChoiceClickListener createMultiChoiceListener() {
+        return new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                if (isChecked) {
-                    result.add(subTags[which]);
-                } else {
-                    result.remove(subTags[which]);
-                }
+                if (isChecked) result.add(subTagsArray[which]);
+                else result.remove(subTagsArray[which]);
+                checkedSubTagsStateArray[which] = isChecked;
             }
-        }).setPositiveButton(OK, new DialogInterface.OnClickListener() {
+        };
+    }
+
+    private DialogInterface.OnClickListener createPositiveListener() {
+        return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (result != null && !result.isEmpty()) {
-                    for (String tags : result) {
-                        ((TagSelectedListener) getActivity()).tagSelected(tags);
-                    }
-                } else if (selectedTagsFromScheduleCreator != null) {
-                    for (String subTag : subTags) {
-                        if (selectedTagsFromScheduleCreator.contains(subTag)) {
-                            result.add(subTag);
-                        }
-                    }
-                    for (String tags : result) {
-                        ((TagSelectedListener) getActivity()).tagSelected(tags);
-                    }
-                }
+                ((TagSelectedListener) getActivity()).tagsSelected(result);
             }
-        }).setNegativeButton(CANCEL, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // TODO
-            }
-        });
-        return builder.create();
+        };
+    }
+
+    private String gS(int resID) {
+        return getActivity().getResources().getString(resID);
     }
 }

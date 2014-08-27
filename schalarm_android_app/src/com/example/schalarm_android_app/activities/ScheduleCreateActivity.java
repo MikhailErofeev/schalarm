@@ -58,13 +58,12 @@ public class ScheduleCreateActivity extends Activity implements TrackSelectedLis
     private SeekBar countOfQuerySeekBar;
 
     private Activity parentContext;
-    private QuestionsService questionsService;
     private AlarmTaskService alarmTaskService;
+
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        questionsService = InjectorApplication.get(QuestionsService.class);
         alarmTaskService = InjectorApplication.get(AlarmTaskService.class);
         parentContext = this;
         setContentView(R.layout.main_settings);

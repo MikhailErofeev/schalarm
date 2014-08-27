@@ -22,7 +22,6 @@ public class SelectTrackActivity extends Activity {
         super.onCreate(savedInstanceState);
         mainLay = new LinearLayout(this);
         allAvailableTracks = new ArrayList<>(MusicFinder.getAllAvailableMusicTracks(this));
-        System.out.println(allAvailableTracks);
         mainLay.addView(new MusicSelectorListView(this, allAvailableTracks));
         setContentView(mainLay);
     }

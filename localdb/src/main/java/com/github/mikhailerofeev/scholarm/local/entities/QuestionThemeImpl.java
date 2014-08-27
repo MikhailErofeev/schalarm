@@ -11,22 +11,26 @@ import java.util.List;
 public class QuestionThemeImpl implements QuestionTheme {
 
 
-  private final String name;
-  private final List<QuestionTheme> children;
+    private final String name;
+    private final List<QuestionTheme> children;
 
-  public QuestionThemeImpl(String name, List<QuestionTheme> children) {
-    this.name = name;
-    this.children = children;
-  }
+    public QuestionThemeImpl(String name, List<QuestionTheme> children) {
+        this.name = name;
+        this.children = children;
+    }
 
+    @Override
+    public String toString() {
+        return getName();
+    }
 
-  @Override
-  public String getName() {
-    return name;
-  }
+    @Override
+    public String getName() {
+        return name;
+    }
 
-  @Override
-  public List<QuestionTheme> getChildren() {
-    return children;
-  }
+    @Override
+    public List<QuestionTheme> getChildren() {
+        return children;
+    }
 }
