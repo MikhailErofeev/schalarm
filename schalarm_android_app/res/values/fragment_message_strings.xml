@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="sub_tags_select_title">Sub tags</string>
+    <string name="application_settings_tab_title">Settings</string>
+    <string name="create_new_alarm_tab_title">Create</string>
+    <string name="current_alarms_tab_title">Alarms</string>
+    <string name="time_select_fragment_title">Start Time</string>
+
 </resources>

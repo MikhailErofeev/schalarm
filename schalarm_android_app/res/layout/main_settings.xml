@@ -52,8 +52,12 @@
                             android:layout_height="wrap_content"
                             android:text="00:00"
                             android:textSize="18sp"
-                            android:id="@+id/create_schedule_timer"
+                            android:id="@+id/create_alarm_timer"
                             android:layout_weight="2"/>
+                    <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/create_alarm_on_off_switch"/>
                 </LinearLayout>
 
                 <View android:layout_width="match_parent"
@@ -78,14 +82,14 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:text="Select Tags"
-                            android:id="@+id/create_schedule_select_tag_button"
+                            android:id="@+id/create_alarm_select_tag_button"
                             android:layout_weight="2"
                             />
                     <Button
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:text="Show Tags"
-                            android:id="@+id/create_schedule_show_tag_button"
+                            android:id="@+id/create_alarm_show_tag_button"
                             android:layout_weight="2"
                             />
                 </LinearLayout>
@@ -107,13 +111,23 @@
                         android:orientation="vertical"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:id="@+id/createScheduleTrackInfoLayout">
+                        android:id="@+id/create_alarm_track_info_layout">
 
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=" Track name - "
-                            android:id="@+id/create_schedule_track_name_info"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent">
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/track_name_info"
+                                />
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/create_alarm_track_name_info"/>
+                    </LinearLayout>
+
 
                     <View android:layout_width="match_parent"
                           android:layout_height="3dp"
@@ -128,19 +142,29 @@
                           android:background="@android:color/transparent">
                     </View>
 
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=" Track Author - "
-                            android:id="@+id/create_schedule_track_author_name_info"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent">
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/track_author_info"
+                                />
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/create_alarm_track_author_name_info"/>
+                    </LinearLayout>
+
                     <Button android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Random track"
-                            android:id="@+id/create_schedule_get_random_track"/>
+                            android:text="@string/random_title"
+                            android:id="@+id/create_alarm_get_random_track"/>
                     <Button android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Select from available"
-                            android:id="@+id/create_schedule_get_available_tracks"/>
+                            android:text="@string/select_track_button_message"
+                            android:id="@+id/create_alarm_get_available_tracks"/>
                 </LinearLayout>
 
                 <View android:layout_width="match_parent"
@@ -155,26 +179,30 @@
                       android:layout_height="5dp"
                       android:background="@android:color/transparent">
                 </View>
+
                 <LinearLayout android:layout_width="match_parent"
                               android:layout_height="wrap_content"
                               android:gravity="center"
-                              android:orientation="horizontal">
-                    <TextView android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:text="  "/>
-                    <TextView android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:text="1"/>
+                              android:orientation="vertical">
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:gravity="center"
+                                  android:orientation="horizontal">
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/query_count_seek_bar_title"/>
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/create_alarm_question_count_seek_bar_result"
+                                android:text="@string/minimum_available_query_count_seek_bar_result"/>
+                    </LinearLayout>
+
                     <SeekBar android:layout_width="match_parent"
                              android:layout_height="wrap_content"
-                             android:id="@+id/create_schedule_seek_bar"
-                            />
-                    <TextView android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:text="1"
-                              android:id="@+id/create_schedule_max_seek_bar_value_view"
-                              android:layout_weight="1"
-                            />
+                             android:id="@+id/create_alarm_seek_bar"
+                             android:max="@integer/create_alarm_seek_bar_max_query_count" android:longClickable="false"/>
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>

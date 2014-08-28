@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">schalarm</string>
+    <string name="save_button">Save</string>
+    <string name="clear_button">Clear</string>
+    <string name="ok_button">Ok</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="track_name_info"> Track name : </string>
+    <string name="track_author_info"> Track author : </string>
+    <string name="random_title">Random</string>
+    <string name="select_track_button_message">Select track</string>
+    <string name="query_count_seek_bar_title">Query count : </string>
+    <string name="minimum_available_query_count_seek_bar_result">1</string>
+
+
+</resources>

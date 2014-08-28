@@ -7,30 +7,30 @@
               android:targetSdkVersion="14"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
-    <application android:label="@string/app_name" android:name=".utils.InjectorApplication">
-        <activity android:name=".activities.StartActivity"
-                  android:label="@string/app_name"
+    <application android:label="@string/app_name" android:name="utils.InjectorApplication">
+        <activity android:name="activities.StartActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@android:style/Theme.Holo.Light"
                   android:icon="@drawable/icon">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"
-                        />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ScheduleCreateActivity"
+        <activity android:name="activities.ScheduleCreateActivity"
                   android:screenOrientation="portrait"
-                  android:theme="@android:style/Theme.Holo.Light.NoActionBar">
+                  android:theme="@android:style/Theme.Holo.Light">
         </activity>
-        <activity android:name=".activities.SelectTrackActivity"
+        <activity android:name="activities.SelectTrackActivity"
                   android:screenOrientation="portrait"
-                  android:theme="@android:style/Theme.Holo.Light.NoActionBar">
+                  android:theme="@android:style/Theme.Holo.Light">
         </activity>
-        <activity android:name=".activities.QueryShowerActivity"
+        <activity android:name="activities.QueryShowerActivity"
                   android:screenOrientation="portrait"
-                  android:theme="@android:style/Theme.Holo.Light.NoActionBar">
+                  android:theme="@android:style/Theme.Holo.Light">
         </activity>
-        <activity android:name=".activities.elements.TagsSelectorActivity"
-                  android:theme="@android:style/Theme.Holo.Light.NoActionBar"
+        <activity android:name="activities.elements.TagsSelectorActivity"
+                  android:theme="@android:style/Theme.Holo.Light"
                   android:screenOrientation="portrait">
         </activity>
     </application>
