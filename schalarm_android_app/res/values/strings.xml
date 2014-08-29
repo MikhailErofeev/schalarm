@@ -5,12 +5,17 @@
     <string name="clear_button">Clear</string>
     <string name="ok_button">Ok</string>
     <string name="cancel_button">Cancel</string>
-    <string name="track_name_info"> Track name : </string>
-    <string name="track_author_info"> Track author : </string>
-    <string name="random_title">Random</string>
-    <string name="select_track_button_message">Select track</string>
-    <string name="query_count_seek_bar_title">Query count : </string>
-    <string name="minimum_available_query_count_seek_bar_result">1</string>
+
+    <string name="create_alarm_track_name_info"> Track name : </string>
+    <string name="create_alarm_track_author_info"> Track author : </string>
+    <string name="create_alarm_check_box_random_title">Random</string>
+    <string name="create_alarm_select_track_button_message">Select track</string>
+    <string name="create_alarm_query_count_seek_bar_title">Query count : </string>
+    <string name="create_alarm_minimum_available_query_count_seek_bar_result">1</string>
+    <string name="create_alarm_show_selected_tag_button_message">Show Tags</string>
+    <string name="create_alarm_select_new_tags_button_message">Select Tags</string>
+    <string name="create_alarm_start_time_message"><![CDATA[  Time to start   >   ]]></string>
+    <string name="create_alarm_timer_default_time_text">00:00</string>
 
 
 </resources>

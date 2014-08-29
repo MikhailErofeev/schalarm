@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+        >
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/settingsScrollerParent"
+            android:layout_weight="1"
+            >
+
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:measureAllChildren="false"
+                android:id="@+id/create_alarm_functions_scroll_container"
+                >
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/settingsElementContainer">
+
+                <View android:layout_width="match_parent"
+                      android:layout_height="@dimen/create_alarm_separator_line_bold_height"
+                      android:layout_marginBottom="@dimen/create_alarm_separator_margin"
+                      android:layout_marginTop="@dimen/create_alarm_separator_margin"
+                      android:background="@android:color/darker_gray">
+                </View>
+
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        >
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/create_alarm_start_time_message"
+                            android:textSize="@dimen/create_alarm_start_time_message_text_size"
+                            android:id="@+id/create_alarm_message_to_start"
+                            android:layout_marginLeft="@dimen/create_alarm_text_field_start_margin">
+                    </TextView>
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/create_alarm_timer_default_time_text"
+                            android:textSize="@dimen/create_alarm_timer_text_size"
+                            android:id="@+id/create_alarm_timer"
+                            android:layout_marginLeft="@dimen/create_alarm_timer_margin"
+                            android:layout_weight="2"/>
+                    <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/create_alarm_on_off_switch"/>
+                </LinearLayout>
+
+                <View android:layout_width="match_parent"
+                      android:layout_height="@dimen/create_alarm_separator_line_bold_height"
+                      android:layout_marginBottom="@dimen/create_alarm_separator_margin"
+                      android:layout_marginTop="@dimen/create_alarm_separator_margin"
+                      android:background="@android:color/darker_gray">
+                </View>
+
+                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <CalendarView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            >
+                    </CalendarView>
+                </LinearLayout>
+
+                <View android:layout_width="match_parent"
+                      android:layout_height="@dimen/create_alarm_separator_line_bold_height"
+                      android:layout_marginBottom="@dimen/create_alarm_separator_margin"
+                      android:layout_marginTop="@dimen/create_alarm_separator_margin"
+                      android:background="@android:color/darker_gray">
+                </View>
+
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/create_schedule_tag_container">
+                    <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/create_alarm_select_new_tags_button_message"
+                            android:id="@+id/create_alarm_select_tag_button"
+                            android:textSize="@dimen/create_alarm_buttons_text_size"
+                            android:layout_weight="2"
+                            />
+                    <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/create_alarm_show_selected_tag_button_message"
+                            android:id="@+id/create_alarm_show_tag_button"
+                            android:textSize="@dimen/create_alarm_buttons_text_size"
+                            android:layout_weight="2"
+                            />
+                </LinearLayout>
+
+                <View android:layout_width="match_parent"
+                      android:layout_height="@dimen/create_alarm_separator_line_bold_height"
+                      android:layout_marginBottom="@dimen/create_alarm_separator_margin"
+                      android:layout_marginTop="@dimen/create_alarm_separator_margin"
+                      android:background="@android:color/darker_gray">
+                </View>
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/create_alarm_track_info_layout">
+
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent">
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/create_alarm_text_field_start_margin"
+                                android:text="@string/create_alarm_track_name_info"
+                                />
+                        <HorizontalScrollView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                            <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/create_alarm_track_info_margin"
+                                        android:id="@+id/create_alarm_track_name_info"/>
+                            </LinearLayout>
+                        </HorizontalScrollView>
+                    </LinearLayout>
+
+                    <View android:layout_width="match_parent"
+                          android:layout_height="@dimen/create_alarm_separator_light_size"
+                          android:layout_marginBottom="@dimen/create_alarm_separator_margin"
+                          android:layout_marginTop="@dimen/create_alarm_separator_margin"
+                          android:background="@android:color/darker_gray">
+                    </View>
+
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent">
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/create_alarm_text_field_start_margin"
+                                android:text="@string/create_alarm_track_author_info"
+                                />
+                        <HorizontalScrollView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                            <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/create_alarm_track_info_margin"
+                                        android:id="@+id/create_alarm_track_author_name_info"/>
+                            </LinearLayout>
+                        </HorizontalScrollView>
+                    </LinearLayout>
+
+                    <View android:layout_width="match_parent"
+                          android:layout_height="@dimen/create_alarm_separator_light_size"
+                          android:layout_marginBottom="@dimen/create_alarm_separator_margin"
+                          android:layout_marginTop="@dimen/create_alarm_separator_margin"
+                          android:background="@android:color/darker_gray">
+                    </View>
+
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent">
+                        <Button android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:textSize="@dimen/create_alarm_buttons_text_size"
+                                android:text="@string/create_alarm_select_track_button_message"
+                                android:id="@+id/create_alarm_get_available_tracks"/>
+                        <CheckBox android:layout_width="match_parent"
+                                  android:layout_weight="2"
+                                  android:layout_height="wrap_content"
+                                  android:text="@string/create_alarm_check_box_random_title"
+                                  android:id="@+id/create_alarm_get_random_track"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View android:layout_width="match_parent"
+                      android:layout_height="@dimen/create_alarm_separator_line_bold_height"
+                      android:layout_marginBottom="@dimen/create_alarm_separator_margin"
+                      android:layout_marginTop="@dimen/create_alarm_separator_margin"
+                      android:background="@android:color/darker_gray">
+                </View>
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:gravity="center"
+                              android:orientation="vertical">
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:gravity="center"
+                                  android:orientation="horizontal">
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/create_alarm_query_count_seek_bar_title"/>
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/create_alarm_question_count_seek_bar_result"
+                                android:text="@string/create_alarm_minimum_available_query_count_seek_bar_result"
+                                android:layout_marginLeft="@dimen/create_alarm_query_count_seek_bar_result_margin"/>
+                    </LinearLayout>
+
+                    <View android:layout_width="match_parent"
+                          android:layout_height="@dimen/create_alarm_separator_light_size"
+                          android:layout_marginBottom="@dimen/create_alarm_separator_margin"
+                          android:layout_marginTop="@dimen/create_alarm_separator_margin"
+                          android:background="@android:color/darker_gray">
+                    </View>
+
+                    <SeekBar android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:id="@+id/create_alarm_seek_bar"
+                             android:max="@integer/create_alarm_seek_bar_max_query_count" android:longClickable="false"/>
+                </LinearLayout>
+
+                <View android:layout_width="match_parent"
+                      android:layout_height="@dimen/create_alarm_separator_line_bold_height"
+                      android:layout_marginBottom="@dimen/create_alarm_separator_margin"
+                      android:layout_marginTop="@dimen/create_alarm_separator_margin"
+                      android:background="@android:color/darker_gray">
+                </View>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="6">
+
+        <View android:layout_width="match_parent"
+              android:layout_height="@dimen/create_alarm_separator_line_bold_height"
+              android:layout_marginBottom="@dimen/create_alarm_separator_margin"
+              android:layout_marginTop="@dimen/create_alarm_separator_margin"
+              android:background="@android:color/holo_blue_dark">
+        </View>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+            <Button android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/create_alarm_buttons_text_size"
+                    android:text="@string/save_button"/>
+
+            <Button android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/create_alarm_buttons_text_size"
+                    android:text="@string/clear_button"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

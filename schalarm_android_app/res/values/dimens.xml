@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="create_alarm_chronometer_left_margin">20dp</dimen>
-    <dimen name="create_alarm_elements_top_margin">15dp</dimen>
-    <dimen name="select_track_element_left_margin">15dp</dimen>
-    <dimen name="select_track_element_top_margin">15dp</dimen>
+    <dimen name="create_alarm_separator_line_bold_height">2dp</dimen>
+    <dimen name="create_alarm_separator_margin">5dp</dimen>
+    <dimen name="create_alarm_separator_light_size">1dp</dimen>
+    <dimen name="create_alarm_text_field_start_margin">10dp</dimen>
+    <dimen name="create_alarm_start_time_message_text_size">18sp</dimen>
+    <dimen name="create_alarm_timer_text_size">18sp</dimen>
+    <dimen name="create_alarm_timer_margin">10dp</dimen>
+    <dimen name="create_alarm_query_count_seek_bar_result_margin">10dp</dimen>
+    <dimen name="create_alarm_save_drop_separate_line_height">7dp</dimen>
+    <dimen name="create_alarm_buttons_text_size">5pt</dimen>
+    <dimen name="create_alarm_track_info_margin">10dp</dimen>
 </resources>
